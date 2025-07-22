@@ -1,16 +1,40 @@
-"using client";
+"use client";
 
-export default function NavLinks() {
-    const paths = [
-        {
-            path: "/",
-            name: "home",
-        }
-    ]
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
-    return (
-        <div className="gap-2 flex flex-col h-auto w-auto">
-            
-        </div>
-    );
+export default function NavLinks({ containerStyles }) {
+  const pathName = usePathname();
+
+  const links = [
+    {
+      filePath: "/",
+      fileName: "home",
+    },
+  ];
+
+  return (
+    <ul className={containerStyles}>
+      {links.map((fileLink, index) => {
+        const isActive = fileLink.filePath === pathName;
+
+        return (
+          <Link
+            key={index}
+            href={fileLink.filePath}
+            className="relative text-lg"
+          >
+            <motion.span
+              className={`relative z-10 font-bold text-[17px] ${
+                isActive ? `font-extrabold` : `font-bold opacity-75`
+              }`}
+            >
+              {fileLink.fileName}
+            </motion.span>
+          </Link>
+        );
+      })}
+    </ul>
+  );
 }
