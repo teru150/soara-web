@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="font-sans grid font-bold text-[35px] flex flex-col items-center justify-center min-h-screen z-20 relative">
+      <div className="font-sans grid font-bold text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative">
         <div 
           className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-1000 ${
             showLogo ? 'opacity-85' : 'opacity-0'
