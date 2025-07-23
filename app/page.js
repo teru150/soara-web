@@ -103,6 +103,9 @@ export default function Home() {
             </section>
           </div>
         </div>
+        <div className="text-center py-8">
+          <p className="text-sm text-gray-400">© Soara 2025</p>
+        </div>
       </div>
     </>
   );
