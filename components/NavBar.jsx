@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import NavLinks from "../components/NavLinks";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -14,7 +16,7 @@ export default function NavBar() {
         <div className="flex translate-x-[15vw] justify-between items-center px-8 py-4 mt-5 h-auto w-[70vw] fixed top-0 z-50 backdrop-blur-md border border-gray-500/15 border-[2px] rounded-full bg-white/15">
           <header className="">
             <h1 className="font-extrabold text-[20px]">
-              <a href="/">SOARA</a>
+              <a href="/">{t('brand')}</a>
             </h1>
           </header>
           <nav>

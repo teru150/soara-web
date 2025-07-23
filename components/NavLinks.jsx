@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function NavLinks({ containerStyles }) {
   const pathName = usePathname();
+  const { t } = useLanguage();
 
   const links = [
     {
@@ -61,7 +63,7 @@ export default function NavLinks({ containerStyles }) {
                 ease: "easeInOut",
               }}
             >
-              {fileLink.fileName}
+              {t(`nav.${fileLink.fileName}`)}
             </motion.button>
           </Link>
         );
