@@ -12,6 +12,26 @@ export default function NavLinks({ containerStyles }) {
       filePath: "/",
       fileName: "home",
     },
+    {
+      filePath: "/about",
+      fileName: "about",
+    },
+    {
+      filePath: "/sponsors",
+      fileName: "sponsors",
+    },
+    {
+      filePath: "/notifications",
+      fileName: "notifications",
+    },
+    {
+      filePath: "/members",
+      fileName: "members",
+    },
+    {
+      filePath: "/contacts",
+      fileName: "contacts",
+    },
   ];
 
   return (
