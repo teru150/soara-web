@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "../contexts/LanguageContext";
 
-export default function NavLinks({ containerStyles }) {
+export default function NavLinks({ containerStyles, isScrolled }) {
   const pathName = usePathname();
   const { t } = useLanguage();
 
@@ -48,8 +48,10 @@ export default function NavLinks({ containerStyles }) {
             className="relative text-lg"
           >
             <motion.button
-              className={`relative z-10 font-bold text-[17px] capitalize ${
+              className={`relative z-10 font-bold text-[17px] capitalize transition-colors duration-300 ${
                 isActive ? `font-extrabold` : `font-bold opacity-75`
+              } ${
+                isScrolled ? 'text-black hover:text-gray-600' : 'text-white hover:text-gray-200'
               }`}
               initial={{y: 0}}
               whileHover={{
