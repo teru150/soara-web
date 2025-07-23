@@ -45,13 +45,24 @@ export default function NavLinks({ containerStyles }) {
             href={fileLink.filePath}
             className="relative text-lg"
           >
-            <motion.span
-              className={`relative z-10 font-bold text-[17px] ${
+            <motion.button
+              className={`relative z-10 font-bold text-[17px] capitalize ${
                 isActive ? `font-extrabold` : `font-bold opacity-75`
               }`}
+              initial={{y: 0}}
+              whileHover={{
+                y: -3
+              }}
+              whileTap={{
+                y: -2
+              }}
+              transition={{
+                duration: 0.2,
+                ease: "easeInOut",
+              }}
             >
               {fileLink.fileName}
-            </motion.span>
+            </motion.button>
           </Link>
         );
       })}

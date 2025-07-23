@@ -24,12 +24,14 @@ export default function NavBar() {
               }
             />
           </nav>
-          <button
+          <motion.button
+            initial={{rotate: 0}}
+            animate={{rotate: isOpen ? 180 : 0}}
             className="xl:hidden relative fixed z-50"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X /> : <Menu />}
-          </button>
+          </motion.button>
         </div>
       </div>
       <AnimatePresence mode="wait">
