@@ -18,8 +18,8 @@ const PageFooter = () => {
             <Link href="/members" className="text-gray-600 hover:text-gray-900 transition-colors">
               Members
             </Link>
-            <Link href="/sponsors" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Sponsors
+            <Link href="/supporters" className="text-gray-600 hover:text-gray-900 transition-colors">
+              Supporters
             </Link>
             <Link href="/notifications" className="text-gray-600 hover:text-gray-900 transition-colors">
               Notifications

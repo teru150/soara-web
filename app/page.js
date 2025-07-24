@@ -83,7 +83,13 @@ export default function Home() {
                 <div className="flex items-start">
                   <div className="w-3 h-3 bg-black rounded-full mt-2 mr-6 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed text-lg">
-                    第48回鳥人間コンテストに出場し、The Fresh Birdman賞を獲得する
+                    第48回鳥人間コンテストに出場し、一切の事故なく、無事に湖岸に帰る
+                  </p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-3 h-3 bg-black rounded-full mt-2 mr-6 flex-shrink-0"></div>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    安定した飛行をし、The Fresh Birdman賞を獲得する
                   </p>
                 </div>
                 <div className="flex items-start">

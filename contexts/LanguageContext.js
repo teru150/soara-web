@@ -10,7 +10,7 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About', 
-      sponsors: 'Sponsors',
+      supporters: 'Supporters',
       notifications: 'Notifications',
       members: 'Members',
       contacts: 'Contacts'
@@ -21,7 +21,7 @@ export const translations = {
     nav: {
       home: 'ホーム',
       about: 'について',
-      sponsors: 'スポンサー', 
+      supporters: 'サポーター', 
       notifications: '通知',
       members: 'メンバー',
       contacts: 'お問い合わせ'

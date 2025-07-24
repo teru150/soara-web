@@ -19,8 +19,8 @@ export default function NavLinks({ containerStyles, isScrolled }) {
       fileName: "about",
     },
     {
-      filePath: "/sponsors",
-      fileName: "sponsors",
+      filePath: "/supporters",
+      fileName: "supporters",
     },
     {
       filePath: "/notifications",
