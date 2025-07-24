@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import PageFooter from '../../components/PageFooter'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -46,12 +47,14 @@ const ContactPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] py-32 px-6">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0a] text-[#ededed]">
+      <div className="flex-grow py-32 px-6">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg text-gray-300">
-            Get in touch with us. We'd love to hear from you!
+            ご要望・ご連絡がございましたら、以下のフォームからご連絡ください。<br />
+            できる限り迅速に対応させていただきます。
           </p>
         </div>
 
@@ -125,6 +128,9 @@ const ContactPage = () => {
           )}
         </form>
       </div>
+      </div>
+      
+      <PageFooter />
     </div>
   )
 }

@@ -2,6 +2,7 @@
 
 import { TypeAnimation } from "react-type-animation";
 import { useState, useEffect } from "react";
+import PageFooter from "../components/PageFooter";
 
 export default function Home() {
   const [showWelcome, setShowWelcome] = useState(false);
@@ -15,8 +16,8 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <div className="font-sans grid font-bold text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative">
+    <div className="min-h-screen flex flex-col">
+      <div className="font-sans grid font-bold text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow">
         <div 
           className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-1000 ${
             showLogo ? 'opacity-85' : 'opacity-0'
@@ -34,7 +35,7 @@ export default function Home() {
         <div className="text-center relative z-20" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9), -1px -1px 2px rgba(0, 0, 0, 0.9), 1px -1px 2px rgba(0, 0, 0, 0.9), -1px 1px 2px rgba(0, 0, 0, 0.9)' }}>
           <TypeAnimation 
             sequence={[
-              3000,
+              2500,
               "空へ、挑み、創る。",
               1000,
               "空へ、挑み、創る。\n We build wings—and what lies beyond.",
@@ -67,46 +68,55 @@ export default function Home() {
         )}
       </div>
 
-      <div className="w-full bg-white text-black min-h-screen py-16 rounded-lg">
+      <div className="bg-white text-black py-16 flex-grow" style={{width: '100vw', marginLeft: 'calc(-50vw + 50%)'}}>
         <div className="max-w-4xl mx-auto px-8">
-          <h1 className="text-4xl font-bold text-center mb-16">About Us</h1>
-          
           <div className="space-y-12">
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Our History</h2>
-              <p className="text-gray-700 leading-relaxed">
-                2025年<br />
-                7月5日　　　結成<br />
-                7月23日　　公式HP・SNS開設
+              <p className="text-gray-700 leading-relaxed text-xl text-center mb-8">
+                SOARAは学校を、そして国境をも跨いで設立された史上初の高校生有志鳥人間チームです。東京を拠点とし、2026年度鳥人間コンテスト滑空機部門出場を目指し10人の高校生が日々励んでいます。
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Our Goal</h2>
-              <p className="text-gray-700 leading-relaxed">
-                私たちの最大の目標は、万全の状態でプラットホームに立ち、事故を起こさずに湖岸に帰ってくることです。何百メートル飛べる機体、美しく飛ぶ機体を作りたいという意気もありますが、それよりもパイロットの安全性を第一にしたいのです。
-              </p>
+              <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center">Our Goals</h2>
+              <div className="space-y-6 max-w-3xl mx-auto">
+                <div className="flex items-start">
+                  <div className="w-3 h-3 bg-black rounded-full mt-2 mr-6 flex-shrink-0"></div>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    第48回鳥人間コンテストに出場し、The Fresh Birdman賞を獲得する
+                  </p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-3 h-3 bg-black rounded-full mt-2 mr-6 flex-shrink-0"></div>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    中高生時代から航空分野に関わる学生を増やすことで、日本の航空産業の未来を切り開く
+                  </p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-3 h-3 bg-black rounded-full mt-2 mr-6 flex-shrink-0"></div>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    鳥人間コンテストの世界的な知名度を上げる
+                  </p>
+                </div>
+              </div>
+              <div className="text-center mt-10">
+                <a href="/about" className="inline-block px-8 py-4 bg-gray-200 hover:bg-gray-300 text-black font-medium rounded-lg transition-colors duration-300 hover:shadow-lg border border-gray-300">
+                  詳しくはこちら
+                </a>
+              </div>
             </section>
-
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">The Reason</h2>
-              <p className="text-gray-700 leading-relaxed">
-                過去高校生として鳥人間コンテストに出場した団体は多くなく、それも殆どが高専や工業高校の生徒です。100m以上の記録を残したチームとなるとかなり限られます。私たちが最終的に目指すのは普通科の高校生として鳥人間コンテストに出場し、100m以上の滑空を記録することです。開成の名前を背負って鳥人間コンテストの48年に渡る歴史に新たな1ページを刻むことができれば幸いです。
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">About Our Name</h2>
-              <p className="text-gray-700 leading-relaxed">
-                SOARAは「空」と「舞い上がる」を意味する英単語「Soar」を掛け合わせた名前です。
+              <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">About Our Name</h2>
+              <p className="text-gray-700 leading-relaxed text-lg text-center">
+                チーム名である「SOARA」は「舞い上がる」という意味の英単語である「soar」と、アルファベットの最初の文字であり、「原点」を意味する「A」を組み合わせた造語です。 <br>
+                </br>SOARAは、日本の未来を担う中高生が、空へと飛び立つチャンスを獲得し、今後の航空業界をリードする人材へと育つ最初のきっかけとなることを願って名付けられています。
               </p>
             </section>
           </div>
         </div>
-        <div className="text-center py-8">
-          <p className="text-sm text-gray-400">© Soara 2025</p>
-        </div>
       </div>
-    </>
+      
+      <PageFooter />
+    </div>
   );
 }
