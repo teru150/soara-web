@@ -59,7 +59,7 @@ const MembersPage = () => {
                   <div className="mb-6">
                     <h2 className="text-3xl font-bold mb-2">{member.name}</h2>
                     <h3 className="text-xl text-gray-300 mb-2">{member.englishName}</h3>
-                    <div className="inline-block px-4 py-2 text-white rounded-full text-lg font-semibold border-2 border-white" style={{backgroundColor: '#00053a'}}>
+                    <div className="inline-block px-4 py-2 text-black rounded-full text-lg font-semibold bg-white">
                       {member.position}
                     </div>
                   </div>
