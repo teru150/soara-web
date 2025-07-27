@@ -70,16 +70,16 @@ export default function Home() {
 
       <div className="bg-white text-black py-16 flex-grow" style={{width: '100vw', marginLeft: 'calc(-50vw + 50%)'}}>
         <div className="max-w-4xl mx-auto px-8">
-          <div className="space-y-12">
+          <div className="space-y-24">
             <section>
               <p className="text-gray-700 leading-relaxed text-xl text-center mb-8">
-                SOARAは学校を、そして国境をも跨いで設立された史上初の高校生有志鳥人間チームです。東京を拠点とし、2026年度鳥人間コンテスト滑空機部門出場を目指し10人の高校生が日々励んでいます。
+                SOARAは学校を、そして国境をも跨いで設立された史上初の高校生有志鳥人間チームです。東京を拠点とし、2026年度鳥人間コンテスト滑空機部門出場を目指し14人の高校生が活動しています。
               </p>
             </section>
 
             <section>
               <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center">Our Goals</h2>
-              <div className="space-y-6 max-w-3xl mx-auto">
+              <div className="space-y-12 max-w-3xl mx-auto">
                 <div className="flex items-start">
                   <div className="w-3 h-3 bg-black rounded-full mt-2 mr-6 flex-shrink-0"></div>
                   <p className="text-gray-700 leading-relaxed text-lg">
@@ -106,7 +106,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="text-center mt-10">
-                <a href="/about" className="inline-block px-8 py-4 bg-gray-200 hover:bg-gray-300 text-black font-medium rounded-lg transition-colors duration-300 hover:shadow-lg border border-gray-300">
+                <a href="/about#goals" className="inline-block px-8 py-4 bg-gray-200 hover:bg-gray-300 text-black font-medium rounded-lg transition-colors duration-300 hover:shadow-lg border border-gray-300">
                   詳しくはこちら
                 </a>
               </div>
