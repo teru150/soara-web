@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="font-sans grid font-bold text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow">
+      <div className="font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow">
         <div 
           className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-1000 ${
             showLogo ? 'opacity-85' : 'opacity-0'
@@ -118,8 +118,23 @@ export default function Home() {
                 </br>SOARAは、日本の未来を担う中高生が、空へと飛び立つチャンスを獲得し、今後の航空業界をリードする人材へと育つ最初のきっかけとなることを願って名付けられています。
               </p>
             </section>
+
+            <section>
+              <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">お知らせ</h2>
+              <div className="max-w-3xl mx-auto">
+                <div className="bg-white border-t border-black p-4 flex">
+                  <span className="text-black inline-block w-32 text-lg">2025/7/30</span>
+                  <span className="text-black font-bold text-lg">aircraftページにて機体設計についての解説を準備中です</span>
+                </div>
+                <div className="bg-white border-b border-black p-4 flex">
+                  <span className="text-black inline-block w-32 text-lg">2025/7/28</span>
+                  <span className="text-black font-bold text-lg">公式HPを開設しました</span>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
+        <div className="pb-24"></div>
       </div>
       
       <PageFooter />

@@ -20,6 +20,11 @@ const AboutPage = () => {
               私たちはこの活動を通じて、単に機体を作り上げて飛ばし、自分たちが楽しみ成長するだけでなく中高生の航空分野への興味をより高め、未来の航空人材を増やすことを目指しています。<br />
               また、SOARAが中高生有志チームのモデルケースとして今後より多くの新規チームが生まれることを願っています。
             </p>
+            <div className="text-center mt-8 mb-32">
+              <a href="#formation" className="inline-block px-8 py-4 bg-gray-600 hover:bg-gray-500 text-white font-medium rounded-lg transition-colors duration-300 hover:shadow-lg">
+                チームについて詳しく見る
+              </a>
+            </div>
             <h2 className="text-2xl font-semibold mb-6 text-gray-200">Our Motivation</h2>
             <p className="text-gray-300 leading-relaxed text-lg">
               私たちが複数ある航空系大会の中であえて鳥人間を選ぶ理由、それは<br />
@@ -66,8 +71,40 @@ const AboutPage = () => {
               </div>
             </div>
           </section>
+
+          <section id="formation">
+            <h2 className="text-2xl font-semibold mb-6 text-gray-200">結成の経緯</h2>
+            <div className="space-y-16">
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 text-white">学校チームの断念</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  全ての始まりは2024年の鳥人間コンテストでとある高校生チームが鳥人間コンテスト人力プロペラ機部門に挑んだことです。大いに影響された現代表の入山が、12月に在籍する高校の部活動として鳥人間コンテストに出場するための同好会を結成しました。<br /><br />
+                  しかし、学校側から「結成初年度で信用がない」「一部活にだけ資金集めを許可できない」といった理由から出場を認可されず、断念を余儀なくされました。ですが、「空を飛びたい」という夢を諦めることはできませんでした。
+                </p>
+              </div>
+
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 text-white">特色ある仲間たちとの出会い</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  どのようにすれば学校から離れても鳥人間コンテストに出場できるか悩んでいたところ、偶然知人に紹介され現プロジェクトマネージャーの野村と出会いました。（彼は山口、入山は東京在住であるため、実のところ今日まで一度も直接会ったことはありませんが…）<br /><br />
+                  話してすぐに意気投合し、ともにSOARAとして有志のチームを結成し、資金、場所、人材全てを自分たちで確保することを決意しました。その後入山の中学時代の同級生だった優秀なエンジニアである現主任設計の中嶋を勧誘し、この3人でチームが始まりました。<br /><br />
+                  その後も個性的な背景を持った加入者は増え続け、現在は私たちの思いと志に共感してくれた14人の仲間たちとともに、鳥人間コンテストに出場するため準備に勤しんでいます。
+                </p>
+              </div>
+
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 text-white">世界との繋がり</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  入山は2025年7月、アメリカの大学にてエンジニアリングのサマープログラムに参加していました。現地で出会った友人に、ふとどういう活動をしているのか聞かれ「Birdman Rally」と答えるときょとんとした顔をされました。その瞬間ようやく鳥人間が日本特有のものであることを思い出しました。<br /><br />
+                  そこでどのような大会であるかを教えると、曰くこんな素晴らしい大会があるとは、もっと早く知りたかった、と驚かれたので色々な友人に伝えて回ることにしました。結果はとても好評で、中にはSOARAに加入してくれる人やアメリカでチームを立ち上げようかと真剣に考えてくれる人まで出てきました。<br /><br />
+                  この反応から、私たちは国際的に鳥人間コンテストの知名度を高めることができれば大会の更なる発展に寄与できると考え、SOARAでは積極的な海外への広報活動及び勧誘を行っています。
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
+      <div className="pb-24"></div>
       </div>
       
       <PageFooter />

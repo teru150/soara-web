@@ -83,6 +83,7 @@ const MembersPage = () => {
             ))}
           </div>
         </div>
+        <div className="pb-24"></div>
       </div>
       
       <PageFooter />

@@ -23,8 +23,8 @@ export default function NavLinks({ containerStyles, isScrolled }) {
       fileName: "supporters",
     },
     {
-      filePath: "/notifications",
-      fileName: "notifications",
+      filePath: "/aircraft",
+      fileName: "aircraft",
     },
     {
       filePath: "/members",
