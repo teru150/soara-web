@@ -8,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-noto-sans-jp);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -21,7 +21,11 @@
 body {
   background: #0a0a0a !important;
   color: #ededed !important;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Noto Sans JP';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Geist Mono'; /* or another font for headers */
 }
 
 /* Responsive text sizes for all pages */

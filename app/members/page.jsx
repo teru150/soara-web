@@ -85,8 +85,6 @@ const MembersPage = () => {
         </div>
         <div className="pb-24"></div>
       </div>
-      
-      <PageFooter />
     </div>
   )
 }

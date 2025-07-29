@@ -39,7 +39,10 @@ export default function NavLinks({ containerStyles, isScrolled }) {
   return (
     <ul className={containerStyles}>
       {links.map((fileLink, index) => {
-        const isActive = fileLink.filePath === pathName;
+        const isActive =
+          fileLink.filePath === "/"
+            ? pathName === "/"
+            : pathName.startsWith(fileLink.filePath);      
 
         return (
           <Link
@@ -49,9 +52,9 @@ export default function NavLinks({ containerStyles, isScrolled }) {
           >
             <motion.button
               className={`relative z-10 font-bold text-[17px] capitalize transition-colors duration-300 ${
-                isActive ? `font-extrabold` : `font-bold opacity-75`
+                isActive ? `font-extrabold text-blue-500/75` : `${isScrolled ? "text-black/80" : "text-white"} font-bold opacity-75`
               } ${
-                isScrolled ? 'text-black hover:text-gray-600' : 'text-white hover:text-gray-200'
+                isScrolled ? 'hover:text-gray-600' : 'hover:text-gray-200'
               }`}
               initial={{y: 0}}
               whileHover={{

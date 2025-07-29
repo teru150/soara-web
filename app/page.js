@@ -136,8 +136,6 @@ export default function Home() {
         </div>
         <div className="pb-24"></div>
       </div>
-      
-      <PageFooter />
     </div>
   );
 }

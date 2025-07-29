@@ -25,7 +25,7 @@ export default function NavBar() {
   return (
     <>
       <div className="w-full justify-center items-center">
-        <div className={`flex translate-x-[15vw] justify-between items-center px-8 py-4 mt-5 h-auto w-[70vw] fixed top-0 z-50 backdrop-blur-md border border-[2px] rounded-full transition-all duration-300 ${
+        <div className={`flex translate-x-[15vw] justify-between items-center px-8 py-3.5 mt-5 h-auto w-[70vw] fixed top-0 z-50 backdrop-blur-md border border-[2px] rounded-full transition-all duration-300 ${
           isScrolled 
             ? 'border-gray-300/30 bg-white/90 text-black' 
             : 'border-gray-500/15 bg-white/15 text-white'
@@ -38,7 +38,7 @@ export default function NavBar() {
           <nav>
             <NavLinks
               containerStyles={
-                "hidden xl:block flex space-x-8 font-semibold justify-between"
+                "hidden xl:block flex space-x-8 font-semibold justify-between items-center"
               }
               isScrolled={isScrolled}
             />
@@ -57,7 +57,7 @@ export default function NavBar() {
         {isOpen && (
             <>
                 <motion.div
-                    className="xl:hidden fixed inset-0 backdrop-blur-xl z-45 min-w-screen min-h-screen bg-black/30"
+                    className="xl:hidden fixed inset-0 backdrop-blur-2xl bg-white/20 z-45 min-w-screen min-h-screen bg-black/30"
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     transition={{delay: 0.05, duration: 0.25, ease: "circInOut"}}

@@ -1,8 +1,8 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import Footer from "../components/Footer";
+import { Geist, Geist_Mono, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/NavBar";
 import { LanguageProvider } from "../contexts/LanguageContext";
+import PageFooter from "@/components/PageFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +13,11 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+})
 
 export const metadata = {
   title: "Soara-Official",
@@ -49,13 +54,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col w-full justify-center items-center`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} antialiased flex flex-col w-full justify-center items-center`}
         style={{backgroundColor: '#0a0a0a'}}
       >
         <LanguageProvider>
           <NavBar />
           {children}
-          <Footer />
+          <PageFooter />
         </LanguageProvider>
       </body>
     </html>

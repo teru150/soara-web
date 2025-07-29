@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const PageFooter = () => {
   return (
-    <footer className="bg-white border-t border-gray-200 py-8 mt-auto" style={{width: '100vw', marginLeft: 'calc(-50vw + 50%)'}}>
+    <footer className="bg-white border-t border-gray-200 rounded-xl py-8 mt-auto" style={{width: '100vw', marginLeft: 'calc(-50vw + 50%)'}}>
       <div className="max-w-6xl mx-auto px-8">
         <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
           {/* Navigation Links */}

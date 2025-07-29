@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import PageFooter from '../../components/PageFooter'
+import { TypeAnimation } from 'react-type-animation'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -112,7 +113,22 @@ const ContactPage = () => {
             disabled={isSubmitting}
             className="w-full py-3 px-6 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed font-medium transition-colors"
           >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+            {isSubmitting ? 'Sending...' : (
+              <TypeAnimation 
+                sequence={[
+                  "Send a message",
+                  3000,
+                  "Send a warm hello",
+                  3000,
+                  "Send a thanks",
+                  3000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                style={{ whiteSpace: 'pre-line' }}
+              />
+            )}
           </button>
 
           {submitStatus === 'success' && (
@@ -129,8 +145,6 @@ const ContactPage = () => {
         </form>
       </div>
       </div>
-      
-      <PageFooter />
     </div>
   )
 }
