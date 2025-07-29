@@ -1,5 +1,4 @@
 import React from 'react'
-import PageFooter from '../../components/PageFooter'
 
 const page = () => {
   return (
@@ -18,4 +17,4 @@ const page = () => {
   )
 }
 
-export default page
+export default page;

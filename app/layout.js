@@ -2,7 +2,7 @@ import { Geist, Geist_Mono, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/NavBar";
 import { LanguageProvider } from "../contexts/LanguageContext";
-import PageFooter from "@/components/PageFooter";
+import PageFooter from "../components/PageFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

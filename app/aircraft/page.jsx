@@ -1,5 +1,4 @@
-import React from 'react'
-import PageFooter from '../../components/PageFooter'
+import React from "react";
 
 const AircraftPage = () => {
   return (
@@ -13,7 +12,7 @@ const AircraftPage = () => {
         <div className="pb-24"></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AircraftPage
+export default AircraftPage;
