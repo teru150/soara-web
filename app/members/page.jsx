@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 
 const MembersPage = () => {
+  const [danielLanguage, setDanielLanguage] = useState("japanese");
   const members = [
     {
       name: "入山輝大",
@@ -32,6 +35,18 @@ const MembersPage = () => {
       image: "/images/Nomura.jpg",
       description:
         "山口県立山口高等学校理数科に在籍し、わずか2週間という短期間で高校生F1チーム「花-SAKURA-Racing」を立ち上げ、プロジェクトマネージャーとして組織の基盤を築き上げた。\n昨年は自身の所属していたオーケストラでの全国大会準優勝を果たし、現在はボウリングで全国大会に出場するなど、多方面で活躍を見せ続けている。こうした経験を活かし、複数の大規模プロジェクトを同時に推進するマネジメント能力を磨き続けている。\n「花-SAKURA-Racing」では日本代表としてSTEM RACING™︎の国際大会に出場予定であり、プロジェクトを通じて教育分野にも深い関心を持っている。特に、地元・山口における教育の不平等性などの課題解決に向けて、プロジェクトを通した積極的なアプローチを行なっている。\nまた、鳥人間チーム「SOARA」には、命をのせた滑空機を中高生が総力を尽くして創り上げるという高い教育的価値に強く共感し、その理念に惹かれて参加した。SOARAでの経験を通じて、技術だけでなく協働の重要性も深く学んでいる。\n多様な背景と経験を武器に、確かな成長を続けている。",
+    },
+    {
+      name: "Daniel Kosukhin",
+      englishName: "ダニエル・コスキン",
+      position: "ソフトウェアエンジニア",
+      school: "Located in New York",
+      grade: "11th grade",
+      image: "/images/danny.jpg",
+      description:
+        "無人車両システムまたはロボット工学ソフトウェア開発に関連するインターンシップを探している、情熱的なウェブ開発者兼プログラマー。FIRST Roboticsのリードプログラマーとして活動し、地元のウェブサイト開発クラブにおけるウェブサイト作成の先駆者としての役割を果たしてきた。過去数年間、自律システムや電気部品の分野で働いてきたほか、メカトロニクスに特化した個人ポートフォリオの制作にも取り組んできた。本ウェブサイトの開発も手掛ける。今後のSOARAチームとの協働を楽しみにしています！",
+      englishDescription:
+        "I'm Daniel Kosukhin, a passionate web developer and programmer looking for an internship related to unmanned vehicle systems or robotics software development. I specialize in FIRST Robotics as a lead programmer and pioneer in the creation of websites at our local website development club. I worked on autonomous systems and electrical components throughout the years, as well as personal portfolios focused on mechatronics. Looking forward to working with Soara in the future!",
     },
   ];
 
@@ -80,11 +95,27 @@ const MembersPage = () => {
                   </div>
 
                   <div className="text-gray-300 leading-relaxed text-lg space-y-4">
-                    {member.description
-                      .split("\n\n")
-                      .map((paragraph, pIndex) => (
-                        <p key={pIndex}>{paragraph}</p>
-                      ))}
+                    {member.name === "Daniel Kosukhin" ? (
+                      <>
+                        {(danielLanguage === "japanese" ? member.description : member.englishDescription)
+                          .split("\n\n")
+                          .map((paragraph, pIndex) => (
+                            <p key={pIndex}>{paragraph}</p>
+                          ))}
+                        <button
+                          onClick={() => setDanielLanguage(danielLanguage === "japanese" ? "english" : "japanese")}
+                          className="mt-4 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-colors"
+                        >
+                          {danielLanguage === "japanese" ? "See in English" : "日本語で見る"}
+                        </button>
+                      </>
+                    ) : (
+                      member.description
+                        .split("\n\n")
+                        .map((paragraph, pIndex) => (
+                          <p key={pIndex}>{paragraph}</p>
+                        ))
+                    )}
                   </div>
                 </div>
               </div>
