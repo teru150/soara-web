@@ -49,7 +49,7 @@ const MembersPage = () => {
         "I'm Daniel Kosukhin, a passionate web developer and programmer looking for an internship related to unmanned vehicle systems or robotics software development. I specialize in FIRST Robotics as a lead programmer and pioneer in the creation of websites at our local website development club. I worked on autonomous systems and electrical components throughout the years, as well as personal portfolios focused on mechatronics. Looking forward to working with Soara in the future!",
     },
     {
-      name: "名前",
+      name: "高橋知志",
       englishName: "Name",
       position: "position",
       school: "school",
