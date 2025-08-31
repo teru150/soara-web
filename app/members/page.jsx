@@ -50,7 +50,7 @@ const MembersPage = () => {
     },
     {
       name: "高橋知志",
-      englishName: "Name",
+      englishName: "Kazushi Takahashi",
       position: "position",
       school: "school",
       grade: "grade",
@@ -60,7 +60,7 @@ const MembersPage = () => {
     },
     {
       name: "越智玲斗",
-      englishName: "Name",
+      englishName: "Reito Ochi",
       position: "position",
       school: "school",
       grade: "grade",
@@ -70,7 +70,7 @@ const MembersPage = () => {
     },
     {
       name: "鈴木雄智",
-      englishName: "Name",
+      englishName: "Takemasa Suzuki",
       position: "position",
       school: "school",
       grade: "grade",
@@ -80,7 +80,7 @@ const MembersPage = () => {
     },
     {
       name: "片岡穣",
-      englishName: "Name",
+      englishName: "Jo Kataoka",
       position: "position",
       school: "school",
       grade: "grade",
@@ -90,7 +90,7 @@ const MembersPage = () => {
     },
     {
       name: "服部明人",
-      englishName: "Name",
+      englishName: "Akito Hattori",
       position: "position",
       school: "school",
       grade: "grade",
@@ -100,7 +100,7 @@ const MembersPage = () => {
     },
     {
       name: "ショーン・リアン",
-      englishName: "Name",
+      englishName: "Shawn Lian",
       position: "position",
       school: "school",
       grade: "grade",
@@ -110,7 +110,7 @@ const MembersPage = () => {
     },
     {
       name: "和田悠希",
-      englishName: "Name",
+      englishName: "Yuki Wada",
       position: "position",
       school: "school",
       grade: "grade",
@@ -120,7 +120,7 @@ const MembersPage = () => {
     },
     {
       name: "服部裕斗",
-      englishName: "Name",
+      englishName: "Yuto Hattori",
       position: "position",
       school: "school",
       grade: "grade",
@@ -130,7 +130,7 @@ const MembersPage = () => {
     },
     {
       name: "浅岡晃成",
-      englishName: "Name",
+      englishName: "Kosei Asaoka",
       position: "position",
       school: "school",
       grade: "grade",
