@@ -12,9 +12,9 @@ const page = () => {
               <h3 className="text-2xl font-bold text-white mb-6">東京理科大学鳥人間サークル鳥科</h3>
               <div className="flex gap-8 items-start">
                 {/* Logo Space */}
-                <div className="flex-shrink-0 w-48 h-48">
+                <a href="https://x.com/torica_official" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 w-48 h-48 hover:opacity-80 transition-opacity">
                   <img src="/images/torica_logo.png" alt="東京理科大学鳥人間サークル鳥科ロゴ" className="w-full h-full object-contain" />
-                </div>
+                </a>
                 {/* Description */}
                 <div className="flex-1">
                   <p className="text-[#ededed] leading-relaxed">
