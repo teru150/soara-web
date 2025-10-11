@@ -9,7 +9,7 @@ const page = () => {
           <div className="mb-16">
             <h2 className="text-4xl font-bold text-blue-400 mb-8 text-center">Special Partner</h2>
             <div className="bg-[#151515] rounded-lg p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">東京理科大学鳥人間サークル鳥科</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">東京理科大学鳥人間サークル鳥科　様</h3>
               <div className="flex gap-8 items-start">
                 {/* Logo Space */}
                 <a href="https://x.com/torica_official" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 w-48 h-48 hover:opacity-80 transition-opacity">
@@ -18,7 +18,7 @@ const page = () => {
                 {/* Description */}
                 <div className="flex-1">
                   <p className="text-[#ededed] leading-relaxed">
-                    東京理科大学鳥人間サークル鳥科は、鳥人間チーム最大規模の160名の部員を擁し、コンテスト出場常連の学生チームです。<br />
+                    東京理科大学鳥人間サークル鳥科は、鳥人間チーム最大規模の約90名の部員を擁する学生チームであり、2025年大会滑空機部門では準優勝するなど、鳥人間コンテスト出場常連の強豪チームです。<br />
                     私たちSOARAに対し、設計・製作のノウハウのご提供、メンタリング、さらにはCFRP桁のご提供に至るまで、全面的なご支援を賜っております。
                   </p>
                 </div>
