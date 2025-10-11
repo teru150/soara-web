@@ -29,7 +29,7 @@ const MembersPage = () => {
     {
       name: "野村恭平",
       englishName: "Kyohei Nomura",
-      position: "プロジェクトマネージャー",
+      position: "ブランディングマネージャー",
       school: "山口県立山口高等学校",
       grade: "2年生",
       image: "/images/Nomura.jpg",

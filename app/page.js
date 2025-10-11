@@ -36,9 +36,9 @@ export default function Home() {
           <TypeAnimation 
             sequence={[
               2500,
-              "空へ、挑み、創る。",
+              "常識の向こうへ、碧空の彼方へ。",
               1000,
-              "空へ、挑み、創る。\n We build wings—and what lies beyond.",
+              "常識の向こうへ、碧空の彼方へ。\n Beyond the limits, beyond the blue sky.",
               500,
               () => {
                 setShowWelcome(true);
@@ -73,7 +73,7 @@ export default function Home() {
           <div className="space-y-24">
             <section>
               <p className="text-gray-700 leading-relaxed text-xl text-center mb-8">
-                SOARAは学校を、そして国境をも跨いで設立された史上初の高校生有志鳥人間チームです。東京を拠点とし、2026年度鳥人間コンテスト滑空機部門出場を目指し14人の高校生が活動しています。
+                SOARAは学校を、そして国境をも跨いで設立された史上初の高校生有志鳥人間チームです。東京を拠点とし、2026年度鳥人間コンテスト滑空機部門出場を目指し20人の高校生が活動しています。
               </p>
             </section>
 
@@ -122,6 +122,14 @@ export default function Home() {
             <section>
               <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">お知らせ</h2>
               <div className="max-w-3xl mx-auto">
+                <div className="bg-white border-t border-black p-4 flex">
+                  <span className="text-black inline-block w-32 text-lg">2025/9/17</span>
+                  <span className="text-black font-bold text-lg">TiB FAB様のご支援により作業場所が決定しました</span>
+                </div>
+                <div className="bg-white border-t border-black p-4 flex">
+                  <span className="text-black inline-block w-32 text-lg">2025/9/13</span>
+                  <span className="text-black font-bold text-lg">HoPE様主催の秋の交流会に参加しました</span>
+                </div>
                 <div className="bg-white border-t border-black p-4 flex">
                   <span className="text-black inline-block w-32 text-lg">2025/7/30</span>
                   <span className="text-black font-bold text-lg">aircraftページにて機体設計についての解説を準備中です</span>
