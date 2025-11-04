@@ -54,8 +54,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} antialiased flex flex-col w-full justify-center items-center`}
-        style={{backgroundColor: '#0a0a0a'}}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} antialiased flex flex-col w-full min-h-screen items-stretch`}
+        style={{ backgroundColor: '#0a0a0a' }}
       >
         <LanguageProvider>
           <NavBar />
