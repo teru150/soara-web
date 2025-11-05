@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import contentData from "../../data/content.json";
 
 const AboutPage = () => {
   return (
@@ -8,38 +11,26 @@ const AboutPage = () => {
 
       <div className="flex-grow py-32 px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
+          {/* ページヒーロー */}
           <h1 className="text-center mb-16 relative">
-            <span className="text-5xl font-bold">About Us</span>
+            <span className="text-5xl font-bold">{contentData.about.hero.title}</span>
             <br />
             <br />
             <span className="text-3xl font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
-              空への情熱で、常識を飛び越える
+              {contentData.about.hero.subtitle}
             </span>
             {/* タイトル下のアクセントライン */}
             <div className="mt-6 mx-auto w-32 h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7]"></div>
           </h1>
 
           <div className="space-y-24">
+            {/* イントロダクションセクション */}
             <section>
-              <p className="text-gray-300 leading-relaxed text-lg mb-12">
-                SOARAは、2025年3月に結成された日本初の高校生有志鳥人間チームです。
-                <br />
-                <br />
-                代表の入山が学校の部活動として鳥人間コンテスト出場を目指すも、「前例がない」「資金調達を認められない」という理由で断念。それでも「空を飛びたい」という夢を諦めきれず、学校の枠を超えて同じ志を持つ仲間を集めました。
-                <br />
-                <br />
-                現在は東京を中心に全国9校から21名が参加し、さらにアメリカからもメンバーが加わっています。
-                <br />
-                <br />
-                私たちは、この挑戦を通じて3つのことを実現します：
-                <br />
-                <br />
-                1. 高校生でも本格的な航空機を作り、安全に飛ばせることを証明する<br />
-                2. 中高生が航空分野への情熱を持ち続けるきっかけを作る<br />
-                3. 鳥人間コンテストの魅力を世界に発信する
-                <br />
-                <br />
-                SOARAは、単なる機体製作チームではありません。次世代の航空人材を育て、日本の空の未来を拓く「ムーブメント」の始まりです。
+              <h2 className="text-2xl font-semibold mb-6 text-gray-200 border-l-4 border-[#369bff] pl-4">
+                {contentData.about.intro.title}
+              </h2>
+              <p className="text-gray-300 leading-relaxed text-lg mb-12 whitespace-pre-line">
+                {contentData.about.intro.content}
               </p>
               <div className="text-center mt-8 mb-32">
                 <a
@@ -51,6 +42,7 @@ const AboutPage = () => {
               </div>
             </section>
 
+            {/* Vision・Mission・Values */}
             <section className="relative bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] rounded-t-lg"></div>
               <h2 className="text-3xl font-semibold mb-8 text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
@@ -59,72 +51,47 @@ const AboutPage = () => {
 
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">Vision（ビジョン）</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-white">{contentData.about.vision.title}</h3>
                   <p className="text-xl text-gray-200 leading-relaxed">
-                    空への情熱で、常識を飛び越える
+                    {contentData.about.vision.content}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">Mission（ミッション）</h3>
-                  <p className="text-lg text-gray-200 leading-relaxed">
-                    学校・年齢・経済的制約という既存の枠を超え、高校生の手で鳥人間コンテストに挑戦する。
-                    <br /><br />
-                    その過程で生まれる技術・経験・ネットワークを通じて、日本の航空教育とものづくりの新しい可能性を切り拓く。
+                  <h3 className="text-2xl font-bold mb-3 text-white">{contentData.about.mission.title}</h3>
+                  <p className="text-lg text-gray-200 leading-relaxed whitespace-pre-line">
+                    {contentData.about.mission.content}
                   </p>
                 </div>
 
                 <div>
                   <h3 className="text-2xl font-bold mb-3 text-white">Values（価値観）</h3>
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div className="relative bg-gray-800/50 p-4 rounded border-l-4 border-[#369bff]">
-                      <h4 className="font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">1. 情熱</h4>
-                      <p className="text-gray-300">空への憧れを、行動に変える</p>
-                    </div>
-                    <div className="relative bg-gray-800/50 p-4 rounded border-l-4 border-[#2080d0]">
-                      <h4 className="font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">2. 越境</h4>
-                      <p className="text-gray-300">学校・専門・世代の境界を超える</p>
-                    </div>
-                    <div className="relative bg-gray-800/50 p-4 rounded border-l-4 border-[#0050a7]">
-                      <h4 className="font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">3. 挑戦</h4>
-                      <p className="text-gray-300">「できない」を「やってみせる」に変える</p>
-                    </div>
-                    <div className="relative bg-gray-800/50 p-4 rounded border-l-4 border-[#1868c0]">
-                      <h4 className="font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">4. 共創</h4>
-                      <p className="text-gray-300">異なる力を繋ぎ、共に創る</p>
-                    </div>
-                    <div className="relative bg-gray-800/50 p-4 rounded md:col-span-2 border-l-4 border-[#369bff]">
-                      <h4 className="font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">5. 継承</h4>
-                      <p className="text-gray-300">知識と可能性を、次世代に繋ぐ</p>
-                    </div>
+                    {contentData.about.values.map((value, index) => (
+                      <div
+                        key={index}
+                        className={`relative bg-gray-800/50 p-4 rounded border-l-4 border-[#369bff] ${
+                          index === contentData.about.values.length - 1 ? 'md:col-span-2' : ''
+                        }`}
+                      >
+                        <h4 className="font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">
+                          {value.number}. {value.title}
+                        </h4>
+                        <p className="text-gray-300">{value.description}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </section>
 
+            {/* Our Motivation */}
             <section>
               <h2 className="text-2xl font-semibold mb-6 text-gray-200 border-l-4 border-[#369bff] pl-4">
-                Our Motivation
+                {contentData.about.motivation.title}
               </h2>
-              <p className="text-gray-300 leading-relaxed text-lg">
-                私たちが鳥人間コンテストを選ぶ理由は、単に「空を飛びたい」からではありません。
-                <br />
-                <br />
-                鳥人間コンテストは、10mの高さから人を乗せた機体を飛ばす競技です。パイロットの命を預かる以上、設計の一つひとつ、製作の一工程ひとつに、妥協は許されません。
-                <br />
-                <br />
-                この
-                <span className="text-2xl font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">「責任の重さ」</span>
-                こそが、私たちが最も学びたいことです。
-                <br />
-                <br />
-                教科書で学ぶ理論を、実際の機体で応用する。安全性を最優先し、万が一のリスクも排除する。チーム全員で責任を分かち合い、完成を目指す。
-                <br />
-                <br />
-                これは、単なる工作活動ではありません。未来のエンジニアに必要な「技術的責任感」と「倫理観」を、実地で学べる唯一無二の場です。
-                <br />
-                <br />
-                だからこそ、私たちは鳥人間コンテストに挑みます。
+              <p className="text-gray-300 leading-relaxed text-lg whitespace-pre-line">
+                {contentData.about.motivation.content}
               </p>
             </section>
 
@@ -354,6 +321,60 @@ const AboutPage = () => {
                     <br />
                     ことを目指しています。
                   </p>
+                </div>
+              </div>
+            </section>
+
+            {/* チームの沿革（タイムライン） */}
+            <section id="history">
+              <h2 className="text-2xl font-semibold mb-12 text-gray-200 border-l-4 border-[#369bff] pl-4">
+                チームの歩み
+              </h2>
+              <div className="relative">
+                {/* タイムライン中央線 */}
+                <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-[#369bff] via-[#2080d0] to-[#0050a7]"></div>
+
+                <div className="space-y-12">
+                  {contentData.about.history.map((event, index) => (
+                    <div key={index} className="relative">
+                      {/* ノード */}
+                      <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-8">
+                        <div className="w-4 h-4 bg-[#369bff] rounded-full border-4 border-[#0a0a0a]"></div>
+                      </div>
+
+                      <div className={`md:grid md:grid-cols-2 gap-8 items-start ${index % 2 === 0 ? '' : 'md:grid-flow-dense'}`}>
+                        {/* 日付 */}
+                        <div className={`${index % 2 === 0 ? 'md:text-right' : 'md:col-start-2'} mb-4 md:mb-0`}>
+                          <div className="inline-block md:block">
+                            <span className="text-4xl font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
+                              {event.year}
+                            </span>
+                            <span className="text-xl text-gray-400 ml-2">
+                              .{event.month}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* コンテンツ */}
+                        <div className={`${index % 2 === 0 ? 'md:col-start-2' : 'md:col-start-1 md:row-start-1'}`}>
+                          <div className="bg-gray-800 p-6 rounded-lg border-l-4 border-[#369bff] hover:shadow-xl hover:shadow-[#369bff]/10 transition-shadow">
+                            <h3 className="text-xl font-bold mb-3 text-white">{event.title}</h3>
+                            <p className="text-gray-300 leading-relaxed whitespace-pre-line">{event.description}</p>
+                            {event.image && (
+                              <div className="mt-4">
+                                <img
+                                  src={event.image}
+                                  alt={event.title}
+                                  className="rounded-lg w-full object-cover"
+                                  loading="lazy"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </section>
