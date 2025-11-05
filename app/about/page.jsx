@@ -42,143 +42,229 @@ const AboutPage = () => {
               </div>
             </section>
 
-            {/* Vision・Mission・Values */}
+            {/* About Our Name */}
+            <section className="relative bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] rounded-t-lg"></div>
+              <h2 className="text-3xl font-semibold mb-6 text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
+                About Our Name
+              </h2>
+              <p className="text-gray-200 leading-relaxed text-lg text-center whitespace-pre-line">
+                チーム名である「SOARA」は「舞い上がる」という意味の英単語である「soar」と、アルファベットの最初の文字であり、「原点」を意味する「A」を組み合わせた造語です。
+                <br />
+                <br />
+                SOARAは、日本の未来を担う中高生が、空へと飛び立つチャンスを獲得し、今後の航空業界をリードする人材へと育つ最初のきっかけとなることを願って名付けられています。
+              </p>
+            </section>
+
+            {/* Mission */}
             <section className="relative bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] rounded-t-lg"></div>
               <h2 className="text-3xl font-semibold mb-8 text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
-                Vision・Mission・Values
+                Mission
               </h2>
 
               <div className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">{contentData.about.vision.title}</h3>
-                  <p className="text-xl text-gray-200 leading-relaxed">
-                    {contentData.about.vision.content}
+                <div className="relative bg-gray-800/50 p-6 rounded-lg border-l-4 border-[#369bff]">
+                  <h3 className="text-2xl font-bold mb-4 text-white">自分たちで作った飛行機を飛ばす夢を叶える</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg">
+                    私たちの第一のミッションは、自分たちの手で設計・製作した飛行機を実際に飛ばすこと――この純粋な夢を実現することです。
+                    <br />
+                    <br />
+                    「高校生には早すぎる」「前例がないから無理」。こうした"常識"に直面したとき、諦めるという選択肢もありました。しかし私たちは、学校の枠を超え、仲間を集め、この挑戦を続けています。
+                    <br />
+                    <br />
+                    鳥人間コンテストは、10mの高さから人を乗せた機体を飛ばす競技です。空力設計、構造解析、材料選定、製作技術――全てが高度に専門的であり、一つのミスも許されません。
+                    <br />
+                    <br />
+                    だからこそ、この挑戦には価値があります。
+                    <br />
+                    <br />
+                    教科書で学んだ理論を実機で応用する経験。チーム全員で責任を分かち合う体験。そして何より、「できない」と言われたことを「やってみせる」という証明。
+                    <br />
+                    <br />
+                    2026年7月、琵琶湖の空で、私たちは飛びます。
+                    <br />
+                    <br />
+                    同じ夢に向かい挑戦することで困難を打ち破れることを証明し、次世代に希望を与えるために。
                   </p>
                 </div>
 
-                <div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">{contentData.about.mission.title}</h3>
-                  <p className="text-lg text-gray-200 leading-relaxed whitespace-pre-line">
-                    {contentData.about.mission.content}
+                <div className="relative bg-gray-800/50 p-6 rounded-lg border-l-4 border-[#0050a7]">
+                  <h3 className="text-2xl font-bold mb-4 text-white">SOARAでの活動を通じてものづくりの面白さを同世代・次世代に伝える</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg">
+                    日本の航空産業は、深刻な人材不足に直面しています。経済産業省の調査によれば、航空関連企業の67%が「必要な人材を確保できていない」と回答しています。
+                    <br />
+                    <br />
+                    この問題の根本には、「中高生の段階で航空・ものづくりへの興味が失われる」という構造的な課題があります。
+                    <br />
+                    <br />
+                    小学生の頃、多くの子どもたちが空や宇宙に憧れを持ちます。しかし、中学・高校と進むにつれ、受験勉強や部活動の忙しさの中で、その夢は忘れられていきます。
+                    <br />
+                    <br />
+                    高校は、人生の進路を選択できるほぼ最後の機会です。
+                    <br />
+                    <br />
+                    SOARAは、その重要な時期に、航空・ものづくりの面白さを実際に体験できる場を提供します。
+                    <br />
+                    <br />
+                    ・YouTube：週1本の技術解説・製作ドキュメンタリー
+                    <br />
+                    ・SNS：週3回の進捗報告・技術紹介
+                    <br />
+                    ・イベント：積極的な出展と交流
+                    <br />
+                    ・学校訪問：講演会・ワークショップの実施
+                    <br />
+                    <br />
+                    これらの活動を通じて、同世代・次世代に「自分にもできるかもしれない」という希望を与え、年々減少している理系・ものづくり系を選ぶ仲間を増やしたい。
+                    <br />
+                    <br />
+                    それが、日本の空の未来を支えることにつながると、私たちは信じています。
                   </p>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">Values（価値観）</h3>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {contentData.about.values.map((value, index) => (
-                      <div
-                        key={index}
-                        className={`relative bg-gray-800/50 p-4 rounded border-l-4 border-[#369bff] ${
-                          index === contentData.about.values.length - 1 ? 'md:col-span-2' : ''
-                        }`}
-                      >
-                        <h4 className="font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">
-                          {value.number}. {value.title}
-                        </h4>
-                        <p className="text-gray-300">{value.description}</p>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
-            </section>
-
-            {/* Our Motivation */}
-            <section>
-              <h2 className="text-2xl font-semibold mb-6 text-gray-200 border-l-4 border-[#369bff] pl-4">
-                {contentData.about.motivation.title}
-              </h2>
-              <p className="text-gray-300 leading-relaxed text-lg whitespace-pre-line">
-                {contentData.about.motivation.content}
-              </p>
             </section>
 
             <section id="goals">
               <h2 className="text-2xl font-semibold mb-6 text-gray-200 border-l-4 border-[#369bff] pl-4">
                 私たちが掲げる目標と、その背景にあるもの
               </h2>
-              <div className="space-y-16">
-                <div className="relative bg-gray-800 p-6 rounded-lg border-t-2 border-[#369bff]">
-                  <h3 className="text-xl font-bold mb-4 text-white">
-                    第48回鳥人間コンテストに出場し、一切の事故なく、無事に湖岸に帰る
-                  </h3>
+
+              <div className="relative bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20 mb-12">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] rounded-t-lg"></div>
+
+                <h3 className="text-3xl font-bold mb-8 text-center text-white">
+                  2026年7月、琵琶湖で200m滑空を実現する
+                </h3>
+
+                <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
+                  {/* 図を追加する余地 - プラットフォームから飛び出す図 */}
+                  <div className="bg-gray-800/50 rounded-lg p-6 flex items-center justify-center min-h-[300px]">
+                    <div className="text-center text-gray-400">
+                      <svg className="w-32 h-32 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                      </svg>
+                      <p className="text-sm">プラットフォームから飛び出す図</p>
+                      <p className="text-xs mt-2">(準備中)</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-gray-800/50 p-6 rounded-lg">
+                      <p className="text-4xl font-bold text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">
+                        200m
+                      </p>
+                      <p className="text-center text-gray-300">目標滑空距離</p>
+                    </div>
+                    <div className="bg-gray-800/50 p-6 rounded-lg">
+                      <p className="text-4xl font-bold text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">
+                        10m
+                      </p>
+                      <p className="text-center text-gray-300">プラットフォーム高さ</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-6 text-gray-200 leading-relaxed text-lg">
+                  <p>
+                    鳥人間コンテスト・滑空機部門では、10mの高さのプラットフォームから機体を滑空させ、着水地点までの飛行距離を競います。
+                  </p>
+                  <p>
+                    私たちSOARAが掲げる目標は、<span className="font-bold text-white">200mの定常滑空を実現すること</span>です。
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-2xl font-bold mb-4 text-white">なぜ200mなのか？</h3>
+                  <div className="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                      200mという数字は、単なる記録目標ではありません。この距離には、3つの重要な意味があります。
+                    </p>
+                  </div>
+                </div>
+
+                <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#369bff]">
+                  <h4 className="text-xl font-bold mb-3 text-white">1. 技術的な証明</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    私たちのスローガンである「責任あるものづくり」を証明するためには、もちろん無事故で飛行を終えることが絶対条件です。設計面でも、構造面でも、操縦面でも、事故を起こしうる可能性を可能な限り排除します。
+                    200mを飛ぶためには、空力設計、構造解析、材料選定、製作精度――全てが高度に最適化されている必要があります。
                     <br />
                     <br />
-                    私たちは初年度のチームであり、経験豊富なチームと比べて設計・製作の精度で劣る部分があることは否めません。
+                    プラットフォームから飛び出した瞬間、機体は初速約20km/hで滑空を開始します。その後、重力によって加速しながら、揚力と抗力のバランスを保ち、安定した滑空姿勢を維持しなければなりません。
                     <br />
                     <br />
-                    だからこそ、人一倍「安全第一」を徹底します。
+                    200mという距離は、「偶然飛んだ」では達成できません。緻密な設計と、丁寧な製作、そしてパイロットの操縦技術――全てが揃って初めて実現できる距離です。
                     <br />
                     <br />
-                    ・桁試験：想定荷重の1.5倍以上で強度確認<br />
-                    ・荷重試験：完成機体全体での構造検証<br />
-                    ・テストフライト：本番前の実飛行テスト<br />
-                    ・緊急脱出訓練：万が一に備えたパイロット訓練
-                    <br />
-                    <br />
-                    「飛ばす」ことよりも「安全に帰る」ことを、最優先します。
+                    この目標を達成することで、<span className="font-bold text-white">高校生有志チームでも本格的な航空機を作り、飛ばせることを証明</span>します。
                   </p>
                 </div>
 
-                <div className="relative bg-gray-800 p-6 rounded-lg border-t-2 border-[#2080d0]">
-                  <h3 className="text-xl font-bold mb-4 text-white">
-                    安定した飛行をし、The Fresh Birdman賞を獲得する
-                  </h3>
+                <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#2080d0]">
+                  <h4 className="text-xl font-bold mb-3 text-white">2. 安全性への責任</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    The Fresh
-                    Birdmanとは、活躍めざましい出場3回以内のチームに贈られる賞です。私たちのフライトが人々の記憶に刻まれなければ、残り２つの私たちの目標が達成されることはないと考えています。また、高校生の有志チームが出場初年度で活躍することで私たちの可能性と情熱の強さを伝えたいという思いがあるからです。
+                    鳥人間コンテストは、10mの高さから人を乗せた機体を飛ばす競技です。パイロットの命を預かる以上、安全性は何よりも優先されなければなりません。
+                    <br />
+                    <br />
+                    200mという目標を掲げることで、私たちは「ただ飛べばいい」という考えを排除します。
+                    <br />
+                    <br />
+                    安定した滑空を200m維持するためには：
+                    <br />
+                    ・想定荷重の1.5倍以上の強度試験
+                    <br />
+                    ・完成機体全体での荷重試験
+                    <br />
+                    ・本番前のテストフライト
+                    <br />
+                    ・緊急脱出訓練
+                    <br />
+                    <br />
+                    これら全ての安全対策を徹底的に行う必要があります。
+                    <br />
+                    <br />
+                    <span className="font-bold text-white">「飛ばす」ことよりも「安全に帰る」ことを、最優先します。</span>
                   </p>
                 </div>
 
-                <div className="relative bg-gray-800 p-6 rounded-lg border-t-2 border-[#0050a7]">
-                  <h3 className="text-xl font-bold mb-4 text-white">
-                    中高生時代から航空分野に関わることで、日本の航空産業の未来を切り開く
-                  </h3>
+                <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#0050a7]">
+                  <h4 className="text-xl font-bold mb-3 text-white">3. 次世代への希望</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    実際、航空宇宙産業は深刻な人材不足に直面しています。
+                    高校生有志チームが初年度で200mを飛ぶ――この事実は、同世代・次世代に大きな影響を与えます。
                     <br />
                     <br />
-                    経済産業省の調査によれば、航空関連企業の67%が「必要な人材を確保できていない」と回答しています。
+                    「学校の承認が得られなくても、挑戦できる」
+                    <br />
+                    「高校生でも、本格的な航空機を作れる」
+                    <br />
+                    「仲間と力を合わせれば、不可能を可能にできる」
+                    <br />
+                    <br />
+                    この3つのメッセージを、飛行距離という形で証明したいのです。
+                    <br />
+                    <br />
+                    日本の航空産業は深刻な人材不足に直面しています。経済産業省の調査によれば、航空関連企業の67%が「必要な人材を確保できていない」と回答しています。
                     <br />
                     <br />
                     この課題の根本には、「中高生の段階で航空への興味が失われる」という構造的な問題があります。
                     <br />
                     <br />
-                    SOARAは、この問題に正面から取り組みます。
+                    <span className="font-bold text-white">200mという明確な目標を達成することで、私たちは同世代・次世代に「自分にもできるかもしれない」という希望を届けます。</span>
                     <br />
                     <br />
-                    高校生が実際に航空機を作り、飛ばす姿を発信することで、同世代・次世代に「自分にもできるかもしれない」という希望を与えたいのです。
-                    <br />
-                    <br />
-                    未来を拓く鍵である情熱を絶やさないために、SOARAは中高生が自由に夢を描き、それを現実にする場でありたいと考えています。部活や受験勉強なども、もちろん人生においてとても重要です。SOARAはそれらを代替するのではなく、並列の存在であるべきだと私たちは考えます。
+                    それが、日本の空の未来を支えることにつながると、私たちは信じています。
                   </p>
                 </div>
+              </div>
 
-                <div className="relative bg-gray-800 p-6 rounded-lg border-t-2 border-[#1868c0]">
-                  <h3 className="text-xl font-bold mb-4 text-white">
-                    鳥人間コンテストの世界的な知名度を上げる
-                  </h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    鳥人間コンテストは日本では高い知名度を誇りますが、世界的にはほとんど知られていません。
-                    <br />
-                    <br />
-                    代表の入山がアメリカのサマープログラムで「Birdman Rally」について話したとき、多くの友人が「そんな素晴らしい大会があるのか！」と驚きの反応を示しました。
-                    <br />
-                    <br />
-                    中には「自分の国でもチームを作りたい」と言ってくれる人まで現れました。
-                    <br />
-                    <br />
-                    この経験から、私たちは確信しました。鳥人間コンテストの魅力は、国境を越えて通じる、と。
-                    <br />
-                    <br />
-                    SOARAは、英語での情報発信、海外イベントへの出展、国際メンバーの受け入れを通じて、鳥人間コンテストを世界に広めます。
-                    <br />
-                    <br />
-                    いつか、海外チームも参加する国際大会になる日を夢見ています。
+              <div className="mt-12 text-center">
+                <div className="inline-block bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20">
+                  <p className="text-2xl font-bold text-white mb-4">
+                    2026年7月、琵琶湖の空で
+                  </p>
+                  <p className="text-xl text-gray-200">
+                    私たちは200m飛びます。
                   </p>
                 </div>
               </div>

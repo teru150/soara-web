@@ -19,6 +19,10 @@ export default function Home() {
     if (visited === 'true') {
       setHasVisited(true);
       setSkipAnimation(true);
+      // 再訪問時は即座に全て表示
+      setShowLogo(true);
+      setShowWelcome(true);
+      setShowScrollDown(true);
     } else {
       sessionStorage.setItem('soara_visited', 'true');
     }
@@ -35,30 +39,22 @@ export default function Home() {
   // スキップボタンのハンドラー
   const handleSkip = () => {
     setSkipAnimation(true);
-    // コンテンツセクションにスムーズスクロール
-    setTimeout(() => {
-      contentRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    setShowWelcome(true);
+    setShowScrollDown(true);
   };
 
-  // アニメーション終了後の自動スクロール
-  useEffect(() => {
-    if (showScrollDown && !skipAnimation) {
-      const timer = setTimeout(() => {
-        contentRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [showScrollDown, skipAnimation]);
+  // スクロールダウンのハンドラー
+  const handleScrollDown = () => {
+    contentRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* ページ上部のアクセントライン */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] z-50"></div>
 
-      {/* オープニングアニメーション（再訪問時は非表示） */}
-      {!hasVisited && (
-        <div className={`font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow bg-black ${skipAnimation ? 'hidden' : ''}`}>
+      {/* ヒーローセクション */}
+      <div className="font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow bg-black">
           <div
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-1000 ${
               showLogo ? 'opacity-85' : 'opacity-0'
@@ -74,23 +70,29 @@ export default function Home() {
             }}
           />
           <div className="text-center relative z-20" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9), -1px -1px 2px rgba(0, 0, 0, 0.9), 1px -1px 2px rgba(0, 0, 0, 0.9), -1px 1px 2px rgba(0, 0, 0, 0.9)' }}>
-            <TypeAnimation
-              sequence={[
-                2500,
-                "常識の向こうへ、碧空の彼方へ。",
-                1000,
-                "常識の向こうへ、碧空の彼方へ。\n Beyond the limits, beyond the blue sky.",
-                500,
-                () => {
-                  setShowWelcome(true);
-                  setTimeout(() => setShowScrollDown(true), 1000);
-                }
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={0}
-              style={{ whiteSpace: 'pre-line' }}
-            />
+            {!hasVisited ? (
+              <TypeAnimation
+                sequence={[
+                  2500,
+                  "常識の向こうへ、碧空の彼方へ。",
+                  1000,
+                  "常識の向こうへ、碧空の彼方へ。\n Beyond the limits, beyond the blue sky.",
+                  500,
+                  () => {
+                    setShowWelcome(true);
+                    setTimeout(() => setShowScrollDown(true), 1000);
+                  }
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={0}
+                style={{ whiteSpace: 'pre-line' }}
+              />
+            ) : (
+              <span style={{ whiteSpace: 'pre-line' }}>
+                常識の向こうへ、碧空の彼方へ。{'\n'}Beyond the limits, beyond the blue sky.
+              </span>
+            )}
             {showWelcome && (
               <div className="mt-8 text-2xl animate-fade-in">
                 学校の枠を超え、国境を越えて。<br />
@@ -100,7 +102,7 @@ export default function Home() {
           </div>
           {showScrollDown && (
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-              <div className="flex flex-col items-center text-gray-400 cursor-pointer hover:text-gray-300 transition-colors" onClick={handleSkip}>
+              <div className="flex flex-col items-center text-gray-400 cursor-pointer hover:text-gray-300 transition-colors" onClick={handleScrollDown}>
                 <div className="w-6 h-10 border-2 border-gray-400 rounded-full mb-2 relative">
                   <div className="w-1 h-2 bg-gray-400 rounded-full absolute left-1/2 top-2 transform -translate-x-1/2 animate-pulse"></div>
                 </div>
@@ -109,16 +111,17 @@ export default function Home() {
             </div>
           )}
 
-          {/* スキップボタン */}
-          <button
-            onClick={handleSkip}
-            className="absolute top-8 right-8 z-50 px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-400 hover:border-white rounded-full transition-all duration-300"
-            aria-label="アニメーションをスキップ"
-          >
-            Skip
-          </button>
+          {/* スキップボタン（初回訪問時のみ表示） */}
+          {!hasVisited && (
+            <button
+              onClick={handleSkip}
+              className="absolute top-8 right-8 z-50 px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-400 hover:border-white rounded-full transition-all duration-300"
+              aria-label="アニメーションをスキップ"
+            >
+              Skip
+            </button>
+          )}
         </div>
-      )}
 
       {/* コンテンツセクション */}
       <div ref={contentRef} className="bg-white text-black py-16 w-full">
@@ -213,94 +216,6 @@ export default function Home() {
                   </a>
                 ))}
               </div>
-            </section>
-
-            {/* 詳細な目標セクション（既存のOur Goals） */}
-            <section>
-              <h2 className="text-3xl font-semibold mb-8 text-center">
-                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">Our Goals</span>
-              </h2>
-              <div className="space-y-12 max-w-3xl mx-auto">
-                <div className="flex items-start">
-                  <div className="w-3 h-3 bg-gradient-to-b from-[#369bff] to-[#0050a7] rounded-full mt-2 mr-6 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-gray-700 leading-relaxed text-lg font-bold mb-2">
-                      第48回鳥人間コンテストに出場し、一切の事故なく、無事に湖岸に帰る
-                    </p>
-                    <p className="text-gray-600 leading-relaxed text-base">
-                      2026年7月、琵琶湖で開催される第48回鳥人間コンテストに出場し、200mの定常滑空を達成する。そして何より、パイロットを含む全メンバーが一切の事故なく、無事に帰還する。
-                      <br />
-                      <br />
-                      これが、私たちの最優先目標です。10mの高さから人を乗せて飛ばす責任の重さを、高校生であっても決して軽んじません。
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-3 h-3 bg-gradient-to-b from-[#369bff] to-[#0050a7] rounded-full mt-2 mr-6 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-gray-700 leading-relaxed text-lg font-bold mb-2">
-                      安定した飛行をし、The Fresh Birdman賞を獲得する
-                    </p>
-                    <p className="text-gray-600 leading-relaxed text-base">
-                      The Fresh Birdman賞――出場3回以内のチームに贈られる新人賞の獲得を目指します。
-                      <br />
-                      <br />
-                      高校生有志チームが初年度で技術的に評価されることで、『高校生でもここまでできる』という可能性を示し、後に続く世代に希望を与えたいと考えています。
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-3 h-3 bg-gradient-to-b from-[#369bff] to-[#0050a7] rounded-full mt-2 mr-6 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-gray-700 leading-relaxed text-lg font-bold mb-2">
-                      中高生時代から航空分野に関わる学生を増やすことで、日本の航空産業の未来を切り開く
-                    </p>
-                    <p className="text-gray-600 leading-relaxed text-base">
-                      日本の航空産業は、人材不足という深刻な課題に直面しています。
-                      <br />
-                      <br />
-                      小学生の頃に空や宇宙に憧れていた子どもたちの多くが、中高生になると忙しさの中でその夢を忘れてしまいます。
-                      <br />
-                      <br />
-                      私たちは、それを『もったいない』と考えます。
-                      <br />
-                      <br />
-                      SOARAの挑戦を通じて、中高生が航空分野への情熱を持ち続け、将来この業界を選ぶきっかけを作ります。それが、日本の空の未来を支えることにつながると信じています。
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-3 h-3 bg-gradient-to-b from-[#369bff] to-[#0050a7] rounded-full mt-2 mr-6 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-gray-700 leading-relaxed text-lg font-bold mb-2">
-                      鳥人間コンテストの世界的な知名度を上げる
-                    </p>
-                    <p className="text-gray-600 leading-relaxed text-base">
-                      SOARAには、アメリカ在住の高校生メンバーも参加しています。彼らとの交流を通じて分かったのは、『Birdman Rally』という素晴らしい大会が、世界ではほとんど知られていないという事実でした。
-                      <br />
-                      <br />
-                      中には「自分の国でもチームを作りたい」と言ってくれる人まで現れました。
-                      <br />
-                      <br />
-                      私たちは、SNS・YouTube・国際イベントを通じて、鳥人間コンテストの魅力を世界に発信し、いつか海外チームも参加する国際大会への発展を夢見ています。
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="text-center mt-10">
-                <a href="/about#goals" className="inline-block px-8 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50">
-                  詳しくはこちら
-                </a>
-              </div>
-            </section>
-            {/* About Our Name */}
-            <section>
-              <h2 className="text-3xl font-semibold mb-6 text-center">
-                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">{contentData.home.aboutName.title}</span>
-              </h2>
-              <p className="text-gray-700 leading-relaxed text-lg text-center whitespace-pre-line">
-                {contentData.home.aboutName.text}
-              </p>
             </section>
 
             {/* お知らせ */}
