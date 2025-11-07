@@ -4,6 +4,22 @@ import React, { useRef, useState, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, PerspectiveCamera } from '@react-three/drei';
 
+// ========================================
+// 機体モデル設定（本番実装時はここを変更）
+// ========================================
+const AIRCRAFT_MODELS = {
+  X1: '/3d/SOARA-X1.glb',
+  X2: '/3d/placeholder-X2.glb',  // 本番時: '/3d/SOARA-X2.glb' に変更
+  X3: '/3d/placeholder-X3.glb',  // 本番時: '/3d/SOARA-X3.glb' に変更
+};
+
+// 実機モデルかプレースホルダーかの判定（本番時は全てtrueに変更）
+const IS_ACTUAL_MODEL = {
+  X1: true,   // 実機モデル
+  X2: false,  // プレースホルダー（本番時: true に変更）
+  X3: false,  // プレースホルダー（本番時: true に変更）
+};
+
 /**
  * 3Dモデルを読み込んで表示するコンポーネント
  */
@@ -18,38 +34,6 @@ function Model({ modelPath, autoRotate = false }) {
   });
 
   return <primitive ref={meshRef} object={scene} scale={1.5} />;
-}
-
-/**
- * プレースホルダーモデル（3Dモデルが存在しない場合）
- */
-function PlaceholderModel({ autoRotate = false }) {
-  const meshRef = useRef();
-
-  useFrame((_, delta) => {
-    if (autoRotate && meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.2;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef}>
-      <boxGeometry args={[2, 0.5, 4]} />
-      <meshStandardMaterial color="#369bff" />
-      <mesh position={[0, 0.5, 0]}>
-        <boxGeometry args={[0.3, 0.3, 1]} />
-        <meshStandardMaterial color="#0050a7" />
-      </mesh>
-      <mesh position={[-3, 0, 0]} rotation={[0, 0, Math.PI / 6]}>
-        <boxGeometry args={[6, 0.1, 2]} />
-        <meshStandardMaterial color="#4aabff" />
-      </mesh>
-      <mesh position={[3, 0, 0]} rotation={[0, 0, -Math.PI / 6]}>
-        <boxGeometry args={[6, 0.1, 2]} />
-        <meshStandardMaterial color="#4aabff" />
-      </mesh>
-    </mesh>
-  );
 }
 
 /**
@@ -70,8 +54,8 @@ function LoadingFallback() {
 export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
   const [autoRotate, setAutoRotate] = useState(true);
 
-  const modelPath = `/3d/SOARA-${aircraft}.glb`;
-  const modelExists = aircraft === 'X1'; // X1のみ存在
+  const modelPath = AIRCRAFT_MODELS[aircraft];
+  const isActualModel = IS_ACTUAL_MODEL[aircraft];
 
   return (
     <div className={`w-full h-full relative ${className}`}>
@@ -90,14 +74,10 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
 
         {/* 3Dモデル */}
         <Suspense fallback={<LoadingFallback />}>
-          {modelExists ? (
-            <Model
-              modelPath={modelPath}
-              autoRotate={autoRotate}
-            />
-          ) : (
-            <PlaceholderModel autoRotate={autoRotate} />
-          )}
+          <Model
+            modelPath={modelPath}
+            autoRotate={autoRotate}
+          />
         </Suspense>
 
         {/* 環境マッピング */}
@@ -136,7 +116,7 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
           </svg>
           <span>{autoRotate ? '自動回転: ON' : '自動回転: OFF'}</span>
         </button>
-        {!modelExists && (
+        {!isActualModel && (
           <p className="text-xs text-gray-400 mt-2">
             3Dモデル準備中（プレースホルダー表示）
           </p>
@@ -157,4 +137,6 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
 }
 
 // GLTFモデルをプリロード
-useGLTF.preload('/3d/SOARA-X1.glb');
+Object.values(AIRCRAFT_MODELS).forEach(modelPath => {
+  useGLTF.preload(modelPath);
+});

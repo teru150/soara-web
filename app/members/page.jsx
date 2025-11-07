@@ -41,14 +41,14 @@ const MembersPage = () => {
           <p className="text-lg text-gray-400 leading-relaxed mb-12">
             現在、メンバー紹介ページを準備中です。
             <br />
-            全メンバーの詳しいプロフィールを掲載予定です。
+            メンバーの詳しいプロフィールを掲載予定です。
             <br />
             <br />
             しばらくお待ちください。
           </p>
 
           {/* 装飾的な線 */}
-          <div className="w-32 h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] mx-auto mb-8"></div>
+          <div className="w-100 h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] mx-auto mb-8"></div>
 
           {/* 戻るボタン */}
           <a

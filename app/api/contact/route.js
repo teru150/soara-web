@@ -22,6 +22,18 @@ export async function POST(request) {
       )
     }
 
+    // 環境変数の確認
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Environment variables missing:', {
+        EMAIL_USER: !!process.env.EMAIL_USER,
+        EMAIL_PASS: !!process.env.EMAIL_PASS
+      })
+      return NextResponse.json(
+        { error: 'Server configuration error. Please contact the administrator.' },
+        { status: 500 }
+      )
+    }
+
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,

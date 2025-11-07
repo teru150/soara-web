@@ -142,7 +142,13 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-8 mb-10">
                 {contentData.home.missions.map((mission, index) => (
                   <article key={index} className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:border-[#369bff]">
-                    <div className="text-4xl mb-4 text-center">{mission.icon}</div>
+                    <div className="mb-4 text-center">
+                      <img
+                        src={mission.icon}
+                        alt={mission.title}
+                        className="w-24 h-24 mx-auto object-cover rounded-lg"
+                      />
+                    </div>
                     <h3 className="text-lg font-bold mb-3 text-gray-800">{mission.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{mission.description}</p>
                   </article>
@@ -185,9 +191,19 @@ export default function Home() {
               </div>
               <div className="text-center">
                 <p className="text-xl font-semibold mb-4 text-gray-800">{contentData.home.goal2026.ctaText}</p>
-                <a href="/supporters" className="inline-block px-10 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg">
-                  {contentData.home.goal2026.ctaButton}
-                </a>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <a href="/supporters" className="inline-block px-10 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg">
+                    {contentData.home.goal2026.ctaButton}
+                  </a>
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSejEijY3nx_A1iCfqOTUukN7OKxZvn_PTHFi-Q7e4QP8MLxxA/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-10 py-4 bg-white border-2 border-[#369bff] text-[#369bff] hover:bg-[#369bff] hover:text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg"
+                  >
+                    チームに加入する
+                  </a>
+                </div>
               </div>
             </section>
 
