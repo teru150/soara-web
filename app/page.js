@@ -169,26 +169,45 @@ export default function Home() {
               <h2 className="text-3xl font-semibold mb-8 text-center">
                 <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">2026年度の挑戦</span>
               </h2>
-              <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
-                <div className="order-2 md:order-1">
-                  <div className="flex items-center justify-center space-x-8">
-                    <div className="text-center">
-                      <span className="block text-5xl font-bold text-gray-500">{contentData.home.goal2026.currentRecord}</span>
-                      <span className="block text-sm text-gray-600 mt-2">現在の記録</span>
+
+              <div className="max-w-4xl mx-auto mb-12">
+                <p className="inline-block px-4 py-1 bg-[#369bff] text-white text-sm font-bold rounded-full mb-4">{contentData.home.goal2026.label}</p>
+                <h3 className="text-3xl font-bold mb-6 text-gray-800">{contentData.home.goal2026.headline}</h3>
+
+                {/* プラットホームから飛び出す図（横長） */}
+                <div className="bg-white rounded-lg p-6 mb-6 shadow-md">
+                  <div className="relative h-32">
+                    {/* プラットホーム */}
+                    <div className="absolute left-0 top-0 w-16 h-full bg-gray-700 rounded-l-lg flex items-center justify-center">
+                      <div className="text-white text-xs font-bold transform -rotate-90">Platform</div>
                     </div>
-                    <div className="text-4xl text-[#369bff]">→</div>
-                    <div className="text-center">
-                      <span className="block text-6xl font-bold bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">{contentData.home.goal2026.targetRecord}</span>
-                      <span className="block text-sm text-gray-600 mt-2">目標</span>
-                    </div>
+
+                    {/* 飛行軌道（横長の曲線） */}
+                    <svg className="absolute left-16 top-0 w-[calc(100%-4rem)] h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+                      {/* 滑空軌道 */}
+                      <path
+                        d="M 0,20 Q 100,15 200,25 T 400,35"
+                        stroke="#369bff"
+                        strokeWidth="3"
+                        fill="none"
+                        strokeDasharray="5,5"
+                      />
+                      {/* 機体アイコン */}
+                      <g transform="translate(350, 30)">
+                        <path d="M -10,-3 L 10,-3 L 10,3 L -10,3 Z" fill="#369bff" />
+                        <path d="M -15,-1 L -10,-3 L -10,3 L -15,1 Z" fill="#0050a7" />
+                        <path d="M 0,-8 L 0,8" stroke="#369bff" strokeWidth="2" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div className="text-center mt-4">
+                    <p className="text-sm text-gray-600">定常滑空の軌道イメージ</p>
                   </div>
                 </div>
-                <div className="order-1 md:order-2">
-                  <p className="inline-block px-4 py-1 bg-[#369bff] text-white text-sm font-bold rounded-full mb-4">{contentData.home.goal2026.label}</p>
-                  <h3 className="text-3xl font-bold mb-4 text-gray-800">{contentData.home.goal2026.headline}</h3>
-                  <p className="text-gray-700 leading-relaxed">{contentData.home.goal2026.description}</p>
-                </div>
+
+                <p className="text-gray-700 leading-relaxed whitespace-pre-line">{contentData.home.goal2026.description}</p>
               </div>
+
               <div className="text-center">
                 <p className="text-xl font-semibold mb-4 text-gray-800">{contentData.home.goal2026.ctaText}</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
