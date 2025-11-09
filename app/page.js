@@ -174,35 +174,13 @@ export default function Home() {
                 <p className="inline-block px-4 py-1 bg-[#369bff] text-white text-sm font-bold rounded-full mb-4">{contentData.home.goal2026.label}</p>
                 <h3 className="text-3xl font-bold mb-6 text-gray-800">{contentData.home.goal2026.headline}</h3>
 
-                {/* プラットホームから飛び出す図（横長） */}
+                {/* 定常滑空軌道の図 */}
                 <div className="bg-white rounded-lg p-6 mb-6 shadow-md">
-                  <div className="relative h-32">
-                    {/* プラットホーム */}
-                    <div className="absolute left-0 top-0 w-16 h-full bg-gray-700 rounded-l-lg flex items-center justify-center">
-                      <div className="text-white text-xs font-bold transform -rotate-90">Platform</div>
-                    </div>
-
-                    {/* 飛行軌道（横長の曲線） */}
-                    <svg className="absolute left-16 top-0 w-[calc(100%-4rem)] h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
-                      {/* 滑空軌道 */}
-                      <path
-                        d="M 0,20 Q 100,15 200,25 T 400,35"
-                        stroke="#369bff"
-                        strokeWidth="3"
-                        fill="none"
-                        strokeDasharray="5,5"
-                      />
-                      {/* 機体アイコン */}
-                      <g transform="translate(350, 30)">
-                        <path d="M -10,-3 L 10,-3 L 10,3 L -10,3 Z" fill="#369bff" />
-                        <path d="M -15,-1 L -10,-3 L -10,3 L -15,1 Z" fill="#0050a7" />
-                        <path d="M 0,-8 L 0,8" stroke="#369bff" strokeWidth="2" />
-                      </g>
-                    </svg>
-                  </div>
-                  <div className="text-center mt-4">
-                    <p className="text-sm text-gray-600">定常滑空の軌道イメージ</p>
-                  </div>
+                  <img
+                    src="/svg/flight-path.svg"
+                    alt="定常滑空の軌道図 - 揚力の不足、安定性の不足、定常滑空の3つのパターン"
+                    className="w-full h-auto"
+                  />
                 </div>
 
                 <p className="text-gray-700 leading-relaxed whitespace-pre-line">{contentData.home.goal2026.description}</p>

@@ -1,31 +1,46 @@
 "use client";
 
 import React, { useRef, useState, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, PerspectiveCamera } from '@react-three/drei';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
 // ========================================
 // 機体モデル設定（本番実装時はここを変更）
 // ========================================
 const AIRCRAFT_MODELS = {
-  X1: '/3d/SOARA-X1.glb',
-  X2: '/3d/placeholder-X2.glb',  // 本番時: '/3d/SOARA-X2.glb' に変更
-  X3: '/3d/placeholder-X3.glb',  // 本番時: '/3d/SOARA-X3.glb' に変更
+  X1: { type: 'glb', path: '/3d/SOARA-X1.glb' },
+  // X2 は OBJ + MTL の組み合わせ
+  X2: { type: 'glb', path: '/3d/placeholder-X2.glb' },
+  X3: { type: 'glb', path: '/3d/placeholder-X3.glb' },
 };
 
 // 実機モデルかプレースホルダーかの判定（本番時は全てtrueに変更）
 const IS_ACTUAL_MODEL = {
   X1: true,   // 実機モデル
-  X2: false,  // プレースホルダー（本番時: true に変更）
+  X2: false,   // OBJ+MTL 実機モデル
   X3: false,  // プレースホルダー（本番時: true に変更）
 };
 
 /**
  * 3Dモデルを読み込んで表示するコンポーネント
  */
-function Model({ modelPath, autoRotate = false }) {
+function Model({ model, autoRotate = false }) {
   const meshRef = useRef();
-  const { scene } = useGLTF(modelPath);
+  let object = null;
+
+  if (model?.type === 'glb') {
+    const { scene } = useGLTF(model.path);
+    object = scene;
+  } else if (model?.type === 'obj') {
+    const materials = useLoader(MTLLoader, model.mtl);
+    materials.preload();
+    const obj = useLoader(OBJLoader, model.obj, (loader) => {
+      loader.setMaterials(materials);
+    });
+    object = obj;
+  }
 
   useFrame((_, delta) => {
     if (autoRotate && meshRef.current) {
@@ -33,7 +48,7 @@ function Model({ modelPath, autoRotate = false }) {
     }
   });
 
-  return <primitive ref={meshRef} object={scene} scale={1.5} />;
+  return object ? <primitive ref={meshRef} object={object} scale={1.5} /> : null;
 }
 
 /**
@@ -54,7 +69,7 @@ function LoadingFallback() {
 export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
   const [autoRotate, setAutoRotate] = useState(true);
 
-  const modelPath = AIRCRAFT_MODELS[aircraft];
+  const modelDef = AIRCRAFT_MODELS[aircraft];
   const isActualModel = IS_ACTUAL_MODEL[aircraft];
 
   return (
@@ -74,10 +89,7 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
 
         {/* 3Dモデル */}
         <Suspense fallback={<LoadingFallback />}>
-          <Model
-            modelPath={modelPath}
-            autoRotate={autoRotate}
-          />
+          <Model model={modelDef} autoRotate={autoRotate} />
         </Suspense>
 
         {/* 環境マッピング */}
@@ -137,6 +149,8 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
 }
 
 // GLTFモデルをプリロード
-Object.values(AIRCRAFT_MODELS).forEach(modelPath => {
-  useGLTF.preload(modelPath);
+Object.values(AIRCRAFT_MODELS).forEach((m) => {
+  if (m.type === 'glb') {
+    useGLTF.preload(m.path);
+  }
 });

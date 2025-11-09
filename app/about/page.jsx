@@ -43,17 +43,37 @@ const AboutPage = () => {
             </section>
 
             {/* About Our Name */}
-            <section className="relative bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20">
+            <section className="relative bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20 overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] rounded-t-lg"></div>
-              <h2 className="text-3xl font-semibold mb-6 text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
+
+              {/* 見出しは最上部に配置 */}
+              <h2 className="text-3xl font-semibold mb-8 text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
                 About Our Name
               </h2>
-              <p className="text-gray-200 leading-relaxed text-lg text-center whitespace-pre-line">
-                チーム名である「SOARA」は「舞い上がる」という意味の英単語である「soar」と、アルファベットの最初の文字であり、「原点」を意味する「A」を組み合わせた造語です。
-                <br />
-                <br />
-                SOARAは、日本の未来を担う中高生が、空へと飛び立つチャンスを獲得し、今後の航空業界をリードする人材へと育つ最初のきっかけとなることを願って名付けられています。
-              </p>
+
+              {/* 本文 + ロゴ（水印）レイアウト */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+                {/* 本文 */}
+                <p className="md:col-span-3 text-gray-200 leading-relaxed text-lg whitespace-pre-line">
+                  チーム名である「SOARA」は「舞い上がる」という意味の英単語である「soar」と、アルファベットの最初の文字であり、「原点」を意味する「A」を組み合わせた造語です。
+                  <br />
+                  <br />
+                  SOARAは、日本の未来を担う中高生が、空へと飛び立つチャンスを獲得し、今後の航空業界をリードする人材へと育つ最初のきっかけとなることを願って名付けられています。
+                </p>
+
+                {/* ロゴ（水平方向に本文の横） */}
+                <div className="md:col-span-2 relative hidden md:flex items-center justify-center min-h-[180px]">
+                  {/* 白い透かし背景 */}
+                  <div className="absolute -inset-3 rounded-2xl bg-white/10 blur-xl" aria-hidden="true"></div>
+                  <div className="relative z-10 w-40 h-40 lg:w-40 lg:h-40 rounded-2xl overflow-hidden ring-1 ring-white/20 backdrop-blur-sm">
+                    <img
+                      src="/logos/soaralogo_sky.jpg"
+                      alt="SOARA logo sky"
+                      className="w-full h-full object-cover opacity-90 drop-shadow-lg"
+                    />
+                  </div>
+                </div>
+              </div>
             </section>
 
             {/* Mission */}
@@ -127,7 +147,7 @@ const AboutPage = () => {
 
             <section id="goals">
               <h2 className="text-2xl font-semibold mb-6 text-gray-200 border-l-4 border-[#369bff] pl-4">
-                私たちが掲げる目標と、その背景にあるもの
+                目標について
               </h2>
 
               <div className="relative bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20 mb-12">
@@ -137,32 +157,8 @@ const AboutPage = () => {
                   2026年7月、琵琶湖で200m滑空を実現する
                 </h3>
 
-                <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-                  {/* 図を追加する余地 - プラットフォームから飛び出す図 */}
-                  <div className="bg-gray-800/50 rounded-lg p-6 flex items-center justify-center min-h-[300px]">
-                    <div className="text-center text-gray-400">
-                      <svg className="w-32 h-32 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                      </svg>
-                      <p className="text-sm">プラットフォームから飛び出す図</p>
-                      <p className="text-xs mt-2">(準備中)</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="bg-gray-800/50 p-6 rounded-lg">
-                      <p className="text-4xl font-bold text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">
-                        200m
-                      </p>
-                      <p className="text-center text-gray-300">目標滑空距離</p>
-                    </div>
-                    <div className="bg-gray-800/50 p-6 rounded-lg">
-                      <p className="text-4xl font-bold text-center bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent mb-2">
-                        10m
-                      </p>
-                      <p className="text-center text-gray-300">プラットフォーム高さ</p>
-                    </div>
-                  </div>
+                <div className="bg-white rounded-lg p-6 mb-8">
+                  <img src="/svg/flight-path.svg" alt="定常滑空の軌道図" className="w-full h-auto" />
                 </div>
 
                 <div className="space-y-6 text-gray-200 leading-relaxed text-lg">
@@ -180,81 +176,18 @@ const AboutPage = () => {
                   <h3 className="text-2xl font-bold mb-4 text-white">なぜ200mなのか？</h3>
                   <div className="space-y-4 text-gray-300 leading-relaxed">
                     <p>
-                      200mという数字は、単なる記録目標ではありません。この距離には、3つの重要な意味があります。
+                      200mという数字は、単なる記録目標ではありません。この距離には、重要な意味があります。
                     </p>
                   </div>
                 </div>
-
                 <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#369bff]">
-                  <h4 className="text-xl font-bold mb-3 text-white">1. 技術的な証明</h4>
-                  <p className="text-gray-300 leading-relaxed">
-                    200mを飛ぶためには、空力設計、構造解析、材料選定、製作精度――全てが高度に最適化されている必要があります。
-                    <br />
-                    <br />
-                    プラットフォームから飛び出した瞬間、機体は初速約20km/hで滑空を開始します。その後、重力によって加速しながら、揚力と抗力のバランスを保ち、安定した滑空姿勢を維持しなければなりません。
-                    <br />
-                    <br />
-                    200mという距離は、「偶然飛んだ」では達成できません。緻密な設計と、丁寧な製作、そしてパイロットの操縦技術――全てが揃って初めて実現できる距離です。
-                    <br />
-                    <br />
-                    この目標を達成することで、<span className="font-bold text-white">高校生有志チームでも本格的な航空機を作り、飛ばせることを証明</span>します。
-                  </p>
+                  <h4 className="text-xl font-bold mb-3 text-white">高校生史上初の記録への挑戦</h4>
+                  <p className="text-gray-300 leading-relaxed">本文は私が書きます。</p>
                 </div>
 
                 <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#2080d0]">
-                  <h4 className="text-xl font-bold mb-3 text-white">2. 安全性への責任</h4>
-                  <p className="text-gray-300 leading-relaxed">
-                    鳥人間コンテストは、10mの高さから人を乗せた機体を飛ばす競技です。パイロットの命を預かる以上、安全性は何よりも優先されなければなりません。
-                    <br />
-                    <br />
-                    200mという目標を掲げることで、私たちは「ただ飛べばいい」という考えを排除します。
-                    <br />
-                    <br />
-                    安定した滑空を200m維持するためには：
-                    <br />
-                    ・想定荷重の1.5倍以上で行う桁試験
-                    <br />
-                    ・完成機体全体での荷重試験
-                    <br />
-                    ・パイロット・フライトチームによる乗り込み練習
-                    <br />
-                    ・緊急時の脱出訓練
-                    <br />
-                    <br />
-                    これら全ての安全対策を徹底的に行う必要があります。
-                    <br />
-                    <br />
-                    <span className="font-bold text-white">記録以上に「安全」を最優先します。</span>
-                  </p>
-                </div>
-
-                <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#0050a7]">
-                  <h4 className="text-xl font-bold mb-3 text-white">3. 次世代へのメッセージ</h4>
-                  <p className="text-gray-300 leading-relaxed">
-                    高校生有志チームが初年度で200mを飛ぶ――この事実は、同世代・次世代に大きな影響を与えます。
-                    <br />
-                    <br />
-                    「学校の承認が得られなくても、挑戦できる」
-                    <br />
-                    「高校生でも、本格的な航空機を作れる」
-                    <br />
-                    「仲間と力を合わせれば、不可能を可能にできる」
-                    <br />
-                    <br />
-                    この3つのメッセージを、具体的な飛行距離という形で証明したいのです。
-                    <br />
-                    <br />
-                    日本の航空産業は深刻な人材不足に直面しています。経済産業省の調査によれば、航空関連企業の67%が「必要な人材を確保できていない」と回答しています。
-                    <br />
-                    <br />
-                    この課題の根本には、「中高生の段階で航空への興味が失われる」という構造的な問題があります。
-                    <br />
-                    <br />
-                    <span className="font-bold text-white">空を飛びたい一心でハードルを乗り越え、初年度で高校生新記録を達成することがもしできれば、同世代・次世代がものづくりに興味を持つきっかけになるのではないでしょうか。</span>
-                    <br />
-                    <br />
-                    それが、日本の空の未来を支えることにつながると、私たちは信じています。
-                  </p>
+                  <h4 className="text-xl font-bold mb-3 text-white">四つの困難を乗り越えたことの証明</h4>
+                  <p className="text-gray-300 leading-relaxed">本文は私が書きます。</p>
                 </div>
               </div>
 

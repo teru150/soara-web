@@ -398,13 +398,12 @@ const AircraftPage = () => {
                   <h4 className="text-xl font-semibold mb-3 text-white">振り返りと学び</h4>
                   <p className="text-gray-300 leading-relaxed">
                     X1は、強度不足により製作を中止せざるを得ませんでした。
-                    これは大きな挫折でしたが、同時に<span className="text-blue-400 font-semibold">計り知れない学びを得た経験</span>でもありました。
+                    これは大きな挫折でしたが、同時に計り知れない学びを得た経験でもありました。
                     <br /><br />
-                    • <span className="font-semibold">構造解析の重要性</span>：理論計算だけでなく、実測データに基づく検証の必要性<br />
-                    • <span className="font-semibold">材料選択の critical性</span>：コスト優先では安全性が確保できない<br />
+                    • <span className="font-semibold">強度を意識した材料選択</span>：コスト優先では安全性が確保できないこと<br />
                     • <span className="font-semibold">実績ある設計の尊重</span>：先輩チームの知見を活かすことの重要性
                     <br /><br />
-                    この失敗があったからこそ、X2ではより堅実で安全な設計に舵を切ることができました。
+                    この失敗があったからこそ、X2以降ではより堅実で安全な設計に舵を切ることができました。
                     <span className="text-blue-400 font-semibold">失敗は、成功への最短ルート</span>だったのです。
                   </p>
                 </div>
@@ -427,7 +426,7 @@ const AircraftPage = () => {
               </div>
 
               <h3 className="text-3xl font-bold mb-8 text-white">
-                SOARA-X2：堅実な改良
+                SOARA-X2：スタンダードへ
               </h3>
 
               {/* Specifications Table */}
@@ -615,7 +614,7 @@ const AircraftPage = () => {
               </div>
 
               <h3 className="text-3xl font-bold mb-8 text-white">
-                SOARA-X3：琵琶湖への挑戦
+                SOARA-X3：琵琶湖を見据えて
               </h3>
 
               {/* Target Specifications Table */}
@@ -909,19 +908,19 @@ const AircraftPage = () => {
             <h3 className="text-2xl font-bold mb-6 text-center">開発ストーリー</h3>
             <div className="max-w-3xl mx-auto space-y-8">
               <div className="relative pl-8 border-l-2 border-blue-500">
-                <div className="absolute -left-3 top-0 w-6 h-6 bg-blue-500 rounded-full"></div>
+                
                 <div className="mb-2">
                   <span className="text-blue-400 font-semibold">2024年12月 - 2025年2月</span>
                 </div>
                 <h4 className="text-xl font-bold mb-2">X1: 挑戦の始まり</h4>
                 <p className="text-gray-300">
-                  初めての機体設計。コストを抑え、製作のしやすさを優先した設計でしたが、
-                  構造解析で主桁の強度不足が判明。製作を断念するという辛い決断を下しました。
+                  手探りでのゼロからの機体設計。コストを抑え、製作のしやすさを優先した設計でしたが、
+                  主桁をはじめとした主要パーツの強度不足が判明し、製作を断念しました。
                 </p>
               </div>
 
               <div className="relative pl-8 border-l-2 border-orange-500">
-                <div className="absolute -left-3 top-0 w-6 h-6 bg-orange-500 rounded-full"></div>
+                
                 <div className="mb-2">
                   <span className="text-orange-400 font-semibold">2025年5月 - 9月</span>
                 </div>
@@ -933,23 +932,21 @@ const AircraftPage = () => {
                 </p>
               </div>
 
-              <div className="relative pl-8 border-l-2 border-blue-500">
-                <div className="absolute -left-3 top-0 w-6 h-6 bg-blue-500 rounded-full animate-pulse"></div>
+              <div className="relative pl-8 border-l-2 border-blue-500 animate-pulse">
                 <div className="mb-2">
                   <span className="text-blue-400 font-semibold">2025年12月 - 2026年7月</span>
                 </div>
-                <h4 className="text-xl font-bold mb-2">X3: 琵琶湖への挑戦</h4>
+                <h4 className="text-xl font-bold mb-2">X3: 琵琶湖を目指して</h4>
                 <p className="text-gray-300">
-                  X2での経験を活かし、性能を最適化した本番機。
-                  2026年7月の鳥人間コンテストで、高校生有志チームの可能性を証明します。
+                  X2での経験を活かし、性能と製法に合わせて最適化した本番機です。<br />
+                  2026年の鳥人間コンテストで、高校生有志チームの可能性を示します。
                 </p>
               </div>
             </div>
 
             <div className="mt-12 text-center">
-              <p className="text-gray-400 text-lg leading-relaxed">
-                失敗を恐れず、学び続け、挑戦し続ける。<br />
-                それがSOARAの開発哲学です。
+              <p className="text-white-400 text-lg leading-relaxed">
+                挑戦を繰り返し、辿り着いた本番機をお披露目できる日をを心待ちにしています。
               </p>
             </div>
           </div>
