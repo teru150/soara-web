@@ -626,7 +626,7 @@ const AircraftPage = () => {
                     </div>
                     <div className="bg-gray-800 p-4 rounded">
                       <p className="font-semibold mb-1">✓ 現実的な性能目標</p>
-                      <p className="text-sm text-gray-400">自分たちの技術力で達成可能な滑空比20を目指す</p>
+                      <p className="text-sm text-gray-400">自分たちの技術力で達成可能な最高の目標である滑空比20を目指す</p>
                     </div>
                     <div className="bg-gray-800 p-4 rounded">
                       <p className="font-semibold mb-1">✓ シンプルな構造設計</p>

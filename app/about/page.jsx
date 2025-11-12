@@ -105,7 +105,7 @@ const AboutPage = () => {
                     2026年7月、琵琶湖の空で、私たちは飛びます。
                     <br />
                     <br />
-                    同じ夢に向かい挑戦することで困難を打ち破れることを証明し、次世代にものづくりへの興味を持ってもらうために。
+                    同じ夢に向かい挑戦することで、困難を打ち破れることを証明するために。
                   </p>
                 </div>
 
@@ -173,21 +173,21 @@ const AboutPage = () => {
 
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">なぜ200mなのか？</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-white">175mの壁</h3>
                   <div className="space-y-4 text-gray-300 leading-relaxed">
                     <p>
-                      200mという数字は、単なる記録目標ではありません。この距離には、重要な意味があります。
+                      200mという数値はどのような意味を持つのでしょうか。現在、鳥人間コンテスト滑空機部門の史上最高記録はTeam三鷹茂原下横田の大木 祥資氏が2024年に樹立した645.15mですが、規格外の優勝13回を誇る氏を除くと、トップクラスのチームが残す記録は400m台となっています。
                     </p>
                   </div>
                 </div>
                 <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#369bff]">
                   <h4 className="text-xl font-bold mb-3 text-white">高校生史上初の記録への挑戦</h4>
-                  <p className="text-gray-300 leading-relaxed">過去、少なくない数の高校生チームが鳥人間コンテスト滑空機部門に挑んできました。しかし、工業高校チーム等を含めて、その最高記録は約150m。これには後述する四つの原因があると考えられます。<br/>私たちは、それらの困難を乗り越えたことを新記録という形で示し、自分たちの夢を叶えるだけでなく、より多くの同・次世代にSOARAの認知を広げることを目指しています。</p>
+                  <p className="text-gray-300 leading-relaxed">過去、少なくない数の高校生チームが鳥人間コンテスト滑空機部門に挑んできました。しかし、強豪大学生チームが400m台で競い合う中、工業高校チーム等を含めても最高記録は約150m。これには後述する四つの原因があると考えられます。<br/>私たちは、それらの困難を乗り越えたことを新記録という形で示し、自分たちの夢を叶えるだけでなく、より多くの同・次世代にSOARAの認知を広げることを目指しています。</p>
                 </div>
 
                 <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#2080d0]">
-                  <h4 className="text-xl font-bold mb-3 text-white">四つの困難を乗り越えたことの証明</h4>
-                  <p className="text-gray-300 leading-relaxed">本文は私が書きます。</p>
+                  <h4 className="text-xl font-bold mb-3 text-white">四つの条件を乗り越えたことの証明</h4>
+                  <p className="text-gray-300 leading-relaxed">四つの条件とは、<span className="font-bold text-white">精密な設計・高い製作精度・熟練した発進フェーズ・精緻なパイロットの飛行</span>を指します。現在琵琶湖で強豪といわれる某学生チームを例にとれば、優秀な設計者と膨大な引継ぎに裏打ちされた確かな機体設計、NC電熱線を利用したリブの削り出しにレーザーでの正確な照準、数百回に渡る乗り込み練習に加えてのテストフライト、そして体重移動を感知するVRフライトシミュレーターや毎週末のパラグライダー練習といったように、四条件を高い水準で満たしていることがわかります。</p>
                 </div>
               </div>
 
