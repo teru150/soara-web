@@ -163,10 +163,10 @@ const AboutPage = () => {
 
                 <div className="space-y-6 text-gray-200 leading-relaxed text-lg">
                   <p>
-                    鳥人間コンテスト・滑空機部門では、10mの高さのプラットフォームから機体を滑空させ、着水地点までの飛行距離を競います。
+                    鳥人間コンテスト滑空機部門では、10mの高さのプラットフォームから機体を滑空させ、着水地点までの飛行距離を競います。
                   </p>
                   <p>
-                    私たちSOARAが掲げる目標は、<span className="font-bold text-white">200mの定常滑空を実現すること</span>です。
+                    私たちSOARAが掲げる目標は、<span className="font-bold text-white">200mの滑空を実現すること</span>です。
                   </p>
                 </div>
               </div>
@@ -182,7 +182,7 @@ const AboutPage = () => {
                 </div>
                 <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#369bff]">
                   <h4 className="text-xl font-bold mb-3 text-white">高校生史上初の記録への挑戦</h4>
-                  <p className="text-gray-300 leading-relaxed">本文は私が書きます。</p>
+                  <p className="text-gray-300 leading-relaxed">過去、少なくない数の高校生チームが鳥人間コンテスト滑空機部門に挑んできました。しかし、工業高校チーム等を含めて、その最高記録は約150m。これには後述する四つの原因があると考えられます。<br/>私たちは、それらの困難を乗り越えたことを新記録という形で示し、自分たちの夢を叶えるだけでなく、より多くの同・次世代にSOARAの認知を広げることを目指しています。</p>
                 </div>
 
                 <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#2080d0]">
@@ -191,16 +191,7 @@ const AboutPage = () => {
                 </div>
               </div>
 
-              <div className="mt-12 text-center">
-                <div className="inline-block bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/10 to-[#369bff]/5 p-8 rounded-lg border border-[#369bff]/20">
-                  <p className="text-2xl font-bold text-white mb-4">
-                    2026年7月、琵琶湖の空で
-                  </p>
-                  <p className="text-xl text-gray-200">
-                    私たちは200m飛びます。
-                  </p>
-                </div>
-              </div>
+            
             </section>
 
             <section id="formation">

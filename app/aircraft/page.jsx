@@ -24,9 +24,9 @@ const AircraftPage = () => {
               From Prototype to Competition
             </h2>
             <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-              SOARAの機体開発は、失敗から学び、改良を重ねる連続です。<br />
+              SOARAの機体開発は、失敗から学び、改良を重ねてきました。<br />
               プロトタイプX1での課題発見、改良機X2での標準化、<br />
-              そして本番機X3での最適化――3機の進化の過程をご覧ください。
+              そして本番機X3での最適化――3機の進化の過程をご紹介します。
             </p>
           </div>
 
@@ -272,64 +272,18 @@ const AircraftPage = () => {
                 </div>
               </div>
 
-              {/* Geometry & Aero Data */}
-              <div className="bg-gray-800/50 rounded-lg p-6 mb-8">
-                <h4 className="text-xl font-semibold mb-4 text-white">空力・幾何データ（X1）</h4>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div>
-                    <h5 className="text-lg font-semibold text-blue-300 mb-3">主翼</h5>
-                    <table className="w-full text-gray-300 text-sm">
-                      <tbody>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼型</td><td className="py-2 text-right">PSU-90-125WL</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼幅（WL除く）</td><td className="py-2 text-right">20.40 m</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼面積（WL除く）</td><td className="py-2 text-right">22.33 m²</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">平均空力翼弦</td><td className="py-2 text-right">1.08 m</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">アスペクト比</td><td className="py-2 text-right">18.64</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">桁位置</td><td className="py-2 text-right">26.4–54.2 %</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼面荷重</td><td className="py-2 text-right">4.75 kg/m²</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">上反角</td><td className="py-2 text-right">7.2°</td></tr>
-                        <tr><td className="py-2 font-semibold">取付迎角</td><td className="py-2 text-right">3.0°</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <h5 className="text-lg font-semibold text-blue-300 mb-3">水平尾翼</h5>
-                    <table className="w-full text-gray-300 text-sm">
-                      <tbody>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼型</td><td className="py-2 text-right">PSU-90-125WL</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼幅</td><td className="py-2 text-right">3.72 m</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼面積</td><td className="py-2 text-right">2.22 m²</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">容積比</td><td className="py-2 text-right">0.018</td></tr>
-                        <tr><td className="py-2 font-semibold">回転中心</td><td className="py-2 text-right">25.56 %</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <h5 className="text-lg font-semibold text-blue-300 mb-3">垂直尾翼</h5>
-                    <table className="w-full text-gray-300 text-sm">
-                      <tbody>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼形</td><td className="py-2 text-right">オリジナル</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼幅</td><td className="py-2 text-right">0.81 m</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">翼面積</td><td className="py-2 text-right">0.67 m²</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">容積比</td><td className="py-2 text-right">0.0012</td></tr>
-                        <tr className="border-b border-gray-700"><td className="py-2 font-semibold">回転中心</td><td className="py-2 text-right">25 %</td></tr>
-                        <tr><td className="py-2 font-semibold">操舵角</td><td className="py-2 text-right">±25°</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+              
 
               {/* Design Philosophy Section */}
               <div className="space-y-6">
                 <div>
                   <h4 className="text-xl font-semibold mb-3 text-white">設計思想：初めての挑戦</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    私たちは今回が初めての機体設計ということもあり、<span className="text-blue-400 font-semibold">製造のしやすさとコストパフォーマンスを最優先</span>しました。
+                    私たちは今回が初めての機体設計ということもあり、製造のしやすさとコストパフォーマンスを最優先しました。
                     高価なCFRP（炭素繊維強化プラスチック）の代わりに、入手しやすく加工が容易な材料を選択。
                     これにより、初期投資を抑えつつ、製作技術を学ぶことを目指しました。
                     <br /><br />
-                    手探りで始めた設計は、多くの課題を抱えることになりましたが、<span className="text-blue-400 font-semibold">ゼロから機体を作る経験</span>は、チームにとってかけがえのない学びとなりました。
+                    手探りで始めた設計は、多くの課題を抱えることになりましたが、ゼロから機体を作る経験は、チームにとってかけがえのない学びとなりました。
                   </p>
                 </div>
 
@@ -346,7 +300,7 @@ const AircraftPage = () => {
                   <div className="bg-red-900/20 border-l-4 border-red-500 p-4 rounded">
                     <p className="text-red-300 font-semibold mb-2">⚠️ 発見された課題</p>
                     <p className="text-gray-300">
-                      構造解析の結果、<span className="font-semibold">主桁の強度が大幅に不足</span>していることが判明しました。
+                      構造解析の結果、主桁の強度が大幅に不足していることが判明しました。
                       塩化ビニルパイプは加工しやすい反面、飛行中の曲げ荷重に耐えられないことが明らかに。
                       この課題により、X1での大会出場は断念せざるを得ませんでした。
                     </p>
@@ -363,7 +317,7 @@ const AircraftPage = () => {
                   <p className="text-gray-300 leading-relaxed">
                     構造としては、底部にポリカーボネート板、上部にはバルサ材を用い、ボルトと接着剤で固定する方法を採用しました。
                     <br /><br />
-                    理想としては丸みを帯びた流線型を目指していましたが、<span className="text-blue-400">製作の容易さを優先し、角ばった形状</span>としました。
+                    理想としては丸みを帯びた流線型を目指していましたが、製作の容易さを優先し、角ばった形状としました。
                     空気抵抗の面では不利ですが、初めての製作チームとしては現実的な選択でした。
                   </p>
                 </div>
@@ -381,11 +335,11 @@ const AircraftPage = () => {
                   <ul className="mt-3 space-y-2 text-gray-300">
                     <li className="flex items-start gap-2">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span><span className="font-semibold">下部ハッチ</span>：足を出して着水できる構造</span>
+                      <span>下部ハッチ：足を出して着水できる構造</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span><span className="font-semibold">上部脱出ハッチ</span>：緊急時に素早く脱出可能</span>
+                      <span>上部脱出ハッチ：緊急時に素早く脱出可能</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-green-400 mt-1">✓</span>
@@ -400,11 +354,11 @@ const AircraftPage = () => {
                     X1は、強度不足により製作を中止せざるを得ませんでした。
                     これは大きな挫折でしたが、同時に計り知れない学びを得た経験でもありました。
                     <br /><br />
-                    • <span className="font-semibold">強度を意識した材料選択</span>：コスト優先では安全性が確保できないこと<br />
-                    • <span className="font-semibold">実績ある設計の尊重</span>：先輩チームの知見を活かすことの重要性
+                    • 強度を意識した材料選択：コスト優先では安全性が確保できないこと<br />
+                    • 実績ある設計の尊重：先輩チームの知見を活かすことの重要性
                     <br /><br />
                     この失敗があったからこそ、X2以降ではより堅実で安全な設計に舵を切ることができました。
-                    <span className="text-blue-400 font-semibold">失敗は、成功への最短ルート</span>だったのです。
+                    失敗は、成功への最短ルートだったのです。
                   </p>
                 </div>
               </div>
@@ -513,13 +467,13 @@ const AircraftPage = () => {
                 <div>
                   <h4 className="text-xl font-semibold mb-3 text-white">設計思想：強豪チーム機体の模倣</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    X1の失敗を踏まえ、X2では<span className="text-blue-400 font-semibold">「鳥人間コンテストのスタンダードに合わせる」</span>ことを最優先としました。
+                    X1の失敗を踏まえ、X2では「鳥人間コンテストのスタンダードに合わせる」ことを最優先としました。
                     <br /><br />
                     独自性よりも実績、革新性よりも安全性。
                     東京理科大学「鳥科」をはじめとする強豪チームの設計を参考に、
-                    <span className="text-blue-400 font-semibold">伝統的な洗練された設計を忠実に模倣することで、確実に飛ぶ機体</span>を目指しました。
+                    伝統的な洗練された設計を忠実に模倣することで、確実に飛ぶ機体を目指しました。
                     <br /><br />
-                    しかし設計を進めるうちに、<span className="text-orange-400 font-semibold">強豪チームと私たちでは、技術力や経験に大きな差がある</span>ことに気づきました。
+                    しかし設計を進めるうちに、強豪チームと私たちでは、技術力や経験に大きな差があることに気づきました。
                     高度な製作技術を前提とした設計は、今の私たちには荷が重すぎたのです。
                   </p>
                 </div>
@@ -532,7 +486,7 @@ const AircraftPage = () => {
                     主翼
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    X1の最大の失敗を教訓に、主桁には<span className="font-semibold text-blue-400">CFRPパイプ</span>を採用。
+                    X1の最大の失敗を教訓に、主桁にはCFRPパイプを採用。
                     軽量かつ高強度で、多くの強豪チームで実績のある材料です。
                     <br /><br />
                     リブにはスタイロフォームを使用し、バルサ材のストリンガーで補強する標準的な構造としました。
@@ -550,7 +504,7 @@ const AircraftPage = () => {
                   <p className="text-gray-300 leading-relaxed">
                     胴体フレームにはアルミパイプを採用し、軽量ながら十分な剛性を確保。
                     フェアリング（外装カバー）には塩ビ板と発泡ブロックを使用し、
-                    X1よりも<span className="text-blue-400">流線型に近い形状</span>を実現しています。
+                    X1よりも流線型に近い形状を実現しています。
                     <br /><br />
                     この改良により、空気抵抗を低減し、滑空性能の向上を目指しています。
                   </p>
@@ -569,15 +523,15 @@ const AircraftPage = () => {
                   <ul className="mt-3 space-y-2 text-gray-300">
                     <li className="flex items-start gap-2">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span><span className="font-semibold">構造強度の余裕</span>：想定荷重の1.5倍以上の強度を確保</span>
+                      <span>構造強度の余裕：想定荷重の1.5倍以上の強度を確保</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span><span className="font-semibold">改良された脱出ハッチ</span>：より大きく、開けやすい設計</span>
+                      <span>改良された脱出ハッチ：より大きく、開けやすい設計</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span><span className="font-semibold">発泡スチロールによる浮力確保</span>：着水時も安全に浮上</span>
+                      <span>発泡スチロールによる浮力確保：着水時も安全に浮上</span>
                     </li>
                   </ul>
                 </div>
@@ -585,14 +539,14 @@ const AircraftPage = () => {
                 <div className="bg-orange-900/20 border-l-4 border-orange-500 p-6 rounded-lg">
                   <h4 className="text-xl font-semibold mb-3 text-white">X2から得た気づき</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    X2の設計を進める中で、私たちは<span className="text-orange-400 font-semibold">重要な気づき</span>を得ました。
+                    X2の設計を進める中で、私たちは重要な気づきを得ました。
                     <br /><br />
-                    強豪チームの設計は確かに優れていますが、それは<span className="font-semibold">高度な製作技術と豊富な経験を前提</span>としています。
+                    強豪チームの設計は確かに優れていますが、それは高度な製作技術と豊富な経験を前提としています。
                     CFRPの積層技術、精密な治具の製作、複雑な構造の組み立て――
                     これらすべてを、限られた時間と経験で習得するのは現実的ではありませんでした。
                     <br /><br />
                     この経験が、X3の設計方針を決定づけることになります。
-                    <span className="text-blue-400 font-semibold">「背伸びせず、自分たちが本当に作れる機体を」</span>
+                    「背伸びせず、自分たちが本当に作れる機体を」
                   </p>
                 </div>
               </div>
@@ -691,17 +645,17 @@ const AircraftPage = () => {
                 <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-8 rounded-lg border border-blue-500/30">
                   <h4 className="text-2xl font-semibold mb-4 text-white">X3への道のり：自分たちの実力に合わせた機体</h4>
                   <p className="text-gray-300 leading-relaxed mb-6">
-                    X3は、SOARAの<span className="text-blue-400 font-semibold">集大成</span>となる機体です。
+                    X3は、SOARAの集大成となる機体です。
                     <br /><br />
                     X1での失敗、X2での「高すぎる目標設定」という気づきを経て、
-                    ついに<span className="text-blue-400 font-semibold">自分たちが本当に作れる機体</span>へ。
+                    ついに自分たちが本当に作れる機体へ。
                     <br /><br />
-                    プロの真似をするのではなく、<span className="font-semibold">今の私たちの技術力で確実に製作できる設計</span>。
+                    プロの真似をするのではなく、今の私たちの技術力で確実に製作できる設計。
                     X2で目指した複雑な構造を見直し、より単純で堅実な設計に。
                     それでいて性能を犠牲にしない――これがX3の挑戦です。
                     <br /><br />
                     背伸びせず、しかし妥協もせず。
-                    2026年7月の琵琶湖で、<span className="text-blue-400 font-semibold">「自分たちの実力を正しく理解したチーム」</span>の強さを証明します。
+                    2026年7月の琵琶湖で、「自分たちの実力を正しく理解したチーム」の強さを証明します。
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -800,7 +754,7 @@ const AircraftPage = () => {
                     <br /><br />
                     数え切れない挫折、無数の試行錯誤、そして諦めなかった意志――
                     <br /><br />
-                    <span className="text-blue-400 font-semibold text-lg">
+                    <span className="text-blue-400 text-lg">
                       X3が琵琶湖の空を飛ぶとき、私たちは証明します。<br />
                       「高校生でも、ここまでできる」と。
                     </span>
