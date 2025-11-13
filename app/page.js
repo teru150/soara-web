@@ -155,42 +155,19 @@ export default function Home() {
                 ))}
               </div>
               <div className="text-center mt-8">
-                <a href="/about#mission-detail" className="inline-flex items-center text-[#369bff] hover:text-[#0050a7] font-medium transition-colors">
+                <a href="/about#mission-detail" className="inline-flex items-center text-[#369bff] hover:text-[#0050a7] font-medium transition-colors mb-8">
                   ミッションの詳細を見る
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </a>
               </div>
-            </section>
 
-            {/* 2026年度目標セクション */}
-            <section className="bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/5 to-[#369bff]/10 rounded-2xl p-8 md:p-12">
-              <h2 className="text-3xl font-semibold mb-8 text-center">
-                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">2026年度の挑戦</span>
-              </h2>
-
-              <div className="max-w-4xl mx-auto mb-12">
-                <p className="inline-block px-4 py-1 bg-[#369bff] text-white text-sm font-bold rounded-full mb-4">{contentData.home.goal2026.label}</p>
-                <h3 className="text-3xl font-bold mb-6 text-gray-800">{contentData.home.goal2026.headline}</h3>
-
-                {/* 定常滑空軌道の図 */}
-                <div className="bg-white rounded-lg p-6 mb-6 shadow-md">
-                  <img
-                    src="/svg/flight-path.svg"
-                    alt="定常滑空の軌道図 - 揚力の不足、安定性の不足、定常滑空の3つのパターン"
-                    className="w-full h-auto"
-                  />
-                </div>
-
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line">{contentData.home.goal2026.description}</p>
-              </div>
-
-              <div className="text-center">
-                <p className="text-xl font-semibold mb-4 text-gray-800">{contentData.home.goal2026.ctaText}</p>
+              <div className="text-center mt-8">
+                <p className="text-xl font-semibold mb-4 text-gray-800">私たちと一緒に、歴史を作りませんか？</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <a href="/supporters" className="inline-block px-10 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg">
-                    {contentData.home.goal2026.ctaButton}
+                    サポーターになる
                   </a>
                   <a
                     href="https://docs.google.com/forms/d/e/1FAIpQLSejEijY3nx_A1iCfqOTUukN7OKxZvn_PTHFi-Q7e4QP8MLxxA/viewform"
@@ -201,6 +178,41 @@ export default function Home() {
                     チームに加入する
                   </a>
                 </div>
+              </div>
+            </section>
+
+            {/* 2026年度目標セクション */}
+            <section className="bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/5 to-[#369bff]/10 rounded-2xl p-8 md:p-12">
+              <h2 className="text-3xl font-semibold mb-8 text-center">
+                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">2026年度の目標</span>
+              </h2>
+
+              <div className="max-w-4xl mx-auto mb-12">
+                <p className="inline-block px-4 py-1 bg-[#369bff] text-white text-sm font-bold rounded-full mb-4">{contentData.home.goal2026.label}</p>
+                <h3 className="text-3xl font-bold mb-6 text-gray-800">{contentData.home.goal2026.headline}</h3>
+
+                {/* 定常滑空軌道の図 */}
+                <div className="bg-white rounded-lg p-6 mb-6 shadow-md">
+                  <img
+                    src="/analysis/flight-path.png"
+                    alt="定常滑空の軌道図 - 揚力の不足、安定性の不足、定常滑空の3つのパターン"
+                    className="w-full h-auto"
+                  />
+                </div>
+
+                <p className="text-gray-700 leading-relaxed whitespace-pre-line">{contentData.home.goal2026.description}</p>
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="/about#goals"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg"
+                >
+                  なぜ200mなのか？ - 詳しくはこちら
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
               </div>
             </section>
 

@@ -158,7 +158,7 @@ const AboutPage = () => {
                 </h3>
 
                 <div className="bg-white rounded-lg p-6 mb-8">
-                  <img src="/svg/flight-path.svg" alt="定常滑空の軌道図" className="w-full h-auto" />
+                  <img src="/analysis/flight-path.png" alt="定常滑空の軌道図" className="w-full h-auto" />
                 </div>
 
                 <div className="space-y-6 text-gray-200 leading-relaxed text-lg">
@@ -166,32 +166,192 @@ const AboutPage = () => {
                     鳥人間コンテスト滑空機部門では、10mの高さのプラットフォームから機体を滑空させ、着水地点までの飛行距離を競います。
                   </p>
                   <p>
-                    私たちSOARAが掲げる目標は、<span className="font-bold text-white">200mの滑空を実現すること</span>です。
+                    私たちSOARAが掲げる目標は、200mの滑空を実現することです。
                   </p>
                 </div>
               </div>
 
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">175mの壁</h3>
-                  <div className="space-y-4 text-gray-300 leading-relaxed">
+                  <h3 className="text-2xl font-bold mb-4 text-white">なぜ200mを実現したいのか</h3>
+                  <div className="space-y-6 text-gray-300 leading-relaxed">
                     <p>
-                      200mという数値はどのような意味を持つのでしょうか。現在、鳥人間コンテスト滑空機部門の史上最高記録はTeam三鷹茂原下横田の大木 祥資氏が2024年に樹立した645.15mですが、規格外の優勝13回を誇る氏を除くと、トップクラスのチームが残す記録は400m台となっています。
+                      SOARAの大会における目標を設定するにあたり、記録の"壁"がどこに存在するのか、そしてその考えられる要因を探りました。
+                    </p>
+                    <p>
+                      まず、記録の壁を過去25年の鳥人間コンテスト滑空機部門の記録を分析することにより発見し、その後個々の壁の前後におけるフライト傾向の差を讀賣テレビによる鳥人間コンテスト公式Youtubeチャンネルに投稿されている動画から考察しました。
                     </p>
                   </div>
                 </div>
-                <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#369bff]">
-                  <h4 className="text-xl font-bold mb-3 text-white">高校生史上初の記録への挑戦</h4>
-                  <p className="text-gray-300 leading-relaxed">過去、少なくない数の高校生チームが鳥人間コンテスト滑空機部門に挑んできました。しかし、強豪大学生チームが400m台で競い合う中、工業高校チーム等を含めても最高記録は約150m。これには後述する四つの原因があると考えられます。<br/>私たちは、それらの困難を乗り越えたことを新記録という形で示し、自分たちの夢を叶えるだけでなく、より多くの同・次世代にSOARAの認知を広げることを目指しています。</p>
+
+                {/* グラフセクション */}
+                <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                  <h4 className="text-xl font-bold mb-6 text-white text-center">
+                    記録の"壁"の分析
+                  </h4>
+
+                  {/* グラフ画像 */}
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    <div className="bg-white rounded-lg p-4">
+                      <img
+                        src="/analysis/gap-position-size.png"
+                        alt="全ギャップの位置とサイズ (2000-2025)"
+                        className="w-full h-auto"
+                      />
+                    </div>
+                    <div className="bg-white rounded-lg p-4">
+                      <img
+                        src="/analysis/gap-frequency-average.png"
+                        alt="距離レンジ別のギャップ頻度と平均サイズ"
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 text-gray-300 leading-relaxed text-base">
+                    <p>
+                      左のグラフでは0-500mを25mごとのレンジに分け、どのレンジで大きな記録ギャップが発生しやすいか、即ち記録を伸ばす上での壁がどこに存在しているのかを分析しました。
+                    </p>
+                    <p>
+                      手法は平均の各記録間のギャップの値とそのレンジにおけるギャップの存在頻度を掛け合わせた「ハードル値」を定義し、その値が大きなレンジを調査しました。
+                    </p>
+                    <p>
+                      その結果が右のグラフであり、赤い線が引かれているレンジ帯が記録を伸ばす上で障壁となるものであると考えられます。
+                    </p>
+                  </div>
                 </div>
 
-                <div className="relative bg-gray-800 p-6 rounded-lg border-l-4 border-[#2080d0]">
-                  <h4 className="text-xl font-bold mb-3 text-white">四つの条件を乗り越えたことの証明</h4>
-                  <p className="text-gray-300 leading-relaxed">四つの条件とは、<span className="font-bold text-white">精密な設計・高い製作精度・熟練した発進フェーズ・精緻なパイロットの飛行</span>を指します。現在琵琶湖で強豪といわれる某学生チームを例にとれば、優秀な設計者と膨大な引継ぎに裏打ちされた確かな機体設計、NC電熱線を利用したリブの削り出しにレーザーでの正確な照準、数百回に渡る乗り込み練習に加えてのテストフライト、そして体重移動を感知するVRフライトシミュレーターや毎週末のパラグライダー練習といったように、四条件を高い水準で満たしていることがわかります。</p>
+                {/* ハードル値表 */}
+                <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                  <h4 className="text-xl font-bold mb-4 text-white text-center">
+                    主要な"壁"のハードル値ランキング
+                  </h4>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-gray-300">
+                      <thead>
+                        <tr className="border-b-2 border-[#369bff]">
+                          <th className="py-3 px-4 text-center font-bold text-white">順位</th>
+                          <th className="py-3 px-4 text-center font-bold text-white">レンジ</th>
+                          <th className="py-3 px-4 text-center font-bold text-white">頻度</th>
+                          <th className="py-3 px-4 text-center font-bold text-white">平均ギャップ</th>
+                          <th className="py-3 px-4 text-center font-bold text-white">ハードル値</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-gray-700 bg-red-900/20">
+                          <td className="py-3 px-4 text-center font-bold">1</td>
+                          <td className="py-3 px-4 text-center">350-375m</td>
+                          <td className="py-3 px-4 text-center">13回</td>
+                          <td className="py-3 px-4 text-center">58.5m</td>
+                          <td className="py-3 px-4 text-center font-bold text-red-400">761</td>
+                        </tr>
+                        <tr className="border-b border-gray-700 bg-orange-900/20">
+                          <td className="py-3 px-4 text-center font-bold">2</td>
+                          <td className="py-3 px-4 text-center">75-100m</td>
+                          <td className="py-3 px-4 text-center">20回</td>
+                          <td className="py-3 px-4 text-center">35.6m</td>
+                          <td className="py-3 px-4 text-center font-bold text-orange-400">712</td>
+                        </tr>
+                        <tr className="border-b border-gray-700 bg-yellow-900/20">
+                          <td className="py-3 px-4 text-center font-bold">3</td>
+                          <td className="py-3 px-4 text-center">150-175m</td>
+                          <td className="py-3 px-4 text-center">16回</td>
+                          <td className="py-3 px-4 text-center">43.0m</td>
+                          <td className="py-3 px-4 text-center font-bold text-yellow-400">688</td>
+                        </tr>
+                        <tr className="border-b border-gray-700">
+                          <td className="py-3 px-4 text-center font-bold">4</td>
+                          <td className="py-3 px-4 text-center">125-150m</td>
+                          <td className="py-3 px-4 text-center">18回</td>
+                          <td className="py-3 px-4 text-center">34.7m</td>
+                          <td className="py-3 px-4 text-center">624</td>
+                        </tr>
+                        <tr className="border-b border-gray-700">
+                          <td className="py-3 px-4 text-center font-bold">5</td>
+                          <td className="py-3 px-4 text-center">300-325m</td>
+                          <td className="py-3 px-4 text-center">15回</td>
+                          <td className="py-3 px-4 text-center">40.5m</td>
+                          <td className="py-3 px-4 text-center">608</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* 壁の分析 */}
+                <div className="space-y-6">
+                  <div className="relative bg-gradient-to-r from-orange-900/30 to-orange-800/20 p-6 rounded-lg border-l-4 border-orange-500">
+                    <h4 className="text-xl font-bold mb-3 text-white flex items-center gap-2">
+                      <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm">第一の壁</span>
+                      75m-100m
+                    </h4>
+                    <p className="text-gray-200 leading-relaxed">
+                      この壁はプラットホームからの発進直後、十分な揚力を得ることができずに墜落する機体とそうでない機体の差を表していると考えられます。
+                      <br /><br />
+                      その原因は複数考えられますが、主に機体の一次構造の剛性不足（2024N大学）、二次構造のねじれ剛性不足（2023J大学）、パイロットないしフライトチームの失敗による引き起こしの失敗、失速等（数多い）が主な要因です。
+                    </p>
+                  </div>
+
+                  <div className="relative bg-gradient-to-r from-yellow-900/30 to-yellow-800/20 p-6 rounded-lg border-l-4 border-yellow-500">
+                    <h4 className="text-xl font-bold mb-3 text-white flex items-center gap-2">
+                      <span className="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm">第二の壁</span>
+                      125m-175m
+                    </h4>
+                    <p className="text-gray-200 leading-relaxed">
+                      この壁はL/D比（揚抗比）の不足（2025チームS）、あるいは静安定性の不足（2024A工科高校、2025T大学）により発生していると考えられます。
+                      <br /><br />
+                      高校生チームの史上最高記録は153mであるため、200mを達成するには、この第二の壁を突破する必要があります。
+                    </p>
+                  </div>
+
+                  <div className="relative bg-gray-800/50 p-6 rounded-lg border-l-4 border-gray-500">
+                    <h4 className="text-xl font-bold mb-3 text-gray-300 flex items-center gap-2">
+                      <span className="bg-gray-500 text-white px-3 py-1 rounded-full text-sm">第三・第四の壁</span>
+                      300-325m / 350-375m
+                    </h4>
+                    <p className="text-gray-400 leading-relaxed">
+                      300-325mに位置する第三の壁、そして350-375mに位置する第四の壁も存在することが明らかになりましたが、今回は扱いません。機体の洗練やフライトチーム、パイロットの熟練度が高度に影響していると考察されますが、今回の分析では詳細な要因を特定するまでには至りませんでした。
+                    </p>
+                  </div>
+                </div>
+
+                {/* 200m目標の意義 */}
+                <div className="relative bg-gradient-to-br from-[#369bff]/20 via-[#0050a7]/20 to-[#369bff]/10 p-8 rounded-lg border-2 border-[#369bff]">
+                  <h4 className="text-2xl font-bold mb-6 text-white text-center">
+                    SOARAが200mを目指す理由
+                  </h4>
+                  <div className="space-y-4 text-gray-200 leading-relaxed text-lg">
+                    <p>
+                      これらの分析をもとに、SOARAでは目標飛行記録を200mとしました。
+                    </p>
+                    <p>
+                      高校生チームの史上最高記録は153mであるため、200mを記録するためには、第一の壁のみならず、高校生チームが未だ突破したことのない第二の壁を突破することが求められます。
+                    </p>
+                    <p>
+                      簡単な目標ではありませんが、私たちは過去の高校生チームと比べ有利な条件にあります。
+                    </p>
+                    <p>
+                      それは、全国的に見ても経験豊富な鳥人間チームが段違いに数多く存在している東京に本拠を置いている事です。
+                    </p>
+                    <p>
+                      既に第一から第四の壁を突破し、2025年度は準優勝を果たした東京理科大学鳥人間サークル鳥科様にスペシャルパートナーとして設計面・製作面でご支援いただいており、その他の先輩チーム様方からも多角的に技術や経験を習得し、壁を突破することを目指します。
+                    </p>
+                  </div>
+                </div>
+
+                {/* 機体へのリンク */}
+                <div className="text-center mt-8">
+                  <p className="text-gray-300 mb-4 text-lg">
+                    200mを突破することを追求して設計された私たちの機体、SOARA-X3はこちらをご参照ください。
+                  </p>
+                  <a
+                    href="/aircraft"
+                    className="inline-block px-8 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50"
+                  >
+                    SOARA-X3の詳細を見る
+                  </a>
                 </div>
               </div>
-
-            
             </section>
 
             <section id="formation">
@@ -201,23 +361,19 @@ const AboutPage = () => {
               <div className="space-y-16">
                 <div className="relative bg-gray-800 p-6 rounded-lg border-t-2 border-[#369bff]">
                   <h3 className="text-xl font-bold mb-4 text-white">
-                    学校チームの断念
+                    SOARAの始まり
                   </h3>
                   <p className="text-gray-300 leading-relaxed">
-                    全ての始まりは2024年の鳥人間コンテストでとある高校生チームが鳥人間コンテスト人力プロペラ機部門に挑んだことです。大いに影響された現代表の入山が、12月に在籍する高校の部活動として鳥人間コンテストに出場するための同好会を結成しました。
+                    全ての始まりは2024年の鳥人間コンテストでとある高校生チームが鳥人間コンテスト人力プロペラ機部門に挑んだことです。大いに影響された現代表の入山が、学校で鳥人間チームを企画しました。しかし結局のところ、実現することはありませんでした。
                     <br />
                     <br />
-                    しかし、学校側から「結成初年度で信用がない」「一部活にだけ資金集めを許可できない」といった理由から出場を認可されず、断念を余儀なくされました。ですが、「空を飛びたい」という夢を諦めることはできませんでした。
+                    それでも、「自分たちで作り上げた飛行機を飛ばしたい」という夢を諦めることはできませんでした。
                     <br />
                     <br />
-                    学校側の判断を、私たちは責めることはできません。前例のない活動に対して慎重になるのは、当然のことです。
+                    思い悩んでいたその時、ふとこう思いました。
                     <br />
                     <br />
-                    しかし同時に、こう思いました。
-                    <br />
-                    <br />
-                    「学校の承認が得られないなら、学校の外で挑戦すればいい」<br />
-                    「前例がないなら、自分たちが前例になればいい」
+                    「すべての高校から飛行機作りたい奴が集まれば、史上最強のチームができるんじゃないか？」
                     <br />
                     <br />
                     この瞬間、SOARAの物語が始まりました。
@@ -229,7 +385,7 @@ const AboutPage = () => {
                     特色ある仲間たちとの出会い
                   </h3>
                   <p className="text-gray-300 leading-relaxed">
-                    どのようにすれば学校から離れても鳥人間コンテストに出場できるか悩んでいたところ、偶然知人に紹介され現ブランディング担当の野村と出会いました。
+                    どのようにすれば鳥人間コンテストに出場できるか悩んでいたところ、偶然知人に紹介され現ブランディング担当の野村と出会いました。
                     <br />
                     <br />
                     話してすぐに意気投合し、ともにSOARAとして有志のチームを結成し、資金、場所、人材全てを自分たちで確保することを決意しました。その後入山の中学時代の同級生だった優秀なエンジニアである現主任設計の中嶋を勧誘し、この3人でチームが始まりました。
@@ -240,11 +396,11 @@ const AboutPage = () => {
                     <br />
                     現在のSOARAの構成は<br />
                     ・メンバー数：21名<br />
-                    ・出身校：9校（東京7校、山口1校、アメリカ1校）<br />
-                    ・専門分野：航空工学、機械工学、電気電子、広報、経営
+                    ・出身校：11校（東京6校、山口1校、兵庫1校、アメリカ3校）<br />
+                    ・専門分野：航空工学、機械工学、電気電子、広報、外交
                     <br />
                     <br />
-                    学校も、住む場所も、得意分野もバラバラ。でも、「空を飛びたい」という情熱だけは同じ。
+                    学校も、住む場所も、得意分野もバラバラ。でも、「自分たちで飛行機作るの？超面白そうじゃん！」という思いだけは同じ。
                     <br />
                     <br />
                     この多様性こそが、SOARAの最大の強みです。
@@ -258,7 +414,7 @@ const AboutPage = () => {
                 SOARAの独自性
               </h2>
               <p className="text-gray-300 leading-relaxed text-lg mb-8">
-                SOARAは、他の鳥人間チームとは異なる、2つの独自性を持っています。
+                SOARAは、他の鳥人間チームと比較し、2つの独自性を持っています。
               </p>
               <div className="space-y-12">
                 <div className="relative bg-gray-800 p-6 rounded-lg border-t-2 border-[#369bff]">

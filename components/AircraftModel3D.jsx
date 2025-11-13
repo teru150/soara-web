@@ -26,7 +26,7 @@ const IS_ACTUAL_MODEL = {
 /**
  * 3Dモデルを読み込んで表示するコンポーネント
  */
-function Model({ model, autoRotate = false }) {
+function Model({ model, aircraft, autoRotate = false }) {
   const meshRef = useRef();
   let object = null;
 
@@ -48,7 +48,10 @@ function Model({ model, autoRotate = false }) {
     }
   });
 
-  return object ? <primitive ref={meshRef} object={object} scale={0.15} /> : null;
+  // X2は実機サイズのため1/100に縮小、その他は0.15スケール
+  const scale = aircraft === 'X2' ? 0.0015 : 0.15;
+
+  return object ? <primitive ref={meshRef} object={object} scale={scale} /> : null;
 }
 
 /**
@@ -89,7 +92,7 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
 
         {/* 3Dモデル */}
         <Suspense fallback={<LoadingFallback />}>
-          <Model model={modelDef} autoRotate={autoRotate} />
+          <Model model={modelDef} aircraft={aircraft} autoRotate={autoRotate} />
         </Suspense>
 
         {/* 環境マッピング */}
