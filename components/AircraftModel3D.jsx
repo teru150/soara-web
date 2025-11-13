@@ -83,7 +83,7 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
         gl={{ antialias: true }}
         style={{ background: 'transparent' }}
       >
-        <PerspectiveCamera makeDefault position={[5, 3, 5]} fov={50} />
+        <PerspectiveCamera makeDefault position={[2.5, 1.5, 2.5]} fov={50} />
 
         {/* 照明設定 */}
         <ambientLight intensity={0.5} />
@@ -103,8 +103,8 @@ export default function AircraftModel3D({ aircraft = 'X1', className = '' }) {
           enablePan={true}
           enableZoom={true}
           enableRotate={true}
-          minDistance={2}
-          maxDistance={15}
+          minDistance={0.67}
+          maxDistance={20}
           autoRotate={autoRotate}
           autoRotateSpeed={1}
         />

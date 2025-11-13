@@ -96,88 +96,90 @@ const AircraftPage = () => {
           </div>
 
           {/* Three-View Drawing Section */}
-          <div className="bg-gray-900 rounded-lg p-8 mb-12">
-            <h3 className="text-2xl font-bold mb-6 text-center">三面図</h3>
-            {selectedAircraft === 'X1' ? (
-              <>
-                <div className="w-full bg-gray-800 rounded-lg overflow-hidden">
-                  <object
-                    data="/blueprint/X1.pdf#toolbar=1&navpanes=0&view=fitH"
-                    type="application/pdf"
-                    className="w-full h-[70vh]"
-                  >
-                    <div className="p-6 text-gray-400 text-center">
-                      <p className="mb-3">PDFビューアを読み込めませんでした。</p>
-                      <a
-                        href="/blueprint/X1.pdf"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-blue-400 underline"
-                      >
-                        こちらからPDFを開く / ダウンロード
-                      </a>
-                    </div>
-                  </object>
-                </div>
-                <div className="text-center mt-4">
-                  <a
-                    href="/blueprint/X1.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md"
-                  >
-                    別タブで開く
-                  </a>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {/* Top View */}
-                  <div className="bg-gray-800 rounded-lg p-4">
-                    <h4 className="text-center text-gray-400 mb-4">平面図（Top View）</h4>
-                    <div className="aspect-square bg-gray-700 rounded flex items-center justify-center">
-                      <div className="text-gray-500 text-center">
-                        <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p className="text-sm">画像準備中</p>
+          {selectedAircraft !== 'X2' && (
+            <div className="bg-gray-900 rounded-lg p-8 mb-12">
+              <h3 className="text-2xl font-bold mb-6 text-center">三面図</h3>
+              {selectedAircraft === 'X1' ? (
+                <>
+                  <div className="w-full bg-gray-800 rounded-lg overflow-hidden">
+                    <object
+                      data="/blueprint/X1.pdf#toolbar=1&navpanes=0&view=fitH"
+                      type="application/pdf"
+                      className="w-full h-[70vh]"
+                    >
+                      <div className="p-6 text-gray-400 text-center">
+                        <p className="mb-3">PDFビューアを読み込めませんでした。</p>
+                        <a
+                          href="/blueprint/X1.pdf"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-400 underline"
+                        >
+                          こちらからPDFを開く / ダウンロード
+                        </a>
+                      </div>
+                    </object>
+                  </div>
+                  <div className="text-center mt-4">
+                    <a
+                      href="/blueprint/X1.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md"
+                    >
+                      別タブで開く
+                    </a>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {/* Top View */}
+                    <div className="bg-gray-800 rounded-lg p-4">
+                      <h4 className="text-center text-gray-400 mb-4">平面図（Top View）</h4>
+                      <div className="aspect-square bg-gray-700 rounded flex items-center justify-center">
+                        <div className="text-gray-500 text-center">
+                          <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <p className="text-sm">画像準備中</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Front View */}
-                  <div className="bg-gray-800 rounded-lg p-4">
-                    <h4 className="text-center text-gray-400 mb-4">正面図（Front View）</h4>
-                    <div className="aspect-square bg-gray-700 rounded flex items-center justify-center">
-                      <div className="text-gray-500 text-center">
-                        <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p className="text-sm">画像準備中</p>
+                    {/* Front View */}
+                    <div className="bg-gray-800 rounded-lg p-4">
+                      <h4 className="text-center text-gray-400 mb-4">正面図（Front View）</h4>
+                      <div className="aspect-square bg-gray-700 rounded flex items-center justify-center">
+                        <div className="text-gray-500 text-center">
+                          <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <p className="text-sm">画像準備中</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Side View */}
-                  <div className="bg-gray-800 rounded-lg p-4">
-                    <h4 className="text-center text-gray-400 mb-4">側面図（Side View）</h4>
-                    <div className="aspect-square bg-gray-700 rounded flex items-center justify-center">
-                      <div className="text-gray-500 text-center">
-                        <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p className="text-sm">画像準備中</p>
+                    {/* Side View */}
+                    <div className="bg-gray-800 rounded-lg p-4">
+                      <h4 className="text-center text-gray-400 mb-4">側面図（Side View）</h4>
+                      <div className="aspect-square bg-gray-700 rounded flex items-center justify-center">
+                        <div className="text-gray-500 text-center">
+                          <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <p className="text-sm">画像準備中</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <p className="text-center text-gray-500 text-sm mt-4">
-                  ※ 三面図は設計完了次第、順次公開いたします
-                </p>
-              </>
-            )}
-          </div>
+                  <p className="text-center text-gray-500 text-sm mt-4">
+                    ※ 三面図は設計完了次第、順次公開いたします
+                  </p>
+                </>
+              )}
+            </div>
+          )}
 
           {/* Aircraft Details - X1 */}
           {selectedAircraft === 'X1' && (
@@ -301,8 +303,10 @@ const AircraftPage = () => {
                     <p className="text-red-300 font-semibold mb-2">⚠️ 発見された課題</p>
                     <p className="text-gray-300">
                       構造解析の結果、主桁の強度が大幅に不足していることが判明しました。
-                      塩化ビニルパイプは加工しやすい反面、飛行中の曲げ荷重に耐えられないことが明らかに。
-                      この課題により、X1での大会出場は断念せざるを得ませんでした。
+                      塩化ビニルパイプは加工しやすい反面、飛行中の曲げ荷重に耐えられないことが明らかになりました。
+                      また、左右の翼主桁が結合されておらず、バルサの胴体では主翼を十分に支えられない根本的な設計ミスも発覚しました。
+                      また、主翼の二次構造が不十分であったため、ねじれ剛性も大幅に不足していました。
+                      これらの課題により、X1での大会出場は断念することとなりました。
                     </p>
                   </div>
                 </div>
@@ -360,6 +364,22 @@ const AircraftPage = () => {
                     この失敗があったからこそ、X2以降ではより堅実で安全な設計に舵を切ることができました。
                     失敗は、成功への最短ルートだったのです。
                   </p>
+                </div>
+
+                {/* Next Aircraft Button */}
+                <div className="text-center mt-8">
+                  <button
+                    onClick={() => {
+                      setSelectedAircraft('X2');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg"
+                  >
+                    次の機体：SOARA-X2を見る
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -486,10 +506,10 @@ const AircraftPage = () => {
                     主翼
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    X1の最大の失敗を教訓に、主桁にはCFRPパイプを採用。
+                    X1の最大の失敗を教訓に、主桁にはCFRP（炭素繊維強化プラスチック）パイプを採用。
                     軽量かつ高強度で、多くの強豪チームで実績のある材料です。
                     <br /><br />
-                    リブにはスタイロフォームを使用し、バルサ材のストリンガーで補強する標準的な構造としました。
+                    リブにはスタイロフォームを使用し、バルサ材のストリンガーやその他二次構造で補強する標準的な構造としました。
                     この組み合わせにより、強度と軽量性を両立させています。
                   </p>
                 </div>
@@ -536,18 +556,33 @@ const AircraftPage = () => {
                   </ul>
                 </div>
 
-                <div className="bg-orange-900/20 border-l-4 border-orange-500 p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-3 text-white">X2から得た気づき</h4>
+                <div className="bg-blue-900/20 border-l-4 border-blue-500 p-6 rounded-lg">
+                  <h4 className="text-xl font-semibold mb-3 text-white">振り返りと学び</h4>
                   <p className="text-gray-300 leading-relaxed">
                     X2の設計を進める中で、私たちは重要な気づきを得ました。
                     <br /><br />
-                    強豪チームの設計は確かに優れていますが、それは高度な製作技術と豊富な経験を前提としています。
-                    CFRPの積層技術、精密な治具の製作、複雑な構造の組み立て――
-                    これらすべてを、限られた時間と経験で習得するのは現実的ではありませんでした。
+                    強豪チームの設計はもちろん優れていますが、それは高度な製作技術と豊富な経験を前提としています。
+                    CFRPの積層技術、空力的・幾何的ねじり下げを反映した精緻なリブ、一年近くを捧げて完成させる流線形の精密なキャノピー。
+                    これらすべてを、限られた時間と経験で習得・製作するのは現実的ではありませんでした。
                     <br /><br />
-                    この経験が、X3の設計方針を決定づけることになります。
-                    「背伸びせず、自分たちが本当に作れる機体を」
+                    この経験により、X3の「背伸びしすぎず、自分たちが本当に作れる機体」という方針が決定しました。
                   </p>
+                </div>
+
+                {/* Next Aircraft Button */}
+                <div className="text-center mt-8">
+                  <button
+                    onClick={() => {
+                      setSelectedAircraft('X3');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg"
+                  >
+                    次の機体：SOARA-X3を見る
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -648,14 +683,14 @@ const AircraftPage = () => {
                     X3は、SOARAの集大成となる機体です。
                     <br /><br />
                     X1での失敗、X2での「高すぎる目標設定」という気づきを経て、
-                    ついに自分たちが本当に作れる機体へ。
+                    自分たちで本当に作れる機体を目指します。
                     <br /><br />
-                    プロの真似をするのではなく、今の私たちの技術力で確実に製作できる設計。
+                    よく飛ぶ機体をそのまま真似するのではなく、今の私たちの技術力で確実に製作できる設計を心掛けました。
                     X2で目指した複雑な構造を見直し、より単純で堅実な設計に。
-                    それでいて性能を犠牲にしない――これがX3の挑戦です。
+                    それでいて性能を犠牲にしない、これがX3の挑戦です。
                     <br /><br />
-                    背伸びせず、しかし妥協もせず。
-                    2026年7月の琵琶湖で、「自分たちの実力を正しく理解したチーム」の強さを証明します。
+                    背伸びも、しかし妥協もしません。
+                    この機体と共に琵琶湖へ向かう日が、今から楽しみでたまりません。
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -738,27 +773,10 @@ const AircraftPage = () => {
                       <p className="text-sm text-gray-400">軽量化による性能向上</p>
                     </div>
                     <div className="bg-gray-900 p-4 rounded">
-                      <p className="text-blue-400 font-semibold mb-2">無事故完走</p>
+                      <p className="text-blue-400 font-semibold mb-2">無事故での着水</p>
                       <p className="text-sm text-gray-400">最優先の安全性確保</p>
                     </div>
                   </div>
-                </div>
-
-                <div className="bg-blue-900/20 border-l-4 border-blue-500 p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-3 text-white">2026年7月、琵琶湖で</h4>
-                  <p className="text-gray-300 leading-relaxed">
-                    X3は、単なる機体ではありません。
-                    <br /><br />
-                    それは、「学校の枠を超えて空を飛びたい」という夢から始まった、
-                    21人の高校生の情熱が形になったものです。
-                    <br /><br />
-                    数え切れない挫折、無数の試行錯誤、そして諦めなかった意志――
-                    <br /><br />
-                    <span className="text-blue-400 text-lg">
-                      X3が琵琶湖の空を飛ぶとき、私たちは証明します。<br />
-                      「高校生でも、ここまでできる」と。
-                    </span>
-                  </p>
                 </div>
 
                 <div className="text-center py-8">
