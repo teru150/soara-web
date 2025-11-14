@@ -15,7 +15,7 @@ export default function Home() {
   const contentRef = useRef(null);
   const slideshowImages = [
     "/images/pics/IMG_2485.jpg",
-    "/images/pics/IMG_3019.jpg",
+    ,
     "/images/pics/IMG_3584.jpg",
     "/images/pics/IMG_3593.jpg",
     "/images/pics/IMG_6802.jpg",
