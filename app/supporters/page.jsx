@@ -9,7 +9,7 @@ const page = () => {
           <div className="mb-16">
             <h2 className="text-4xl font-bold text-blue-400 mb-8 text-center">Special Partner</h2>
             <div className="bg-[#151515] rounded-lg p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">東京理科大学鳥人間サークル鳥科　様</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">東京理科大学鳥人間サークル鳥科 様</h3>
               <div className="flex gap-8 items-start">
                 {/* Logo Space */}
                 <a href="https://x.com/torica_official" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 w-48 h-48 hover:opacity-80 transition-opacity">
@@ -18,7 +18,7 @@ const page = () => {
                 {/* Description */}
                 <div className="flex-1">
                   <p className="text-[#ededed] leading-relaxed">
-                    東京理科大学鳥人間サークル鳥科は、鳥人間チーム最大規模の約90名の部員を擁する学生チームであり、2025年大会滑空機部門では準優勝するなど、鳥人間コンテスト出場常連の強豪チームです。<br />
+                    東京理科大学鳥人間サークル鳥科は、鳥人間チーム最大規模の160名の部員を擁し、コンテスト出場常連の学生チームです。<br />
                     私たちSOARAに対し、設計・製作のノウハウのご提供、メンタリング、さらにはCFRP桁のご提供に至るまで、全面的なご支援を賜っております。
                   </p>
                 </div>
@@ -30,11 +30,10 @@ const page = () => {
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-white mb-6 text-center">ご支援者様の募集</h2>
             <div className="text-[#ededed] leading-relaxed text-lg mb-8">
-              SOARAは前例のない高校生有志チームとして空へ挑む夢、そして<br />
-              「鳥人間を通じて、同世代・次世代に鳥人間それ自体だけでなく、ものづくりへの興味をも持ってもらう」<br />
-              というビジョンを掲げて活動しています。<br />
-              これらの実現には、高額な開発・製作資金、設計・試作における技術的なサポートなど、高校生だけでは賄いきれない多くの方々のご支援が必要となります。<br />
-              私たちの目指す夢と目標にご共感いただいた皆さまからのご支援を、心よりお待ちしております。次世代のものづくりを担う人材育成に挑み、そして人類普遍の夢を追いかける私たちを応援していただけませんか。
+              SOARAは、前例のない有志高校生チームとして鳥人間コンテストに挑み、またその過程でものづくりの面白さを同・次世代に広めることを目指し、活動しています。<br />
+              しかしこれらの実現には、高額な開発・製作資金、設計・試作における技術的なサポートなど、高校生だけでは困難なことが多数存在しており、多くの方々のご支援が必要となります。<br />
+              私たちの目指す夢と目標にご共感いただいた皆さまからのご支援を、心よりお待ちしております。<br />
+              何卒よろしくお願い申し上げます。
             </div>
 
             {/* Contact Section */}
