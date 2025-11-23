@@ -1,67 +1,200 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const MembersPage = () => {
+  // メンバーデータ（仮置き）
+  const members = [
+    {
+      name: "入山輝大",
+      englishName: "Terumasa Iriyama",
+      school: "開成高等学校",
+      grade: "2年",
+      position: "代表",
+      image: "/images/people/Iriyama.jpg",
+      introduction:
+        "一度は断たれた鳥人間コンテストに出るという夢を諦めきれず、SOARAを立ち上げました。各地から集った同じ夢を目指す仲間と共に、琵琶湖を目指し邁進しています。",
+    },
+    {
+      name: "高橋知志",
+      englishName: "Kazushi Takahashi",
+      school: "渋谷教育学園渋谷高等学校",
+      grade: "1年",
+      position: "副代表/マーケティング班長",
+      image: "/images/people/Takahashi.JPG",
+      introduction:
+        "多分メンバーの中で一番入った経緯が謎の人間です。交わった道を最後まで歩ききった先に見える景色を求めています。この道を琵琶湖まで繋いで見せます。",
+    },
+    {
+      name: "中嶋幹",
+      englishName: "Motoki Nakajima",
+      school: "St.Paul's School",
+      grade: "11th Grade",
+      position: "設計班長",
+      image: "/images/people/nakajima.jpg",
+      introduction: "",
+    },
+    {
+      name: "菊池嶺志",
+      englishName: "Reishi Kikuchi",
+      school: "S高等学校",
+      grade: "3年",
+      position: "空力/構造設計",
+      image: "/images/unknown.png",
+      introduction: "",
+    },
+    {
+      name: "和田悠希",
+      englishName: "Yuki Wada",
+      school: "開成高校",
+      grade: "1年",
+      position: "製作班長",
+      image: "/images/people/wada.jpg",
+      introduction: "中学生の時に見た鳥人間コンテストに憧れてチームに入りました。",
+    },
+    {
+      name: "Shawn Lian",
+      englishName: "ショーン・リアン",
+      school: "-",
+      grade: "11th Grade",
+      position: "設計班",
+      image: "/images/people/Shawn.png",
+      introduction: "",
+    },
+    {
+      name: "越智玲斗",
+      englishName: "Reito Ochi",
+      school: "広尾学園高校インターナショナルコース",
+      grade: "2年",
+      position: "マーケティング班/ソフトウェア",
+      image: "/images/people/Ochi.jpeg",
+      introduction:
+        "I do IT related stuff such as creating AIs and competitive programming as a hobby. I also love to play/create games, and do a little bit of basketball.",
+    },
+    {
+      name: "服部明人",
+      englishName: "Akito Hattori",
+      school: "青稜高等学校",
+      grade: "2年",
+      position: "グラフィックデザイナー/電装設計",
+      image: "/images/unknown.png",
+      introduction: "",
+    },
+    {
+      name: "服部裕斗",
+      englishName: "Yuto Hattori",
+      school: "-",
+      grade: "大学1年",
+      position: "パイロット / メンター",
+      image: "/images/unknown.png",
+      introduction:
+        "高校生ではないですが、チームで完成させた機体の性能を最大まで引き出せるよう頑張ります。",
+    },
+    {
+      name: "野村恭平",
+      englishName: "Kyohei Nomura",
+      school: "山口県立山口高等学校",
+      grade: "2年",
+      position: "ブランディングマネージャー",
+      image: "/images/people/Nomura.jpg",
+      introduction: "",
+    },
+    {
+      name: "Daniel Kosukhin",
+      englishName: "ダニエル・コスキン",
+      school: "New York",
+      grade: "11th Grade",
+      position: "ソフトウェア",
+      image: "/images/people/danny.jpg",
+      introduction: "",
+    },
+    {
+      name: "鈴木雄智",
+      englishName: "Takemasa Suzuki",
+      school: "筑波大学附属駒場高等学校",
+      grade: "2年",
+      position: "製作班",
+      image: "/images/people/suzuki.jpg",
+      introduction: "",
+    },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0a] text-[#ededed] relative overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0a] text-[#ededed]">
       {/* ページ上部のアクセントライン */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7]"></div>
 
-      <div className="flex-grow flex items-center justify-center py-32 px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          {/* ロゴ風アイコン */}
-          <div className="mb-12">
-            <svg
-              className="w-32 h-32 mx-auto text-[#369bff]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-              />
-            </svg>
-          </div>
-
-          {/* Coming Soon タイトル */}
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
-            Coming Soon
+      <div className="flex-grow py-32 px-6">
+        <div className="max-w-6xl mx-auto">
+          {/* ページタイトル */}
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">
+            Members
           </h1>
+          <p className="text-center text-gray-400 mb-16">メンバー紹介</p>
 
-          {/* サブタイトル */}
-          <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-gray-300">
-            メンバー紹介ページ
-          </h2>
+          {/* メンバーカードグリッド */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {members.map((member, index) => (
+              <div
+                key={index}
+                className="bg-[#111111] border border-gray-800 rounded-xl p-6 hover:border-[#369bff]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/10"
+              >
+                {/* 顔写真（四角く縁取り） */}
+                <div className="flex justify-center mb-6">
+                  <div className="relative w-40 h-40 rounded-lg overflow-hidden border-2 border-[#369bff]/50">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      sizes="160px"
+                    />
+                  </div>
+                </div>
 
-          {/* 説明文 */}
-          <p className="text-lg text-gray-400 leading-relaxed mb-12">
-            現在、メンバー紹介ページを準備中です。
-            <br />
-            メンバーの詳しいプロフィールを掲載予定です。
-            <br />
-            <br />
-            しばらくお待ちください。
-          </p>
+                {/* 役職バッジ */}
+                <div className="flex justify-center mb-3">
+                  <span className="px-4 py-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] text-white text-sm font-semibold rounded-full">
+                    {member.position}
+                  </span>
+                </div>
 
-          {/* 装飾的な線 */}
-          <div className="w-100 h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] mx-auto mb-8"></div>
+                {/* 氏名 */}
+                <h2 className="text-2xl font-bold text-center mb-1">
+                  {member.name}
+                </h2>
+                <p className="text-gray-400 text-center mb-4">
+                  {member.englishName}
+                </p>
 
-          {/* 戻るボタン */}
-          <a
-            href="/"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50"
-          >
-            ホームへ戻る
-          </a>
+                {/* 学校・学年 */}
+                <div className="text-center text-sm text-gray-400 mb-4 space-y-1">
+                  <p>
+                    <span className="text-gray-500">School: </span>
+                    {member.school}
+                  </p>
+                  <p>
+                    <span className="text-gray-500">Grade: </span>
+                    {member.grade}
+                  </p>
+                </div>
+
+                {/* 区切り線 */}
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mb-4"></div>
+
+                {/* 意気込み・自己紹介 */}
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {member.introduction}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 背景装飾 */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#369bff] rounded-full opacity-5 blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#0050a7] rounded-full opacity-5 blur-3xl"></div>
       </div>
