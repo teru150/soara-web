@@ -8,7 +8,6 @@ import contentData from "../data/content.json";
 export default function Home() {
   const [showWelcome, setShowWelcome] = useState(false);
   const [showScrollDown, setShowScrollDown] = useState(false);
-  const [showLogo, setShowLogo] = useState(false);
   const [skipAnimation, setSkipAnimation] = useState(false);
   const [hasVisited, setHasVisited] = useState(false);
   const contentRef = useRef(null);
@@ -20,21 +19,12 @@ export default function Home() {
       setHasVisited(true);
       setSkipAnimation(true);
       // 再訪問時は即座に全て表示
-      setShowLogo(true);
       setShowWelcome(true);
       setShowScrollDown(true);
     } else {
       sessionStorage.setItem('soara_visited', 'true');
     }
   }, []);
-
-  // ロゴを最初に表示
-  useEffect(() => {
-    if (!hasVisited) {
-      const timer = setTimeout(() => setShowLogo(true), 100);
-      return () => clearTimeout(timer);
-    }
-  }, [hasVisited]);
 
   // スキップボタンのハンドラー
   const handleSkip = () => {
@@ -54,21 +44,15 @@ export default function Home() {
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] z-50"></div>
 
       {/* ヒーローセクション */}
-      <div className="font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow bg-black">
-          <div
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-1000 ${
-              showLogo ? 'opacity-85' : 'opacity-0'
-            }`}
-            style={{
-              width: '400px',
-              height: '400px',
-              backgroundImage: 'url(/images/soara-logo.png)',
-              backgroundSize: '400px 400px',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              pointerEvents: 'none'
-            }}
-          />
+      <div
+        className="font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow bg-black"
+        style={{
+          backgroundImage: 'url(/images/website-hero-mk3.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
           <div className="text-center relative z-20" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9), -1px -1px 2px rgba(0, 0, 0, 0.9), 1px -1px 2px rgba(0, 0, 0, 0.9), -1px 1px 2px rgba(0, 0, 0, 0.9)' }}>
             {!hasVisited ? (
               <TypeAnimation
