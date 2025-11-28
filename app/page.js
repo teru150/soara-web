@@ -1,5 +1,6 @@
 "use client";
 
+import { TypeAnimation } from "react-type-animation";
 import { useState, useEffect, useRef } from "react";
 import PageFooter from "../components/PageFooter";
 import contentData from "../data/content.json";
@@ -8,20 +9,9 @@ export default function Home() {
   const [showWelcome, setShowWelcome] = useState(false);
   const [showScrollDown, setShowScrollDown] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
-  const [showHeroText, setShowHeroText] = useState(false);
   const [skipAnimation, setSkipAnimation] = useState(false);
   const [hasVisited, setHasVisited] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const contentRef = useRef(null);
-  const slideshowImages = [
-    "/images/pics/IMG_2485.jpg",
-    "/images/pics/IMG_3019.jpg",
-    "/images/pics/IMG_3584.jpg",
-    "/images/pics/IMG_3593.jpg",
-    "/images/pics/IMG_6802.jpg",
-    "/images/pics/IMG_7502.jpg",
-    "/images/pics/kareoke.jpg",
-  ];
 
   // sessionStorageをチェック（再訪問時はアニメーションをスキップ）
   useEffect(() => {
@@ -31,7 +21,6 @@ export default function Home() {
       setSkipAnimation(true);
       // 再訪問時は即座に全て表示
       setShowLogo(true);
-      setShowHeroText(true);
       setShowWelcome(true);
       setShowScrollDown(true);
     } else {
@@ -47,40 +36,9 @@ export default function Home() {
     }
   }, [hasVisited]);
 
-  // ヒーローテキストとメッセージの表示タイミング
-  useEffect(() => {
-    if (hasVisited || skipAnimation) {
-      setShowHeroText(true);
-      setShowWelcome(true);
-      setShowScrollDown(true);
-      return;
-    }
-
-    const heroTimer = setTimeout(() => setShowHeroText(true), 1200);
-    const welcomeTimer = setTimeout(() => setShowWelcome(true), 2200);
-    const scrollTimer = setTimeout(() => setShowScrollDown(true), 3200);
-
-    return () => {
-      clearTimeout(heroTimer);
-      clearTimeout(welcomeTimer);
-      clearTimeout(scrollTimer);
-    };
-  }, [hasVisited, skipAnimation]);
-
-  // イントロセクションのスライドショー
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slideshowImages.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [slideshowImages.length]);
-
   // スキップボタンのハンドラー
   const handleSkip = () => {
     setSkipAnimation(true);
-    setShowLogo(true);
-    setShowHeroText(true);
     setShowWelcome(true);
     setShowScrollDown(true);
   };
@@ -90,34 +48,52 @@ export default function Home() {
     contentRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const heroHeadlineClass = `transition-all duration-[1200ms] ease-out transform ${
-    showHeroText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-  }`;
-
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* ページ上部のアクセントライン */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] z-50"></div>
 
       {/* ヒーローセクション */}
-      <div
-        className="font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow"
-        style={{
-          backgroundImage: "url(/images/website-hero-mk3.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: "#000"
-        }}
-      >
-          <div className={`absolute inset-0 bg-black/70 transition-opacity duration-1000 ${showLogo ? 'opacity-75' : 'opacity-0'}`} />
-          <div className="text-center relative z-20 px-6" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9), -1px -1px 2px rgba(0, 0, 0, 0.9), 1px -1px 2px rgba(0, 0, 0, 0.9), -1px 1px 2px rgba(0, 0, 0, 0.9)' }}>
-            <div className={heroHeadlineClass}>
-              <p className="leading-snug">
-                <span className="block">常識の向こうへ、碧空の彼方へ。</span>
-                <span className="block">Beyond the limits, beyond the blue sky.</span>
-              </p>
-            </div>
+      <div className="font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow bg-black">
+          <div
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-1000 ${
+              showLogo ? 'opacity-85' : 'opacity-0'
+            }`}
+            style={{
+              width: '400px',
+              height: '400px',
+              backgroundImage: 'url(/images/soara-logo.png)',
+              backgroundSize: '400px 400px',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              pointerEvents: 'none'
+            }}
+          />
+          <div className="text-center relative z-20" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9), -1px -1px 2px rgba(0, 0, 0, 0.9), 1px -1px 2px rgba(0, 0, 0, 0.9), -1px 1px 2px rgba(0, 0, 0, 0.9)' }}>
+            {!hasVisited ? (
+              <TypeAnimation
+                sequence={[
+                  2500,
+                  "常識の向こうへ、碧空の彼方へ。",
+                  1000,
+                  "常識の向こうへ、碧空の彼方へ。\n Beyond the limits, beyond the blue sky.",
+                  500,
+                  () => {
+                    setShowWelcome(true);
+                    setTimeout(() => setShowScrollDown(true), 1000);
+                  }
+                ]}
+                wrapper="span"
+                className="inline-block animate-fade-in"
+                speed={50}
+                repeat={0}
+                style={{ whiteSpace: 'pre-line' }}
+              />
+            ) : (
+              <span className="inline-block animate-fade-in" style={{ whiteSpace: 'pre-line' }}>
+                常識の向こうへ、碧空の彼方へ。{'\n'}Beyond the limits, beyond the blue sky.
+              </span>
+            )}
             {showWelcome && (
               <div className="mt-8 text-2xl animate-fade-in">
                 学校の枠を超え、国境を越えて。<br />
@@ -150,55 +126,13 @@ export default function Home() {
 
       {/* コンテンツセクション */}
       <div ref={contentRef} className="bg-white text-black py-16 w-full">
-        <div className="max-w-6xl mx-auto px-8">
+        <div className="max-w-4xl mx-auto px-8">
           <div className="space-y-24">
             {/* イントロダクションセクション */}
-            <section className="grid gap-10 lg:grid-cols-2 items-stretch">
-              <div className="flex flex-col justify-between items-center text-center gap-8 h-full">
-                <div>
-                  <p className="text-gray-700 leading-relaxed text-xl whitespace-pre-line text-center">
-                    {contentData.home.intro.text}
-                  </p>
-                  <div className="mt-6 h-1 w-24 bg-gradient-to-r from-[#369bff] to-[#0050a7] mx-auto"></div>
-                </div>
-
-                <div className="w-full bg-gradient-to-br from-[#369bff]/15 via-[#0050a7]/10 to-transparent border border-[#369bff]/40 rounded-2xl p-6 shadow-lg">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">私たちと一緒に空を目指しませんか？</h3>
-                  <p className="text-gray-600 mb-6">SOARAの挑戦に共感してくださる方を募集中です。支援・参加のどちらの形でも大歓迎です！お待ちしております。</p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/supporters" className="flex-1 px-6 py-3 bg-gradient-to-r from-[#369bff] to-[#0050a7] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
-                      サポーターになる
-                    </a>
-                    <a
-                      href="https://docs.google.com/forms/d/e/1FAIpQLSejEijY3nx_A1iCfqOTUukN7OKxZvn_PTHFi-Q7e4QP8MLxxA/viewform"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 px-6 py-3 border-2 border-[#369bff] text-[#369bff] font-semibold rounded-lg hover:bg-[#369bff] hover:text-white transition-all"
-                    >
-                      チームに加入する
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full h-full">
-                <div className="relative w-full h-[320px] lg:h-full min-h-[360px] rounded-2xl overflow-hidden shadow-2xl bg-gray-200">
-                  {slideshowImages.map((src, index) => (
-                    <img
-                      key={src}
-                      src={src}
-                      alt="SOARA activities"
-                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out ${
-                        index === currentSlide ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    />
-                  ))}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
-                  <div className="absolute bottom-4 left-4 text-white text-sm tracking-wide font-semibold uppercase">
-                    SOARA Moments
-                  </div>
-                </div>
-              </div>
+            <section>
+              <p className="text-gray-700 leading-relaxed text-xl text-center mb-8 whitespace-pre-line">
+                {contentData.home.intro.text}
+              </p>
             </section>
 
             {/* ミッションセクション */}
@@ -230,6 +164,22 @@ export default function Home() {
                 </a>
               </div>
 
+              <div className="text-center mt-8">
+                <p className="text-xl font-semibold mb-4 text-gray-800">私たちと一緒に、歴史を作りませんか？</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <a href="/supporters" className="inline-block px-10 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg">
+                    サポーターになる
+                  </a>
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSejEijY3nx_A1iCfqOTUukN7OKxZvn_PTHFi-Q7e4QP8MLxxA/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-10 py-4 bg-white border-2 border-[#369bff] text-[#369bff] hover:bg-[#369bff] hover:text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg"
+                  >
+                    チームに加入する
+                  </a>
+                </div>
+              </div>
             </section>
 
             {/* 2026年度目標セクション */}
