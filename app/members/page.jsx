@@ -60,7 +60,7 @@ const MembersPage = () => {
       grade: "11th Grade",
       position: "設計班",
       image: "/images/people/Shawn.png",
-      introduction: "",
+      introduction: "当两位天才相遇时，他们必须结合彼此的想法，像志同道合的人一样，通过克服挑战取得进步，才能获得回报。在前往琵琶湖的旅途中，我们结识了许多新朋友，我们的团队将真正诠释“鸟人”的真谛。",
     },
     {
       name: "越智玲斗",
