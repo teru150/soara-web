@@ -54,8 +54,8 @@ const MembersPage = () => {
       introduction: "中学生の時に見た鳥人間コンテストに憧れてチームに入りました。",
     },
     {
-      name: "Shawn Lian",
-      englishName: "ショーン・リアン",
+      name: "水木勢",
+      englishName: "Shawn Lian",
       school: "Seven Lakes High School",
       grade: "11th Grade",
       position: "設計班",
