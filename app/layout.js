@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
-})
+});
 
 export const metadata = {
   title: "Soara-Official",
@@ -25,42 +25,43 @@ export const metadata = {
   icons: {
     icon: [
       {
-        media: '(prefers-color-scheme: light)',
-        url: '/favicon-light.ico',
-        href: '/favicon-light.ico',
+        media: "(prefers-color-scheme: light)",
+        url: "/favicon-light.ico",
+        href: "/favicon-light.ico",
       },
       {
-        media: '(prefers-color-scheme: dark)',
-        url: '/favicon-dark.ico',
-        href: '/favicon-dark.ico',
+        media: "(prefers-color-scheme: dark)",
+        url: "/favicon-dark.ico",
+        href: "/favicon-dark.ico",
       },
     ],
     shortcut: [
       {
-        url: '/favicon-light.ico',
-        media: '(prefers-color-scheme: light)',
+        url: "/favicon-light.ico",
+        media: "(prefers-color-scheme: light)",
       },
       {
-        url: '/favicon-dark.ico',
-        media: '(prefers-color-scheme: dark)',
+        url: "/favicon-dark.ico",
+        media: "(prefers-color-scheme: dark)",
       },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: "/apple-touch-icon.png",
   },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="ja" className="bg-gray-50">
       <head />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} antialiased flex flex-col w-full min-h-screen items-stretch`}
-        style={{ backgroundColor: '#0a0a0a' }}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} antialiased flex flex-col w-full min-h-screen items-stretch bg-gray-50 text-gray-800`}
       >
         <LanguageProvider>
-          <NavBar />
-          {children}
-          <PageFooter />
+          <div className="soara-surface flex min-h-screen flex-col">
+            <NavBar />
+            <main className="flex-1">{children}</main>
+            <PageFooter />
+          </div>
         </LanguageProvider>
       </body>
     </html>

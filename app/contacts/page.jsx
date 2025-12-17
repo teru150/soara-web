@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { TypeAnimation } from "react-type-animation";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -47,22 +46,34 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0a] text-[#ededed]">
-      <div className="flex-grow py-32 px-6">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-            <p className="text-lg text-gray-300">
-              ご要望・ご連絡がございましたら、以下のフォームからご連絡ください。
-              <br />
-              できる限り迅速に対応させていただきます。
-            </p>
+    <div className="relative flex flex-col px-6 pb-20 pt-24 sm:px-8 lg:px-12">
+      <div className="absolute inset-0 soara-grid pointer-events-none" aria-hidden />
+      <div className="mx-auto flex w-full max-w-screen-md flex-col gap-10">
+        <header className="space-y-3 rounded-3xl bg-white/90 p-8 shadow-soara ring-1 ring-gray-200">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+            Contact
+          </p>
+          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+            ご相談・お問い合わせ
+          </h1>
+          <p className="text-lg text-gray-600">
+            スポンサー/パートナーシップ、取材やイベント登壇などのご連絡をお待ちしています。
+            2営業日以内の返信を心がけています。
+          </p>
+          <div className="flex flex-col gap-2 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between">
+            <span>Mail: soara.hpa@gmail.com</span>
+            <span>拠点: 東京都 / オンライン対応可</span>
           </div>
+        </header>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
-                Name
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-200"
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-sm font-semibold text-gray-800">
+                お名前 / ご所属
               </label>
               <input
                 type="text"
@@ -71,14 +82,13 @@ const ContactPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors"
-                placeholder="Your name"
+                className="w-full rounded-xl border-2 border-transparent bg-gray-50 px-4 py-3 text-base text-gray-900 transition focus:border-[#369bff] focus:bg-white focus:ring-4 focus:ring-[#369bff]/20"
+                placeholder="例: SOARA株式会社 / 田中太郎"
               />
             </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Email
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-semibold text-gray-800">
+                メールアドレス
               </label>
               <input
                 type="email"
@@ -87,69 +97,48 @@ const ContactPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors"
+                className="w-full rounded-xl border-2 border-transparent bg-gray-50 px-4 py-3 text-base text-gray-900 transition focus:border-[#369bff] focus:bg-white focus:ring-4 focus:ring-[#369bff]/20"
                 placeholder="your.email@example.com"
               />
             </div>
+          </div>
 
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium mb-2"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors resize-vertical"
-                placeholder="Your message..."
-              />
+          <div className="space-y-2">
+            <label htmlFor="message" className="text-sm font-semibold text-gray-800">
+              ご用件
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows={6}
+              className="w-full rounded-xl border-2 border-transparent bg-gray-50 px-4 py-3 text-base text-gray-900 transition focus:border-[#369bff] focus:bg-white focus:ring-4 focus:ring-[#369bff]/20"
+              placeholder="サポート・取材・イベント連携など、お気軽にお知らせください。"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full rounded-xl bg-gradient-to-r from-[#369bff] to-[#0050a7] px-6 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isSubmitting ? "送信中..." : "送信する"}
+          </button>
+
+          {submitStatus === "success" && (
+            <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-800 ring-1 ring-green-200">
+              ありがとうございます。メッセージを受け付けました。
             </div>
+          )}
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-3 px-6 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed font-medium transition-colors"
-            >
-              {isSubmitting ? (
-                "Sending..."
-              ) : (
-                <TypeAnimation
-                  sequence={[
-                    "Send a message",
-                    3000,
-                    "Send a warm hello",
-                    3000,
-                    "Send a thanks",
-                    3000,
-                  ]}
-                  wrapper="span"
-                  speed={50}
-                  repeat={Infinity}
-                  style={{ whiteSpace: "pre-line" }}
-                />
-              )}
-            </button>
-
-            {submitStatus === "success" && (
-              <div className="p-4 rounded-lg bg-green-800 text-green-200">
-                Thank you! Your message has been sent successfully.
-              </div>
-            )}
-
-            {submitStatus === "error" && (
-              <div className="p-4 rounded-lg bg-red-800 text-red-200">
-                Sorry, there was an error sending your message. Please try
-                again.
-              </div>
-            )}
-          </form>
-        </div>
+          {submitStatus === "error" && (
+            <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-800 ring-1 ring-red-200">
+              送信に失敗しました。時間を置いて再度お試しください。
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );

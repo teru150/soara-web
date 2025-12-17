@@ -11,6 +11,7 @@ export const translations = {
       home: 'Home',
       about: 'About', 
       supporters: 'Supporters',
+      birdman: 'Birdman',
       aircraft: 'Aircraft',
       members: 'Members',
       contacts: 'Contacts'
@@ -22,6 +23,7 @@ export const translations = {
       home: 'ホーム',
       about: 'について',
       supporters: 'サポーター', 
+      birdman: '鳥人間',
       aircraft: '機体',
       members: 'メンバー',
       contacts: 'お問い合わせ'

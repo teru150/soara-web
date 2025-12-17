@@ -23,6 +23,10 @@ export default function NavLinks({ containerStyles, isScrolled }) {
       fileName: "supporters",
     },
     {
+      filePath: "/birdman",
+      fileName: "birdman",
+    },
+    {
       filePath: "/aircraft",
       fileName: "aircraft",
     },
@@ -45,19 +49,15 @@ export default function NavLinks({ containerStyles, isScrolled }) {
             : pathName.startsWith(fileLink.filePath);
 
         return (
-          <Link
-            key={index}
-            href={fileLink.filePath}
-            className="relative text-lg"
-          >
+          <Link key={index} href={fileLink.filePath} className="group relative">
             <motion.button
-              className={`relative z-10 font-bold text-[17px] capitalize transition-colors duration-300 ${
+              className={`relative z-10 rounded-lg px-2 py-1 text-base capitalize transition-colors duration-200 ${
                 isActive
-                  ? `font-extrabold text-blue-500/75`
-                  : `${
-                      isScrolled ? "text-black/80" : "text-white"
-                    } font-bold opacity-75`
-              } ${isScrolled ? "hover:text-gray-600" : "hover:text-gray-200"}`}
+                  ? "text-[#0050a7]"
+                  : isScrolled
+                    ? "text-gray-700 hover:text-gray-900"
+                    : "text-white hover:text-gray-200"
+              }`}
               initial={{ y: 0 }}
               whileHover={{
                 y: -3,
@@ -69,8 +69,16 @@ export default function NavLinks({ containerStyles, isScrolled }) {
                 duration: 0.2,
                 ease: "easeInOut",
               }}
+              aria-current={isActive ? "page" : undefined}
             >
               {t(`nav.${fileLink.fileName}`)}
+              <span
+                className={`absolute inset-x-1 -bottom-1 h-0.5 rounded-full transition-all duration-200 ${
+                  isActive
+                    ? "bg-[#369bff] opacity-100"
+                    : "bg-[#369bff]/0 opacity-0 group-hover:opacity-50"
+                }`}
+              />
             </motion.button>
           </Link>
         );
