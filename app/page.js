@@ -1,256 +1,425 @@
-"use client";
+﻿"use client";
 
-import { TypeAnimation } from "react-type-animation";
-import { useState, useEffect, useRef } from "react";
-import PageFooter from "../components/PageFooter";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import contentData from "../data/content.json";
 
-export default function Home() {
-  const [showWelcome, setShowWelcome] = useState(false);
-  const [showScrollDown, setShowScrollDown] = useState(false);
-  const [skipAnimation, setSkipAnimation] = useState(false);
-  const [hasVisited, setHasVisited] = useState(false);
-  const contentRef = useRef(null);
+const heroImages = [
+  { src: "/images/pics/IMG_3745.JPG", caption: "11月に行われた交流イベントにて" },
+  { src: "/images/pics/partial_blur.png", caption: "8月に行われた東京大学F-Tecとの交流会" },
+  { src: "/images/pics/IMG_2485.jpg", caption: "交流会後" },
+  { src: "/images/pics/IMG_3584.jpg", caption: "購入した桁を積み込み中" },
+  { src: "/images/pics/IMG_3593.jpg", caption: "会議室でアイデア出し" },
+  { src: "/images/pics/IMG_6802.jpg", caption: "チーム結成初期の一枚" },
+  { src: "/images/pics/IMG_7502.jpg", caption: "ミニ風洞と越智" },
+  { src: "/images/pics/kareoke.jpg", caption: "肩の力を抜いて親睦を深める時間" },
+];
 
-  // sessionStorageをチェック（再訪問時はアニメーションをスキップ）
+const stats = (meta) => [
+  { label: "Mission", value: "2", detail: <>困難への挑戦 ×<br />同世代の仲間を増やす</> },
+  {
+    label: "Members",
+    value: String(meta?.members ?? 21),
+    detail: meta?.schoolsNote ?? "全国13校・アメリカ含む",
+  },
+  { label: "Target", value: "200m", detail: "高校生初の記録へ挑戦" },
+];
+
+const faceGallery = [
+  "/images/people/Iriyama.jpg",
+  "/images/people/Takahashi.JPG",
+  "/images/people/nakajima.jpg",
+  "/images/people/Kikuchi.jpg",
+  "/images/people/wada.jpg",
+  "/images/people/Shawn.png",
+  "/images/people/Ochi.jpeg",
+  "/images/people/Nomura.jpg",
+  "/images/people/danny.jpg",
+  "/images/people/suzuki.jpg",
+];
+
+const heroOverlayOpacity = 0.75;
+const heroOverlay = `linear-gradient(180deg, rgba(255,255,255,${heroOverlayOpacity}) 0%, rgba(255,255,255,${
+  heroOverlayOpacity * 0.95
+}) 50%, rgba(255,255,255,${Math.min(heroOverlayOpacity + 0.05, 1)}) 100%)`;
+
+export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const intervalRef = useRef(null);
+  const [faceIndex, setFaceIndex] = useState(0);
+  const meta = contentData.meta || { members: 21, schools: 13, schoolsNote: "全国13校・アメリカ含む" };
+
   useEffect(() => {
-    const visited = sessionStorage.getItem('soara_visited');
-    if (visited === 'true') {
-      setHasVisited(true);
-      setSkipAnimation(true);
-      // 再訪問時は即座に全て表示
-      setShowWelcome(true);
-      setShowScrollDown(true);
-    } else {
-      sessionStorage.setItem('soara_visited', 'true');
-    }
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(media.matches);
+    const handler = (event) => setReduceMotion(event.matches);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
   }, []);
 
-  // スキップボタンのハンドラー
-  const handleSkip = () => {
-    setSkipAnimation(true);
-    setShowWelcome(true);
-    setShowScrollDown(true);
-  };
+  useEffect(() => {
+    if (reduceMotion) return;
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 4500);
+    return () => clearInterval(intervalRef.current);
+  }, [reduceMotion]);
 
-  // スクロールダウンのハンドラー
-  const handleScrollDown = () => {
-    contentRef.current?.scrollIntoView({ behavior: 'smooth' });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFaceIndex((prev) => (prev + 2) % faceGallery.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToSlide = (nextIndex) => {
+    const safeIndex =
+      ((nextIndex % heroImages.length) + heroImages.length) % heroImages.length;
+    setCurrentSlide(safeIndex);
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* ページ上部のアクセントライン */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#369bff] to-[#0050a7] z-50"></div>
-
-      {/* ヒーローセクション */}
-      <div
-        className="font-sans grid font-bold text-[36px] md:text-[44px] flex flex-col items-center justify-center min-h-screen z-20 relative flex-grow bg-black"
-        style={{
-          backgroundImage: 'url(/images/website-hero-mk3.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-          <div className="text-center relative z-20" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9), -1px -1px 2px rgba(0, 0, 0, 0.9), 1px -1px 2px rgba(0, 0, 0, 0.9), -1px 1px 2px rgba(0, 0, 0, 0.9)' }}>
-            {!hasVisited ? (
-              <TypeAnimation
-                sequence={[
-                  2500,
-                  "常識の向こうへ、碧空の彼方へ。",
-                  1000,
-                  "常識の向こうへ、碧空の彼方へ。\n Beyond the limits, beyond the blue sky.",
-                  500,
-                  () => {
-                    setShowWelcome(true);
-                    setTimeout(() => setShowScrollDown(true), 1000);
-                  }
-                ]}
-                wrapper="span"
-                className="inline-block animate-fade-in"
-                speed={50}
-                repeat={0}
-                style={{ whiteSpace: 'pre-line' }}
-              />
-            ) : (
-              <span className="inline-block animate-fade-in" style={{ whiteSpace: 'pre-line' }}>
-                常識の向こうへ、碧空の彼方へ。{'\n'}Beyond the limits, beyond the blue sky.
-              </span>
-            )}
-            {showWelcome && (
-              <div className="mt-8 text-2xl animate-fade-in">
-                学校の枠を超え、国境を越えて。<br />
-                史上初の高校生有志鳥人間チーム&ldquo;SOARA&rdquo;公式HPへようこそ。
-              </div>
-            )}
-          </div>
-          {showScrollDown && (
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-              <div className="flex flex-col items-center text-gray-400 cursor-pointer hover:text-gray-300 transition-colors" onClick={handleScrollDown}>
-                <div className="w-6 h-10 border-2 border-gray-400 rounded-full mb-2 relative">
-                  <div className="w-1 h-2 bg-gray-400 rounded-full absolute left-1/2 top-2 transform -translate-x-1/2 animate-pulse"></div>
-                </div>
-                <span className="text-xs opacity-70">Scroll</span>
+    <div className="relative flex min-h-screen flex-col">
+      <div className="pointer-events-none absolute inset-0 soara-grid" aria-hidden />
+      <section className="relative isolate overflow-hidden px-6 pb-16 pt-28 sm:px-8 lg:px-12">
+        <div
+          className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/website-hero-mk3.png')" }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 -z-10"
+          style={{ background: heroOverlay }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 -z-5 soara-grid opacity-100 mix-blend-multiply"
+          aria-hidden
+        />
+        <div className="mx-auto grid max-w-screen-xl items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="space-y-8">
+            <br />
+            <div className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
+                2026 Birdman Contest Glider Project
+              </p>
+              <h1 className="text-4xl font-bold leading-tight text-gray-900 sm:text-5xl lg:text-[52px]">
+                常識の向こうへ、<br />
+                碧空の彼方へ。
+              </h1>
+              <p className="mt-3 text-base font-semibold tracking-tight text-gray-800 sm:text-lg lg:text-xl">
+                Beyond the limits, beyond the blue sky.
+              </p>
+            <div className="max-w-2xl space-y-8 text-lg leading-relaxed text-gray-600">
+              <p>
+                  全国と海外から集まった{meta.members}人の高校生が、2026年鳥人間コンテスト滑空機部門で
+                <span className="font-semibold text-[#0050a7]">200mの滑空</span>
+                を目指す史上初のチームが「SOARA」です。
+              </p>
+              <p>
+              自分たちで飛行機を作り上げる夢を叶えつつ、ともにものづくりを楽しむ仲間を増やしながら琵琶湖を目指します。
+                </p>
               </div>
             </div>
-          )}
 
-          {/* スキップボタン（初回訪問時のみ表示） */}
-          {!hasVisited && (
-            <button
-              onClick={handleSkip}
-              className="absolute top-8 right-8 z-50 px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-400 hover:border-white rounded-full transition-all duration-300"
-              aria-label="アニメーションをスキップ"
-            >
-              Skip
-            </button>
-          )}
-        </div>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <a
+                href="/supporters"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#369bff] to-[#0050a7] px-6 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
+              >
+                サポーターになる
+                <span aria-hidden>→</span>
+              </a>
+              <a
+                href="https://forms.gle/2vZGsXn6kLM6GRZv8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#369bff] bg-white px-6 py-3 text-base font-semibold text-[#0050a7] transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
+              >
+                メンバーになる
+                <span aria-hidden>↗</span>
+              </a>
+              <a
+                href="/about#mission-detail"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-semibold text-[#0050a7] shadow-sm ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
+              >
+                ミッションを見る
+              </a>
+            </div>
 
-      {/* コンテンツセクション */}
-      <div ref={contentRef} className="bg-white text-black py-16 w-full">
-        <div className="max-w-4xl mx-auto px-8">
-          <div className="space-y-24">
-            {/* イントロダクションセクション */}
-            <section>
-              <p className="text-gray-700 leading-relaxed text-xl text-center mb-8 whitespace-pre-line">
-                {contentData.home.intro.text}
-              </p>
-            </section>
-
-            {/* ミッションセクション */}
-            <section id="mission" className="scroll-mt-20">
-              <h2 className="text-3xl font-semibold mb-12 text-center">
-                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">SOARAのミッション</span>
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8 mb-10">
-                {contentData.home.missions.map((mission, index) => (
-                  <article key={index} className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:border-[#369bff]">
-                    <div className="mb-4 text-center">
-                      <img
-                        src={mission.icon}
-                        alt={mission.title}
-                        className="w-24 h-24 mx-auto object-cover rounded-lg"
-                      />
-                    </div>
-                    <h3 className="text-lg font-bold mb-3 text-gray-800">{mission.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{mission.description}</p>
-                  </article>
-                ))}
-              </div>
-              <div className="text-center mt-8">
-                <a href="/about#mission-detail" className="inline-flex items-center text-[#369bff] hover:text-[#0050a7] font-medium transition-colors mb-8">
-                  ミッションの詳細を見る
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-
-              <div className="text-center mt-8">
-                <p className="text-xl font-semibold mb-4 text-gray-800">私たちと一緒に、歴史を作りませんか？</p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <a href="/supporters" className="inline-block px-10 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg">
-                    サポーターになる
-                  </a>
-                  <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSejEijY3nx_A1iCfqOTUukN7OKxZvn_PTHFi-Q7e4QP8MLxxA/viewform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block px-10 py-4 bg-white border-2 border-[#369bff] text-[#369bff] hover:bg-[#369bff] hover:text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg"
-                  >
-                    チームに加入する
-                  </a>
+            <div className="grid grid-cols-1 gap-4 rounded-2xl bg-white/80 p-4 shadow-sm ring-1 ring-gray-200 sm:grid-cols-3">
+              {stats(meta).map((stat) => (
+                <div key={stat.label} className="rounded-xl bg-gray-50 px-4 py-3">
+                  <p className="text-sm font-semibold text-gray-500">
+                    {stat.label}
+                  </p>
+                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-sm text-gray-600">{stat.detail}</p>
                 </div>
-              </div>
-            </section>
+              ))}
+            </div>
+          </div>
 
-            {/* 2026年度目標セクション */}
-            <section className="bg-gradient-to-br from-[#369bff]/10 via-[#0050a7]/5 to-[#369bff]/10 rounded-2xl p-8 md:p-12">
-              <h2 className="text-3xl font-semibold mb-8 text-center">
-                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">2026年度の目標</span>
-              </h2>
-
-              <div className="max-w-4xl mx-auto mb-12">
-                <p className="inline-block px-4 py-1 bg-[#369bff] text-white text-sm font-bold rounded-full mb-4">{contentData.home.goal2026.label}</p>
-                <h3 className="text-3xl font-bold mb-6 text-gray-800">{contentData.home.goal2026.headline}</h3>
-
-                {/* 定常滑空軌道の図 */}
-                <div className="bg-white rounded-lg p-6 mb-6 shadow-md">
+          <div className="relative flex h-full flex-col">
+            <div className="absolute inset-0 -z-10 translate-x-6 translate-y-6 rounded-3xl bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] blur-2xl" />
+            <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-black/0" />
+              <div className="relative h-[360px] w-full overflow-hidden sm:h-[420px]">
+                {heroImages.map((image, index) => (
                   <img
-                    src="/analysis/flight-path.png"
-                    alt="定常滑空の軌道図 - 揚力の不足、安定性の不足、定常滑空の3つのパターン"
-                    className="w-full h-auto"
+                    key={image.src}
+                    src={image.src}
+                    alt={image.caption}
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
                   />
+                ))}
+              </div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-3 rounded-xl bg-black/40 px-4 py-3 text-white backdrop-blur">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-white/80">
+                    SOARA Photo Gallery
+                  </p>
+                  <p className="text-sm font-semibold">
+                    {heroImages[currentSlide].caption}
+                  </p>
                 </div>
-
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line">{contentData.home.goal2026.description}</p>
-              </div>
-
-              <div className="text-center">
-                <a
-                  href="/about#goals"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#369bff] to-[#0050a7] hover:from-[#4aabff] hover:to-[#1060b7] text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#369bff]/50 text-lg"
-                >
-                  なぜ200mなのか？ - 詳しくはこちら
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </section>
-
-            {/* ページナビゲーションカード */}
-            <section>
-              <h2 className="text-3xl font-semibold mb-12 text-center">
-                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">もっと知る</span>
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {contentData.home.pageNavigation.map((nav, index) => (
-                  <a
-                    key={index}
-                    href={nav.href}
-                    className="group bg-white border-2 border-gray-200 rounded-lg p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:border-[#369bff] block"
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => goToSlide(currentSlide - 1)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    aria-label="前の写真"
                   >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="text-3xl mb-3">{nav.icon}</div>
-                        <h3 className="text-xl font-bold mb-2 text-gray-800 group-hover:text-[#369bff] transition-colors">{nav.title}</h3>
-                        <p className="text-gray-600 text-sm">{nav.description}</p>
+                    ←
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => goToSlide(currentSlide + 1)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    aria-label="次の写真"
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
+              <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2">
+                {heroImages.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => goToSlide(index)}
+                    className={`h-2.5 rounded-full transition-all ${
+                      currentSlide === index
+                        ? "w-6 bg-white"
+                        : "w-2.5 bg-white/60"
+                    }`}
+                    aria-label={`写真 ${index + 1} に切り替え`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-sm lg:mt-auto">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+                Meet the Faces
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {[0, 1].map((offset) => {
+                  const src = faceGallery[(faceIndex + offset) % faceGallery.length];
+                  return (
+                    <Link
+                      key={src}
+                      href="/members"
+                      className="group relative block h-36 overflow-hidden rounded-xl bg-gray-100 ring-1 ring-gray-200"
+                    >
+                      <img
+                        src={src}
+                        alt="SOARAメンバー"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent px-3 py-2 text-xs font-semibold text-white">
+                        メンバー紹介へ →
                       </div>
-                      <svg className="w-6 h-6 text-gray-400 group-hover:text-[#369bff] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </a>
-                ))}
+                    </Link>
+                  );
+                })}
               </div>
-            </section>
-
-            {/* お知らせ */}
-            <section>
-              <h2 className="text-3xl font-semibold mb-6 text-center">
-                <span className="bg-gradient-to-b from-[#369bff] to-[#0050a7] bg-clip-text text-transparent">お知らせ</span>
-              </h2>
-              <div className="max-w-3xl mx-auto">
-                {contentData.home.notifications.map((notification, index) => (
-                  <div
-                    key={index}
-                    className={`bg-white p-4 flex ${
-                      index === 0 ? 'border-t-2 border-[#369bff]' : 'border-t border-gray-300'
-                    } ${index === contentData.home.notifications.length - 1 ? 'border-b-2 border-b-[#0050a7]' : ''}`}
-                  >
-                    <span className="text-black inline-block w-32 text-lg flex-shrink-0">{notification.date}</span>
-                    <span className="text-black font-bold text-lg">{notification.title}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
+            </div>
           </div>
         </div>
-        <div className="pb-24"></div>
-      </div>
+      </section>
+
+      <section className="bg-white px-6 py-16 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-screen-xl space-y-12">
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+              Mission
+            </p>
+            <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">
+              SOARAのミッション
+            </h2>
+            <p className="mt-3 text-lg text-gray-600">
+              飛ばす夢とものづくりの楽しさ、両方を次世代に届けるための2本柱。
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {contentData.home.missions.map((mission) => (
+              <article
+                key={mission.title}
+                className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#e6f4ff] to-transparent opacity-0 transition group-hover:opacity-70" />
+                <div className="relative z-10 space-y-3">
+                  <img
+                    src={mission.icon}
+                    alt={mission.title}
+                    className="h-16 w-16 rounded-xl object-cover shadow-md ring-1 ring-gray-200"
+                  />
+                  <h3 className="text-xl font-semibold text-gray-900 whitespace-pre-line">
+                    {mission.title}
+                  </h3>
+                  <p className="text-gray-600">{mission.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-screen-xl overflow-hidden rounded-3xl border border-[#369bff]/20 bg-gradient-to-br from-[#e6f4ff]/80 via-white to-[#f5f7fa] shadow-soara">
+          <div className="grid gap-10 p-10 lg:grid-cols-[1.1fr_0.9fr] lg:p-12">
+            <div className="space-y-5">
+              <p className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#0050a7] shadow-sm ring-1 ring-[#369bff]/30">
+                {contentData.home.goal2026.label}
+              </p>
+              <h3 className="text-3xl font-bold text-gray-900">
+                {contentData.home.goal2026.headline}
+              </h3>
+              <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">
+                {contentData.home.goal2026.description}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="/about#goals"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#0050a7] px-5 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
+                >
+                  なぜ200mなのか詳しく見る
+                  <span aria-hidden>→</span>
+                </a>
+                <a
+                  href="/aircraft"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0050a7] ring-1 ring-[#369bff]/30 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
+                >
+                  機体を見る
+                </a>
+              </div>
+            </div>
+            <div className="relative lg:-mt-6">
+              <div className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-br from-[#369bff]/25 via-white to-transparent blur-2xl" />
+              <div className="space-y-4">
+                <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+                  <img
+                    src="/analysis/flight-path.png"
+                    alt="定常滑空の軌道図"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+                  <img
+                    src="/analysis/torica-25.png"
+                    alt="鳥人間コンテストの記録推移"
+                    className="h-56 w-full object-cover sm:h-64"
+                  />
+                  <p className="border-t border-gray-100 px-4 py-2 text-xs text-gray-500">
+                    433mを記録した理想的な滑空 | 出典：ytv公式鳥人間コンテストYoutubeチャンネル
+                  </p>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-16 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-screen-xl space-y-10">
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+              Explore
+            </p>
+            <h3 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">
+              もっと知る
+            </h3>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {contentData.home.pageNavigation.map((nav) => (
+              <a
+                key={nav.href}
+                href={nav.href}
+                className="group relative block overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#369bff]/8 to-transparent opacity-0 transition group-hover:opacity-100" />
+                <div className="relative flex items-start gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#e6f4ff] text-2xl">
+                    {nav.icon}
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="text-xl font-semibold text-gray-900">
+                      {nav.title}
+                    </h4>
+                    <p className="text-sm text-gray-600">{nav.description}</p>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#0050a7]">
+                      詳しく見る →
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-20 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-screen-xl space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+                News
+              </p>
+              <h3 className="mt-2 text-3xl font-bold text-gray-900">お知らせ</h3>
+            </div>
+            <a
+              href="/supporters"
+              className="hidden items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-[#0050a7] ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7] sm:inline-flex"
+            >
+              サポートのご相談はこちら
+            </a>
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+            {contentData.home.notifications.map((notification, index) => (
+              <div
+                key={`${notification.date}-${notification.title}`}
+                className={`flex flex-col gap-2 px-6 py-4 sm:flex-row sm:items-center sm:gap-6 ${
+                  index !== contentData.home.notifications.length - 1
+                    ? "border-b border-gray-100"
+                    : ""
+                }`}
+              >
+                <span className="w-32 shrink-0 text-sm font-semibold text-gray-500">
+                  {notification.date}
+                </span>
+                <p className="text-base font-medium text-gray-900">
+                  {notification.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
