@@ -30,7 +30,7 @@ const missionStories = [
   },
 ];
 
-const introImage = "/images/pics/IMG_3745.jpg";
+const introImage = "/images/pics/IMG_3745.JPG";
 const introTitle = "SOARAとは";
 const introParagraphs = [
   "SOARAは、2025年6月に結成された日本初の高校生有志鳥人間チームです。学校の枠を越え「自分たちで飛行機を作りたい」という情熱だけで集まった仲間がスタート地点です。",
