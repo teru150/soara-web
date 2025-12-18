@@ -6,8 +6,16 @@ const PageFooter = () => {
   return (
     <footer className="mt-16 border-t border-gray-200 bg-white/90">
       <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-10 px-6 py-12 lg:px-8">
-        <div className="soara-hero-gradient relative overflow-hidden rounded-3xl px-6 py-8 text-white shadow-soara sm:px-10">
-          <div className="absolute inset-0 soara-grid opacity-30" aria-hidden />
+        <div
+          className="relative overflow-hidden rounded-3xl px-6 py-8 text-white shadow-soara sm:px-10"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, rgba(0, 80, 167, 0.55) 0%, rgba(0, 80, 167, 0.35) 45%, rgba(0, 61, 128, 0.6) 100%), url('/images/website-hero-mk3.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "left center",
+          }}
+        >
+          <div className="absolute inset-0 soara-grid opacity-15" aria-hidden />
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-white/80">
@@ -17,7 +25,7 @@ const PageFooter = () => {
                 高校生が空を切り拓く挑戦を、共に。
               </h2>
               <p className="mt-2 text-white/80">
-                スポンサー・メディア・コラボのご相談を随時受け付けています。
+                スポンサー・メディア・コラボのご相談をお待ちしております。
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -25,7 +33,7 @@ const PageFooter = () => {
                 href="/supporters"
                 className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0050a7] shadow-lg shadow-black/5 transition hover:translate-y-[-1px] hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                支援の詳細を見る
+                ご支援の詳細はこちらから
               </Link>
               <Link
                 href="/contacts"

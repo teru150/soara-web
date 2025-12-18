@@ -66,9 +66,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex flex-col gap-3 rounded-2xl bg-white/80 px-5 py-4 shadow-sm ring-1 ring-gray-200">
-              <p className="text-sm font-semibold text-gray-500">
-                Key Facts
-              </p>
+              <p className="text-sm font-semibold text-gray-500">Key Facts</p>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div>
                   <p className="text-2xl font-bold text-gray-900">
@@ -84,7 +82,9 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-gray-900">Tokyo</p>
-                  <p className="text-sm text-gray-600">Tokyo Innovation Baseを拠点に活動</p>
+                  <p className="text-sm text-gray-600">
+                    Tokyo Innovation Baseを拠点に活動
+                  </p>
                 </div>
               </div>
             </div>
@@ -200,17 +200,17 @@ export default function AboutPage() {
             2026年7月、琵琶湖で200m滑空を実現する
           </h2>
           <p className="text-lg leading-relaxed text-gray-700">
-            鳥人間コンテスト滑空機部門で200mを達成することが、SOARAの指標です。<br/>
+            鳥人間コンテスト滑空機部門で200mを達成することが、SOARAの指標です。<br />
             高校生チームが未だ突破したことのない第二の壁を超えることで、次世代の可能性を示します。
           </p>
 
           <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
             <div className="flex flex-col gap-4 md:flex-row md:items-center">
               <div className="flex-1">
-                <p className="text-sm font-semibold text-gray-600">過去記録の分析で判明した”壁”について</p>
-                <p className="mt-2 text-sm text-gray-700">
+                <p className="text-sm font-semibold text-gray-600">壁の分析（サマリー）</p>
+                <div className="mt-2 rounded-lg bg-gray-50 px-3 py-2 text-sm text-gray-700 ring-1 ring-gray-200">
                   過去25年の記録から壁の位置と要因を分析し、ギャップ頻度とサイズを可視化しました。
-                </p>
+                </div>
                 <button
                   type="button"
                   onClick={() => setOpenWallAnalysis((v) => !v)}
@@ -221,7 +221,7 @@ export default function AboutPage() {
                   <span aria-hidden>{openWallAnalysis ? "▲" : "▼"}</span>
                 </button>
               </div>
-              <div className="flex flex-1 items-center justify-center rounded-xl bg-gray-50 p-4">
+              <div className="flex flex-1 items-center justify-center rounded-xl bg-gray-50 p-6">
                 <img
                   src="/analysis/gap-frequency-average.png"
                   alt="距離レンジ別のギャップ分析"
@@ -272,8 +272,7 @@ export default function AboutPage() {
           <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
             <p className="text-sm font-semibold text-gray-600">目標を設定した具体的理由</p>
             <p className="mt-3 text-gray-700">
-              ・高校生記録153mを上回るためには、揚抗比・安定性・操縦技術の両立が不可欠。
-              <br />
+              ・高校生記録153mを上回るためには、揚抗比・安定性・操縦技術の両立が不可欠。<br />
               ・東京を拠点に、経験豊富な大学・社会人チームと連携し、設計と製作の質を向上可。
             </p>
           </div>

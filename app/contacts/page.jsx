@@ -57,8 +57,8 @@ const ContactPage = () => {
             ご相談・お問い合わせ
           </h1>
           <p className="text-lg text-gray-600">
-            スポンサー/パートナーシップ、取材やイベント登壇などのご連絡をお待ちしています。
-            2営業日以内の返信を心がけています。
+            スポンサー/パートナーシップ、取材やイベント登壇などのご連絡を<br/>
+            お待ちしています。2営業日以内の返信を心がけています。
           </p>
           <div className="flex flex-col gap-2 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between">
             <span>Mail: soara.hpa@gmail.com</span>

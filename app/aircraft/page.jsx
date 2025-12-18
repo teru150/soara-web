@@ -295,47 +295,6 @@ export default function AircraftPage() {
             </div>
           ))}
         </section>
-
-        <section className="rounded-3xl bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] p-8 shadow-soara ring-1 ring-[#369bff]/25">
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-                Next Step
-              </p>
-              <h2 className="text-3xl font-bold text-gray-900">
-                200m滑空へ、設計協力・試験環境を募集中
-              </h2>
-              <p className="text-base text-gray-700">
-                風洞試験、構造解析、材料提供、操縦訓練など、技術連携いただけるパートナーを探しています。
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="/supporters"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#0050a7] px-5 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
-                >
-                  連携のご相談
-                </a>
-                <a
-                  href="/contacts"
-                  className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0050a7] ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
-                >
-                  お問い合わせフォーム
-                </a>
-              </div>
-            </div>
-            <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
-              <p className="text-sm font-semibold text-gray-700">関連資料</p>
-              <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                <li>・三面図（X1）PDF</li>
-                <li>・設計コンセプト資料</li>
-                <li>・機体設計仕様書</li>
-              </ul>
-              <p className="mt-3 text-sm text-gray-600">
-                必要に応じて資料を共有します。詳細はお問い合わせください。
-              </p>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   );

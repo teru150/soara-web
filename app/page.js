@@ -1,16 +1,17 @@
 ﻿"use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import contentData from "../data/content.json";
 
 const heroImages = [
-  { src: "/images/pics/IMG_2485.jpg", caption: "夜間の作業場で翼を確認するメンバー" },
-  { src: "/images/pics/IMG_3019.jpg", caption: "図面を囲みながらの設計ディスカッション" },
-  { src: "/images/pics/IMG_3584.jpg", caption: "フライト前チェックに向けた準備" },
-  { src: "/images/pics/IMG_3593.jpg", caption: "太陽光の下での翼組み立て" },
-  { src: "/images/pics/IMG_3745.JPG", caption: "試作部品の品質を共有" },
+  { src: "/images/pics/IMG_3745.JPG", caption: "11月に行われた交流イベントにて" },
+  { src: "/images/pics/partial_blur.png", caption: "8月に行われた東京大学F-Tecとの交流会" },
+  { src: "/images/pics/IMG_2485.jpg", caption: "交流会後" },
+  { src: "/images/pics/IMG_3584.jpg", caption: "購入した桁を積み込み中" },
+  { src: "/images/pics/IMG_3593.jpg", caption: "会議室でアイデア出し" },
   { src: "/images/pics/IMG_6802.jpg", caption: "チーム結成初期の一枚" },
-  { src: "/images/pics/IMG_7502.jpg", caption: "フィールドでの風の確認" },
+  { src: "/images/pics/IMG_7502.jpg", caption: "ミニ風洞と越智" },
   { src: "/images/pics/kareoke.jpg", caption: "肩の力を抜いて親睦を深める時間" },
 ];
 
@@ -24,6 +25,19 @@ const stats = (meta) => [
   { label: "Target", value: "200m", detail: "高校生初の記録へ挑戦" },
 ];
 
+const faceGallery = [
+  "/images/people/Iriyama.jpg",
+  "/images/people/Takahashi.JPG",
+  "/images/people/nakajima.jpg",
+  "/images/people/Kikuchi.jpg",
+  "/images/people/wada.jpg",
+  "/images/people/Shawn.png",
+  "/images/people/Ochi.jpeg",
+  "/images/people/Nomura.jpg",
+  "/images/people/danny.jpg",
+  "/images/people/suzuki.jpg",
+];
+
 const heroOverlayOpacity = 0.75;
 const heroOverlay = `linear-gradient(180deg, rgba(255,255,255,${heroOverlayOpacity}) 0%, rgba(255,255,255,${
   heroOverlayOpacity * 0.95
@@ -33,6 +47,7 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
   const intervalRef = useRef(null);
+  const [faceIndex, setFaceIndex] = useState(0);
   const meta = contentData.meta || { members: 21, schools: 13, schoolsNote: "全国13校・アメリカ含む" };
 
   useEffect(() => {
@@ -50,6 +65,13 @@ export default function Home() {
     }, 4500);
     return () => clearInterval(intervalRef.current);
   }, [reduceMotion]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFaceIndex((prev) => (prev + 2) % faceGallery.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const goToSlide = (nextIndex) => {
     const safeIndex =
@@ -75,7 +97,7 @@ export default function Home() {
           className="pointer-events-none absolute inset-0 -z-5 soara-grid opacity-100 mix-blend-multiply"
           aria-hidden
         />
-        <div className="mx-auto grid max-w-screen-xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mx-auto grid max-w-screen-xl items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="space-y-8">
             <br />
             <div className="space-y-4">
@@ -110,6 +132,15 @@ export default function Home() {
                 <span aria-hidden>→</span>
               </a>
               <a
+                href="https://forms.gle/2vZGsXn6kLM6GRZv8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#369bff] bg-white px-6 py-3 text-base font-semibold text-[#0050a7] transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
+              >
+                メンバーになる
+                <span aria-hidden>↗</span>
+              </a>
+              <a
                 href="/about#mission-detail"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-semibold text-[#0050a7] shadow-sm ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
               >
@@ -130,7 +161,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative flex h-full flex-col">
             <div className="absolute inset-0 -z-10 translate-x-6 translate-y-6 rounded-3xl bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] blur-2xl" />
             <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-black/0" />
@@ -149,7 +180,7 @@ export default function Home() {
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-3 rounded-xl bg-black/40 px-4 py-3 text-white backdrop-blur">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-white/80">
-                    Life at SOARA
+                    SOARA Photo Gallery
                   </p>
                   <p className="text-sm font-semibold">
                     {heroImages[currentSlide].caption}
@@ -190,6 +221,33 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            <div className="mt-4 rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-sm lg:mt-auto">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+                Meet the Faces
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {[0, 1].map((offset) => {
+                  const src = faceGallery[(faceIndex + offset) % faceGallery.length];
+                  return (
+                    <Link
+                      key={src}
+                      href="/members"
+                      className="group relative block h-36 overflow-hidden rounded-xl bg-gray-100 ring-1 ring-gray-200"
+                    >
+                      <img
+                        src={src}
+                        alt="SOARAメンバー"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent px-3 py-2 text-xs font-semibold text-white">
+                        メンバー紹介へ →
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -220,7 +278,7 @@ export default function Home() {
                     alt={mission.title}
                     className="h-16 w-16 rounded-xl object-cover shadow-md ring-1 ring-gray-200"
                   />
-                  <h3 className="text-xl font-semibold text-gray-900">
+                  <h3 className="text-xl font-semibold text-gray-900 whitespace-pre-line">
                     {mission.title}
                   </h3>
                   <p className="text-gray-600">{mission.description}</p>
@@ -260,16 +318,29 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative lg:-mt-6">
               <div className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-br from-[#369bff]/25 via-white to-transparent blur-2xl" />
-              <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
-                <img
-                  src="/analysis/flight-path.png"
-                  alt="定常滑空の軌道図"
-                  className="h-full w-full object-cover"
-                />
+              <div className="space-y-4">
+                <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+                  <img
+                    src="/analysis/flight-path.png"
+                    alt="定常滑空の軌道図"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+                  <img
+                    src="/analysis/torica-25.png"
+                    alt="鳥人間コンテストの記録推移"
+                    className="h-56 w-full object-cover sm:h-64"
+                  />
+                  <p className="border-t border-gray-100 px-4 py-2 text-xs text-gray-500">
+                    433mを記録した理想的な滑空 | 出典：ytv公式鳥人間コンテストYoutubeチャンネル
+                  </p>
+                </div>
               </div>
             </div>
+           
           </div>
         </div>
       </section>

@@ -67,8 +67,13 @@ export default function SupportersPage() {
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-3">
-          {[
+        <section className="space-y-4">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+            ご支援いただきたい内容
+          </p>
+          
+          <div className="grid gap-6 lg:grid-cols-3">
+            {[
             {
               title: "技術連携",
               detail: "設計・製作レビュー、材料/設備の提供、メンタリング",
@@ -81,15 +86,20 @@ export default function SupportersPage() {
               title: "広報・コラボ",
               detail: "共同イベント、講演、メディア露出、採用ブランディング",
             },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"
-            >
-              <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>
-              <p className="mt-2 text-gray-700">{item.detail}</p>
-            </div>
-          ))}
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"
+              >
+                <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>
+                <p className="mt-2 text-gray-700">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-base text-gray-700">
+            SOARAは、前例のない有志高校生チームとして鳥人間コンテストに挑み、またその過程でものづくりの面白さを同・次世代に広めることを目指して活動しています。<br/>
+            しかしこれらの実現には、高額な開発・製作資金、設計・試作における技術的なサポートなど、高校生だけでは困難なことが多数存在しており、<br/>多くの方々のご支援が必要となります。
+          </p>
         </section>
 
         <section className="rounded-3xl bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] p-8 shadow-soara ring-1 ring-[#369bff]/25">
@@ -102,27 +112,12 @@ export default function SupportersPage() {
               <p className="text-base text-gray-700">
                 高校生チームだからこそ学びに真摯で、動きが速いのが強みです。<br/>
                 貴社・貴団体の強みと結びつく形での連携をご提案します。
-              </p>
-              <ul className="space-y-2 text-gray-700">
-                <li>・技術メンタリング/設備貸与のご相談</li>
-                <li>・スポンサー/パートナーシップのご相談</li>
-                <li>・イベント/講演/メディア取材のご依頼</li>
-              </ul>
+              </p>            
+              私たちの目指す夢と目標にご共感いただいた皆さまからのご支援を、心よりお待ちしております。
               <br/>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="/contacts"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#0050a7] px-5 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
-                >
-                  お問い合わせフォームへ
-                </a>
-                <a
-                href="mailto:soara.hpa@gmail.com"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0050a7] ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
-              >
-                  soara.hpa@gmail.com
-                </a>
-              </div>
+              何卒よろしくお願い申し上げます。
+              <br/>
+              
             </div>
             <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
               <p className="text-sm font-semibold text-gray-600">SNS</p>
@@ -154,6 +149,25 @@ export default function SupportersPage() {
                 活動の様子や技術解説を週次で発信予定です。<br/>
                 是非フォローをお願いします。
               </p>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-col gap-3 rounded-2xl bg-white/80 p-5 shadow-sm ring-1 ring-gray-200 md:flex-row md:items-center md:justify-between">
+            <p className="text-sm text-gray-700">
+              ご相談はこちらから。フォームまたはEメールでご連絡ください。
+            </p>
+            <div className="flex flex-wrap items-center gap-3 md:flex-nowrap">
+              <a
+                href="/contacts"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#0050a7] px-4 py-2.5 text-sm font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
+              >
+                お問い合わせフォームへ
+              </a>
+              <a
+                href="mailto:soara.hpa@gmail.com"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#0050a7] ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
+              >
+                soara.hpa@gmail.com
+              </a>
             </div>
           </div>
         </section>
