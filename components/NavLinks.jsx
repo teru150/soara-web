@@ -23,6 +23,10 @@ export default function NavLinks({ containerStyles, isScrolled }) {
       fileName: "supporters",
     },
     {
+      filePath: "/blog",
+      fileName: "blog",
+    },
+    {
       filePath: "/birdman",
       fileName: "birdman",
     },
@@ -51,7 +55,7 @@ export default function NavLinks({ containerStyles, isScrolled }) {
         return (
           <Link key={index} href={fileLink.filePath} className="group relative">
             <motion.button
-              className={`relative z-10 rounded-lg px-2 py-1 text-base capitalize transition-colors duration-200 ${
+              className={`relative z-10 rounded-lg px-2 py-1 text-sm capitalize transition-colors duration-200 ${
                 isActive
                   ? "text-[#0050a7]"
                   : isScrolled

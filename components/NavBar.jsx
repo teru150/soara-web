@@ -47,7 +47,7 @@ export default function NavBar() {
             <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
               Soaring into 2026
             </p>
-            <p className="text-lg font-semibold text-gray-900">
+            <p className="text-base font-semibold text-gray-900 whitespace-nowrap">
               高校生有志鳥人間チーム　SOARA
             </p>
           </div>
@@ -60,7 +60,7 @@ export default function NavBar() {
           />
           <a
             href="/supporters"
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#369bff] to-[#0050a7] px-4 py-2 text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
+            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#369bff] to-[#0050a7] px-4 py-2 text-sm font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff] whitespace-nowrap"
           >
             <span>支援する</span>
             <span aria-hidden>→</span>
@@ -83,7 +83,7 @@ export default function NavBar() {
         {isOpen && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/30 backdrop-blur-md lg:hidden"
+              className="pointer-events-auto fixed inset-0 bg-black/30 backdrop-blur-md lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -91,7 +91,7 @@ export default function NavBar() {
               onClick={() => setIsOpen(false)}
             />
             <motion.nav
-              className="lg:hidden fixed inset-x-4 top-20 z-50 rounded-2xl bg-white p-6 shadow-2xl"
+              className="pointer-events-auto lg:hidden fixed inset-x-4 top-20 z-50 rounded-2xl bg-white p-6 shadow-2xl"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}

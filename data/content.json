@@ -60,6 +60,18 @@
         "icon": "🤝",
         "title": "支援者の方へ",
         "description": "活動を支えてくださる方々のご紹介と支援のお願い"
+      },
+      {
+        "href": "/birdman",
+        "icon": "🌊",
+        "title": "鳥人間コンテストとは？",
+        "description": "大会の歴史とSOARAが挑む理由"
+      },
+      {
+        "href": "/blog",
+        "icon": "📝",
+        "title": "活動報告",
+        "description": "設計・制作・交流イベントの最新レポート"
       }
     ],
     "aboutName": {

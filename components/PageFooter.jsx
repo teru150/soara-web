@@ -102,7 +102,7 @@ const PageFooter = () => {
 
           <div>
             <p className="text-sm font-semibold text-gray-900">Navigate</p>
-            <div className="mt-4 grid gap-2 text-sm text-gray-600">
+            <div className="mt-4 grid gap-2 text-sm text-gray-600 sm:grid-cols-2">
               <Link className="hover:text-[#0050a7]" href="/">
                 ホーム
               </Link>
@@ -117,6 +117,9 @@ const PageFooter = () => {
               </Link>
               <Link className="hover:text-[#0050a7]" href="/supporters">
                 サポーター
+              </Link>
+              <Link className="hover:text-[#0050a7]" href="/blog">
+                活動報告
               </Link>
               <Link className="hover:text-[#0050a7]" href="/birdman">
                 鳥人間コンテストとは
