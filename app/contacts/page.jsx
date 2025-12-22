@@ -24,20 +24,19 @@ const ContactPage = () => {
     setSubmitStatus("");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setSubmitStatus("error");
-      }
+      const subject = `SOARAお問い合わせ: ${formData.name}`;
+      const body = [
+        `お名前/ご所属: ${formData.name}`,
+        `メールアドレス: ${formData.email}`,
+        "",
+        formData.message,
+      ].join("\n");
+      const mailto = `mailto:soara.hpa@gmail.com?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       setSubmitStatus("error");
     } finally {
@@ -129,7 +128,7 @@ const ContactPage = () => {
 
           {submitStatus === "success" && (
             <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-800 ring-1 ring-green-200">
-              ありがとうございます。メッセージを受け付けました。
+              メールアプリを開きました。内容を確認して送信してください。
             </div>
           )}
 
