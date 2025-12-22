@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import contentData from "../../data/content.json";
 
@@ -48,7 +48,7 @@ const members = [
   {
     name: "和田悠希",
     englishName: "Yuki Wada",
-    school: "開成高校",
+    school: "開成高等学校",
     grade: "1年",
     position: "製作班長",
     image: "/images/people/wada.jpg",
@@ -70,7 +70,8 @@ const members = [
     school: "広尾学園高校インターナショナルコース",
     grade: "2年",
     position: "マーケティング班 / ソフトウェア",
-    image: "/images/people/Ochi.jpeg",
+    image: "/images/people/ochi-aura.jpg",
+    altImage: "/images/people/ochi.jpeg",
     introduction:
       "I do IT related stuff such as creating AIs and competitive programming as a hobby. I also love to play/create games, and do a little bit of basketball.",
   },
@@ -80,7 +81,7 @@ const members = [
     school: "青稜高等学校",
     grade: "2年",
     position: "グラフィックデザイナー / 電装設計",
-    image: "/images/unknown.png",
+    image: "/images/people/hattori.jpg",
     introduction:
       "設計とデザインの両方に関心があり、「考えたものを実際に形にする」ことを大切にしています。3D CADを用いた設計や、3Dプリンター・レーザー加工による制作を通して、構造面とデザイン面の両立を学んできました。SOARAでは、機体設計の一部やグラフィック制作を担当し、チームの挑戦を支える存在でありたいと考えています。",
   },
@@ -101,7 +102,7 @@ const members = [
     grade: "2年",
     position: "ブランディング",
     image: "/images/people/Nomura.jpg",
-    introduction: "",
+    introduction: "史上初の鳥人間コンテスト高校生有志チーム「SOARA」に参加する運びとなりました！応援の程、どうぞよろしくお願いいたします！！",
   },
   {
     name: "Daniel Kosukhin",
@@ -110,7 +111,7 @@ const members = [
     grade: "11th Grade",
     position: "ソフトウェア",
     image: "/images/people/danny.jpg",
-    introduction: "",
+    introduction: "I'm Daniel Kosukhin, a passionate web developer and programmer looking for an internship related to unmanned vehicle systems or robotics software development. I specialize in FIRST Robotics as a lead programmer and pioneer in the creation of websites at our local website development club. I worked on autonomous systems and electrical components throughout the years, as well as personal portfolios focused on mechatronics. Looking forward to working with Soara in the future!",
   },
   {
     name: "鈴木雄智",
@@ -121,9 +122,20 @@ const members = [
     image: "/images/people/suzuki.jpg",
     introduction: "",
   },
+  {
+    name: "浅岡晃成",
+    englishName: "Takemasa Suzuki",
+    school: "開成高等学校",
+    grade: "2年",
+    position: "製作班",
+    image: "/images/unknown.png",
+    introduction: "小さい時から歴史の授業が好きで、そこから現代史、第二次世界大戦、ミリタリーと流れ、その流れでプラモ作りを趣味としていまして、それが今のポジションに繋がっています。",
+  },
 ];
 
 const MembersPage = () => {
+  const [hoveredMember, setHoveredMember] = useState(null);
+
   return (
     <div className="relative flex flex-col px-6 pb-20 pt-24 sm:px-8 lg:px-12">
       <div className="absolute inset-0 soara-grid pointer-events-none" aria-hidden />
@@ -141,15 +153,22 @@ const MembersPage = () => {
         </header>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {members.map((member) => (
+          {members.map((member) => {
+            const displayImage =
+              hoveredMember === member.name && member.altImage
+                ? member.altImage
+                : member.image;
+            return (
             <div
               key={member.name}
               className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200 transition hover:-translate-y-1 hover:shadow-lg"
+              onMouseEnter={() => setHoveredMember(member.name)}
+              onMouseLeave={() => setHoveredMember(null)}
             >
               <div className="mb-4 flex justify-center">
                 <div className="relative h-32 w-32 overflow-hidden rounded-2xl ring-2 ring-[#e6f4ff]">
                   <Image
-                    src={member.image}
+                    src={displayImage}
                     alt={member.name}
                     fill
                     className="object-cover"
@@ -176,7 +195,8 @@ const MembersPage = () => {
                 {member.introduction || "Coming soon..."}
               </p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="rounded-3xl bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] p-8 shadow-soara ring-1 ring-[#369bff]/25">

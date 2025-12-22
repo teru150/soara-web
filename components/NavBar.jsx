@@ -10,12 +10,24 @@ import Image from "next/image";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
+    let lastScrollY = 0;
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 10);
+      const scrollingDown = scrollY > lastScrollY + 4;
+      const scrollingUp = scrollY < lastScrollY - 4;
+      if (scrollY < 60) {
+        setIsHidden(false);
+      } else if (scrollingDown) {
+        setIsHidden(true);
+      } else if (scrollingUp) {
+        setIsHidden(false);
+      }
+      lastScrollY = scrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -23,7 +35,11 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="pointer-events-none fixed left-0 right-0 top-4 z-50 flex justify-center px-4">
+    <header
+      className={`pointer-events-none fixed left-0 right-0 top-4 z-50 flex justify-center px-4 transition-transform duration-300 ${
+        isHidden ? "-translate-y-20" : "translate-y-0"
+      }`}
+    >
       <div
         className={`soara-glass pointer-events-auto flex w-full max-w-screen-xl items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
           isScrolled ? "shadow-soara" : ""
