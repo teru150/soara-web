@@ -71,7 +71,7 @@ const members = [
     grade: "2年",
     position: "マーケティング班 / ソフトウェア",
     image: "/images/people/ochi-aura.jpg",
-    altImage: "/images/people/ochi.jpeg",
+    altImage: "/images/people/Ochi.jpeg",
     introduction:
       "I do IT related stuff such as creating AIs and competitive programming as a hobby. I also love to play/create games, and do a little bit of basketball.",
   },
