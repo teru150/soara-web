@@ -1,85 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
-
-const posts = [
-  {
-    id: "2025-12-kit",
-    title: "きっと、Flyers様作業場見学報告",
-    date: "2025.12.22",
-    category: "外交",
-    image: "/blog/kitflyers.png",
-    excerpt:
-      "京都工芸繊維大学きっと、Flyers様の作業場を一名が見学させていただきました。",
-    highlights: [
-      "先輩チームから製法や工程をご教授いただいた",
-    ],
-    body: [
-      "京都工芸繊維大学きっと、Flyers様の作業場を見学させていただきました。比較的新興チームということもあり、私たちの初歩的な質問もご理解いただき大変心強かったです。",
-      "翼ホルダー、かんざしの効率的な製法、エンドリブ補強やレーザーカットの手法、さらには桁試験のアドバイスなど多くのご助言をいただき、学びを得ることができました。",
-      "お忙しい中お時間をいただき丁寧にご紹介いただいたきっと、Flyersの皆様に感謝申し上げます。ありがとうございました。"
-    ],
-  },
-  {
-    id: "2025-12-setup",
-    title: "活動報告ページ開設",
-    date: "2025.12.21",
-    category: "外交",
-    image: "/blog/soara-code.png",
-    excerpt:
-      "活動報告を投稿するページをウェブサイトに追加しました。",
-    highlights: [
-      "ページ開設のご報告",
-    ],
-    body: [
-      "SOARAの活動の様子を投稿する媒体がSNS以外にも必要と感じ、活動報告ページを開設しました。",
-      "SNSで投稿するものと比べて長めで詳細な報告を投稿する予定です。",
-      "今後しばらくは過去の活動に関しての記事も投稿する予定ですので、ご理解ください。"
-    ],
-  },
-  {
-    id: "2025-10",
-    title: "主桁の運搬完了",
-    date: "2025.10.26",
-    category: "製作",
-    image: "/blog/ketainvan.png",
-    excerpt:
-      "主翼桁を東京理科大学鳥科様より購入させていただきました。",
-    highlights: [
-      "鳥科様の2024年主桁を購入",
-      "主桁とは機体の骨組みとなるカーボンパイプ",
-      "SOARAでは購入した約25m分中約20mを使用予定"
-    ],
-    body: [
-     "東京理科大学鳥人間サークル鳥科様より、同サークルが2024年に使用したCFRP（炭素繊維強化プラスチック）製の主桁を購入し、輸送を行いました。",
-     "SOARAでは設計の結果、購入した主桁約25m中約20mを使用した機体を製作する運びとなりました。",
-     "12月下旬に桁試験を実施し、1月下旬に本作業場への移送を行う予定です。",
-     "鳥科の皆様には運搬に際して多大なるご協力をいただき、大変お世話になりました。心より感謝申し上げます。"
-    ],
-  },
-  {
-    id: "2025-09",
-    title: "秋HPA交流会参加報告",
-    date: "2025.09.31",
-    category: "外交",
-    image: "/blog/hoseiuniv.png",
-    excerpt:
-      "法政大学HoPE様主催の秋HPA交流会にSOARAより3名が参加しました。",
-    highlights: [
-      "鳥人間チーム交流会への参加",
-      "先輩チームの方々との交流",
-    ],
-    body: [
-      "年2回開催される鳥人間チームのメンバー間の交流会であるHPA交流会にSOARAより3名が参加しました。",
-      "日本中から結集した鳥人間たちの熱気に気圧されながらも、経験豊富な先輩方とお会いしてお話しすることができ、参加したメンバー皆にとってとても有意義な経験となりました。",
-      "リブの切り出し方式や尾翼の設計についてなど、交流会でいただいたアドバイスを製作や設計に反映することができました。",
-      "ちなみに、抽選会では法政水をいただきました。イベントを主催いただいたHoPEの皆様、ありがとうございました。"
-    ],
-  },
-];
+import { X, Plus } from "lucide-react";
 
 const modalMotion = {
   initial: { opacity: 0, scale: 0.98, y: 12 },
@@ -89,21 +14,58 @@ const modalMotion = {
 
 export default function BlogPage() {
   const [activePost, setActivePost] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("/api/posts");
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-xl text-gray-600">読み込み中...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex flex-col px-6 pb-20 pt-24 sm:px-8 lg:px-12">
       <div className="pointer-events-none absolute inset-0 soara-grid" aria-hidden />
       <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-10">
-        <header className="space-y-3 rounded-3xl bg-white/90 p-8 shadow-soara ring-1 ring-gray-200">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-            Blog
-          </p>
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-            SOARA-活動報告
-          </h1>
-          <p className="text-lg text-gray-600">
-            設計・制作・広報の進捗やイベントでの学びを時系列順にお届けします。
-          </p>
+        <header className="rounded-3xl bg-white/90 p-8 shadow-soara ring-1 ring-gray-200">
+          <div className="flex items-start justify-between gap-4">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+                Blog
+              </p>
+              <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+                SOARA-活動報告
+              </h1>
+              <p className="text-lg text-gray-600">
+                設計・制作・広報の進捗やイベントでの学びを時系列順にお届けします。
+              </p>
+            </div>
+            <Link
+              href="/admin"
+              className="group flex shrink-0 items-center gap-2 rounded-xl bg-[#0050a7] px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-[#003d80] sm:px-6"
+            >
+              <Plus className="h-5 w-5" />
+              <span className="hidden sm:inline">記事を投稿</span>
+            </Link>
+          </div>
         </header>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -184,7 +146,15 @@ export default function BlogPage() {
                   <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
                     {activePost.title}
                   </h2>
-                  <p className="mt-1 text-sm text-white/80">{activePost.date}</p>
+                  <div className="mt-1 flex items-center gap-2 text-sm text-white/80">
+                    <span>{activePost.date}</span>
+                    {activePost.author && (
+                      <>
+                        <span>•</span>
+                        <span>投稿者: {activePost.author}</span>
+                      </>
+                    )}
+                  </div>
                 </div>
                 <button
                   type="button"

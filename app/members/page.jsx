@@ -51,7 +51,7 @@ const members = [
     school: "開成高等学校",
     grade: "1年",
     position: "製作班長",
-    image: "/images/people/wada.jpg",
+    image: "/images/people/wada-new.JPG",
     introduction: "中学生の時に見た鳥人間コンテストに憧れてチームに入りました。",
   },
   {
