@@ -166,29 +166,51 @@ export default function BlogPage() {
                 </button>
               </div>
               <div className="h-[calc(100%-14rem)] overflow-y-auto px-6 pb-10 pt-6 sm:h-[calc(100%-18rem)] sm:px-10">
-                <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-                  <div className="space-y-5 text-gray-700">
-                    {activePost.body.map((paragraph, index) => (
-                      <p key={index} className="text-base leading-relaxed">
-                        {paragraph}
+                <div className="mx-auto max-w-3xl space-y-6">
+                  {activePost.body.map((item, index) => {
+                    // Check if item is an object
+                    if (typeof item === "object" && item !== null) {
+                      if (item.type === "image" && item.src) {
+                        return (
+                          <div key={index} className="w-full">
+                            <div className="relative h-64 w-full overflow-hidden rounded-2xl ring-1 ring-gray-200 sm:h-96">
+                              <img
+                                src={item.src}
+                                alt={item.alt || "Blog image"}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  console.error("Image failed to load:", item.src);
+                                  e.target.style.display = "none";
+                                }}
+                              />
+                              {item.caption && (
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                                  <p className="text-sm text-white">{item.caption}</p>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      } else if (item.type === "text") {
+                        // Handle new format text object
+                        return (
+                          <p key={index} className="text-base leading-relaxed text-gray-700">
+                            {item.content}
+                          </p>
+                        );
+                      }
+                    }
+                    // Otherwise, render as string (old format)
+                    return (
+                      <p key={index} className="text-base leading-relaxed text-gray-700">
+                        {item}
                       </p>
-                    ))}
-                  </div>
-                  <div className="space-y-4 rounded-2xl bg-gray-50 p-5 ring-1 ring-gray-200">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
-                      Highlights
-                    </p>
-                    <ul className="space-y-3 text-sm text-gray-600">
-                      {activePost.highlights.map((item, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#369bff]" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="rounded-xl bg-white p-4 text-sm text-gray-600 shadow-sm ring-1 ring-gray-200">
+                    );
+                  })}
+                  <div className="mt-8 rounded-2xl bg-gradient-to-br from-[#e6f4ff] to-white p-6 ring-1 ring-[#369bff]/25">
+                    <p className="text-sm text-gray-700">
                       詳細や参加希望は、お問い合わせフォームからご連絡ください。
-                    </div>
+                    </p>
                   </div>
                 </div>
               </div>

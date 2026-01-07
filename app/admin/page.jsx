@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Pencil, Trash2, Plus, List } from "lucide-react";
+import ImageCropper from "../../components/ImageCropper";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -25,14 +26,23 @@ export default function AdminPage() {
     author: "",
     excerpt: "",
     image: "",
-    highlights: [""],
-    body: [""],
+    body: [{ type: "text", content: "" }],
   });
   const [submitStatus, setSubmitStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+
+  // 本文内画像アップロード用の状態
+  const [bodyImageFiles, setBodyImageFiles] = useState({});
+  const [bodyImagePreviews, setBodyImagePreviews] = useState({});
+  const [uploadingBodyImages, setUploadingBodyImages] = useState({});
+
+  // 画像クロップ用の状態
+  const [croppingImage, setCroppingImage] = useState(null);
+  const [croppingType, setCroppingType] = useState(null); // "header" or "body"
+  const [croppingIndex, setCroppingIndex] = useState(null); // body用のindex
 
   // 削除確認ダイアログ
   const [deletingPost, setDeletingPost] = useState(null);
@@ -59,10 +69,29 @@ export default function AdminPage() {
   }, [isAuthenticated]);
 
   // ログイン処理
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setIsAuthenticated(true);
     setAuthError("");
+
+    // パスワードを検証（簡易的にPOSTリクエストで確認）
+    try {
+      const response = await fetch("/api/verify-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (response.ok) {
+        setIsAuthenticated(true);
+      } else {
+        setAuthError("パスワードが正しくありません");
+        setPassword("");
+      }
+    } catch (error) {
+      setAuthError("認証に失敗しました");
+    }
   };
 
   // フォーム入力の処理
@@ -71,64 +100,100 @@ export default function AdminPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ハイライトの追加・削除
-  const addHighlight = () => {
+  // 本文アイテムの追加・削除・更新
+  const addBodyItem = (type = "text") => {
+    const newItem = type === "text"
+      ? { type: "text", content: "" }
+      : { type: "image", src: "", alt: "", caption: "" };
+
     setFormData((prev) => ({
       ...prev,
-      highlights: [...prev.highlights, ""],
+      body: [...prev.body, newItem],
     }));
   };
 
-  const removeHighlight = (index) => {
-    setFormData((prev) => ({
-      ...prev,
-      highlights: prev.highlights.filter((_, i) => i !== index),
-    }));
-  };
-
-  const updateHighlight = (index, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      highlights: prev.highlights.map((h, i) => (i === index ? value : h)),
-    }));
-  };
-
-  // 本文の追加・削除
-  const addBodyParagraph = () => {
-    setFormData((prev) => ({
-      ...prev,
-      body: [...prev.body, ""],
-    }));
-  };
-
-  const removeBodyParagraph = (index) => {
+  const removeBodyItem = (index) => {
     setFormData((prev) => ({
       ...prev,
       body: prev.body.filter((_, i) => i !== index),
     }));
+    // Clean up image states for this index
+    setBodyImageFiles((prev) => {
+      const newFiles = { ...prev };
+      delete newFiles[index];
+      return newFiles;
+    });
+    setBodyImagePreviews((prev) => {
+      const newPreviews = { ...prev };
+      delete newPreviews[index];
+      return newPreviews;
+    });
   };
 
-  const updateBodyParagraph = (index, value) => {
+  const updateBodyItem = (index, field, value) => {
     setFormData((prev) => ({
       ...prev,
-      body: prev.body.map((p, i) => (i === index ? value : p)),
+      body: prev.body.map((item, i) => {
+        if (i === index) {
+          if (item.type === "text") {
+            return { ...item, content: value };
+          } else {
+            return { ...item, [field]: value };
+          }
+        }
+        return item;
+      }),
     }));
   };
 
-  // 画像ファイル選択時の処理
+  // 画像ファイル選択時の処理（トップ画像）
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result);
+        setCroppingImage(reader.result);
+        setCroppingType("header");
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // 画像アップロード処理
+  // クロップ完了時の処理（トップ画像）
+  const handleCropComplete = (croppedBlob) => {
+    if (croppingType === "header") {
+      // トップ画像のクロップ
+      const file = new File([croppedBlob], "cropped-image.jpg", {
+        type: "image/jpeg",
+      });
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(croppedBlob);
+    } else if (croppingType === "body" && croppingIndex !== null) {
+      // 本文内画像のクロップ
+      const file = new File([croppedBlob], "cropped-image.jpg", {
+        type: "image/jpeg",
+      });
+      setBodyImageFiles((prev) => ({ ...prev, [croppingIndex]: file }));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBodyImagePreviews((prev) => ({
+          ...prev,
+          [croppingIndex]: reader.result,
+        }));
+      };
+      reader.readAsDataURL(croppedBlob);
+    }
+
+    setCroppingImage(null);
+    setCroppingType(null);
+    setCroppingIndex(null);
+  };
+
+  // 画像アップロード処理（トップ画像）
   const handleImageUpload = async () => {
     if (!imageFile) {
       setSubmitStatus({
@@ -175,6 +240,68 @@ export default function AdminPage() {
     }
   };
 
+  // 本文内画像ファイル選択時の処理
+  const handleBodyImageChange = (index, e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCroppingImage(reader.result);
+        setCroppingType("body");
+        setCroppingIndex(index);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // 本文内画像アップロード処理
+  const handleBodyImageUpload = async (index) => {
+    const file = bodyImageFiles[index];
+    if (!file) {
+      setSubmitStatus({
+        type: "error",
+        message: "画像ファイルを選択してください",
+      });
+      return;
+    }
+
+    setUploadingBodyImages((prev) => ({ ...prev, [index]: true }));
+    setSubmitStatus({ type: "", message: "" });
+
+    try {
+      const formDataUpload = new FormData();
+      formDataUpload.append("file", file);
+      formDataUpload.append("password", password);
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formDataUpload,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        updateBodyItem(index, "src", data.path);
+        setSubmitStatus({
+          type: "success",
+          message: "画像をアップロードしました",
+        });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "画像のアップロードに失敗しました",
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "画像のアップロードに失敗しました",
+      });
+    } finally {
+      setUploadingBodyImages((prev) => ({ ...prev, [index]: false }));
+    }
+  };
+
   // 投稿処理
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -182,6 +309,30 @@ export default function AdminPage() {
     setSubmitStatus({ type: "", message: "" });
 
     try {
+      // トップ画像が選択されているがアップロードされていない場合、先にアップロード
+      if (imageFile && !formData.image) {
+        setSubmitStatus({
+          type: "error",
+          message: "トップ画像をアップロードしてください",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // 本文内の画像で未アップロードのものがあるか確認
+      const hasUnuploadedImages = formData.body.some(
+        (item) => item.type === "image" && !item.src && bodyImageFiles[formData.body.indexOf(item)]
+      );
+
+      if (hasUnuploadedImages) {
+        setSubmitStatus({
+          type: "error",
+          message: "すべての画像をアップロードしてください",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       const url = editingPost
         ? `/api/posts/${editingPost.id}`
         : "/api/posts";
@@ -196,8 +347,14 @@ export default function AdminPage() {
           password,
           post: {
             ...formData,
-            highlights: formData.highlights.filter((h) => h.trim() !== ""),
-            body: formData.body.filter((p) => p.trim() !== ""),
+            body: formData.body.filter((item) => {
+              if (item.type === "text") {
+                return item.content.trim() !== "";
+              } else if (item.type === "image") {
+                return item.src.trim() !== "";
+              }
+              return false;
+            }),
           },
         }),
       });
@@ -218,11 +375,13 @@ export default function AdminPage() {
           author: "",
           excerpt: "",
           image: "",
-          highlights: [""],
-          body: [""],
+          body: [{ type: "text", content: "" }],
         });
         setImageFile(null);
         setImagePreview("");
+        setBodyImageFiles({});
+        setBodyImagePreviews({});
+        setUploadingBodyImages({});
         setEditingPost(null);
         // 記事一覧を再取得
         fetchPosts();
@@ -249,14 +408,29 @@ export default function AdminPage() {
   // 編集ボタン押下時
   const handleEdit = (post) => {
     setEditingPost(post);
+
+    // Convert old format to new format if needed
+    let bodyItems = [];
+    if (post.body && post.body.length > 0) {
+      bodyItems = post.body.map((item) => {
+        // If item is already in new format
+        if (typeof item === "object" && item.type) {
+          return item;
+        }
+        // Convert old text format to new format
+        return { type: "text", content: item };
+      });
+    } else {
+      bodyItems = [{ type: "text", content: "" }];
+    }
+
     setFormData({
       title: post.title,
       category: post.category,
       author: post.author,
       excerpt: post.excerpt,
       image: post.image || "",
-      highlights: post.highlights.length > 0 ? post.highlights : [""],
-      body: post.body.length > 0 ? post.body : [""],
+      body: bodyItems,
     });
     setActiveTab("new");
     window.scrollTo(0, 0);
@@ -271,11 +445,13 @@ export default function AdminPage() {
       author: "",
       excerpt: "",
       image: "",
-      highlights: [""],
-      body: [""],
+      body: [{ type: "text", content: "" }],
     });
     setImageFile(null);
     setImagePreview("");
+    setBodyImageFiles({});
+    setBodyImagePreviews({});
+    setUploadingBodyImages({});
   };
 
   // 削除処理
@@ -579,7 +755,7 @@ export default function AdminPage() {
                         />
                       </div>
                     )}
-                    {imageFile && (
+                    {imageFile && !formData.image && (
                       <button
                         type="button"
                         onClick={handleImageUpload}
@@ -590,87 +766,138 @@ export default function AdminPage() {
                       </button>
                     )}
                     {formData.image && (
-                      <p className="text-sm text-green-600">
-                        画像パス: {formData.image}
-                      </p>
+                      <div className="rounded-lg bg-green-50 p-3">
+                        <p className="text-sm font-semibold text-green-700">
+                          ✓ アップロード済み
+                        </p>
+                        <p className="text-xs text-green-600 mt-1">
+                          {formData.image}
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* ハイライト */}
-            <div className="rounded-3xl bg-white p-8 shadow-lg ring-1 ring-gray-200">
-              <h2 className="mb-6 text-xl font-bold text-gray-900">
-                ハイライト
-              </h2>
-              <div className="space-y-3">
-                {formData.highlights.map((highlight, index) => (
-                  <div key={index} className="flex gap-2">
-                    <input
-                      type="text"
-                      value={highlight}
-                      onChange={(e) => updateHighlight(index, e.target.value)}
-                      placeholder="重要なポイントを入力"
-                      className="flex-1 rounded-xl border border-gray-300 px-4 py-2 text-gray-900 focus:border-[#0050a7] focus:outline-none focus:ring-2 focus:ring-[#0050a7]/20"
-                    />
-                    {formData.highlights.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeHighlight(index)}
-                        className="rounded-xl bg-red-100 px-4 py-2 text-red-700 transition hover:bg-red-200"
-                      >
-                        削除
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={addHighlight}
-                  className="rounded-xl bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-200"
-                >
-                  + ハイライトを追加
-                </button>
-              </div>
-            </div>
-
             {/* 本文 */}
             <div className="rounded-3xl bg-white p-8 shadow-lg ring-1 ring-gray-200">
-              <h2 className="mb-6 text-xl font-bold text-gray-900">本文</h2>
-              <div className="space-y-3">
-                {formData.body.map((paragraph, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <label className="text-sm font-semibold text-gray-700">
-                        段落 {index + 1}
-                      </label>
+              <h2 className="mb-6 text-xl font-bold text-gray-900">本文コンテンツ</h2>
+              <p className="mb-4 text-sm text-gray-600">
+                テキストや画像を組み合わせて記事を作成できます
+              </p>
+              <div className="space-y-4">
+                {formData.body.map((item, index) => (
+                  <div key={index} className="rounded-xl border border-gray-300 p-4">
+                    <div className="mb-3 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold text-gray-700">
+                          {item.type === "text" ? "📝 テキスト" : "🖼️ 画像"} {index + 1}
+                        </span>
+                      </div>
                       {formData.body.length > 1 && (
                         <button
                           type="button"
-                          onClick={() => removeBodyParagraph(index)}
-                          className="rounded-xl bg-red-100 px-3 py-1 text-sm text-red-700 transition hover:bg-red-200"
+                          onClick={() => removeBodyItem(index)}
+                          className="rounded-lg bg-red-100 px-3 py-1 text-sm text-red-700 transition hover:bg-red-200"
                         >
                           削除
                         </button>
                       )}
                     </div>
-                    <textarea
-                      value={paragraph}
-                      onChange={(e) => updateBodyParagraph(index, e.target.value)}
-                      rows={3}
-                      placeholder="本文を入力してください"
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#0050a7] focus:outline-none focus:ring-2 focus:ring-[#0050a7]/20"
-                    />
+
+                    {item.type === "text" ? (
+                      <textarea
+                        value={item.content}
+                        onChange={(e) => updateBodyItem(index, "content", e.target.value)}
+                        rows={3}
+                        placeholder="本文を入力してください"
+                        className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#0050a7] focus:outline-none focus:ring-2 focus:ring-[#0050a7]/20"
+                      />
+                    ) : (
+                      <div className="space-y-3">
+                        <div>
+                          <label className="mb-1 block text-xs font-semibold text-gray-700">
+                            画像ファイル <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleBodyImageChange(index, e)}
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-[#0050a7] focus:outline-none focus:ring-2 focus:ring-[#0050a7]/20"
+                          />
+                          {bodyImagePreviews[index] && (
+                            <div className="mt-2 relative h-32 w-full overflow-hidden rounded-lg border border-gray-300">
+                              <img
+                                src={bodyImagePreviews[index]}
+                                alt="プレビュー"
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                          )}
+                          {bodyImageFiles[index] && !item.src && (
+                            <button
+                              type="button"
+                              onClick={() => handleBodyImageUpload(index)}
+                              disabled={uploadingBodyImages[index]}
+                              className="mt-2 w-full rounded-lg bg-[#0050a7] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#003d80] disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                              {uploadingBodyImages[index] ? "アップロード中..." : "画像をアップロード"}
+                            </button>
+                          )}
+                          {item.src && (
+                            <div className="mt-2 rounded-lg bg-green-50 p-2">
+                              <p className="text-xs text-green-700">
+                                ✓ アップロード済み: {item.src}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-xs font-semibold text-gray-700">
+                            代替テキスト（alt）
+                          </label>
+                          <input
+                            type="text"
+                            value={item.alt || ""}
+                            onChange={(e) => updateBodyItem(index, "alt", e.target.value)}
+                            placeholder="画像の説明"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-[#0050a7] focus:outline-none focus:ring-2 focus:ring-[#0050a7]/20"
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-xs font-semibold text-gray-700">
+                            キャプション
+                          </label>
+                          <input
+                            type="text"
+                            value={item.caption || ""}
+                            onChange={(e) => updateBodyItem(index, "caption", e.target.value)}
+                            placeholder="画像の下に表示されるキャプション"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-[#0050a7] focus:outline-none focus:ring-2 focus:ring-[#0050a7]/20"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
-                <button
-                  type="button"
-                  onClick={addBodyParagraph}
-                  className="rounded-xl bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-200"
-                >
-                  + 段落を追加
-                </button>
+
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => addBodyItem("text")}
+                    className="flex-1 rounded-xl bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-200"
+                  >
+                    + テキストを追加
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => addBodyItem("image")}
+                    className="flex-1 rounded-xl bg-green-100 px-4 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-200"
+                  >
+                    + 画像を追加
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -733,6 +960,19 @@ export default function AdminPage() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* 画像クロッパー */}
+        {croppingImage && (
+          <ImageCropper
+            image={croppingImage}
+            onComplete={handleCropComplete}
+            onCancel={() => {
+              setCroppingImage(null);
+              setCroppingType(null);
+              setCroppingIndex(null);
+            }}
+          />
         )}
       </div>
     </div>

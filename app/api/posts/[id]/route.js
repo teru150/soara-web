@@ -41,7 +41,6 @@ export async function PUT(request, { params }) {
       author: post.author,
       excerpt: post.excerpt,
       image: post.image || posts[postIndex].image,
-      highlights: post.highlights || [],
       body: post.body || [],
       date: new Date().toLocaleDateString("ja-JP", {
         year: "numeric",

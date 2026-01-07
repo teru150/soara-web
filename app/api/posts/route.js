@@ -58,10 +58,9 @@ export async function POST(request) {
         day: "2-digit",
       }).replace(/\//g, "."),
       category: post.category,
-      image: post.image || "/blog/default.png",
+      image: post.image || "/blog/soara-code.png",
       author: post.author,
       excerpt: post.excerpt,
-      highlights: post.highlights || [],
       body: post.body || [],
       createdAt: new Date().toISOString(),
     };
