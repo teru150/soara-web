@@ -5,13 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import contentData from "../data/content.json";
 
 const heroImages = [
-  { src: "/images/pics/IMG_3745.JPG", caption: "11月に行われた交流イベントにて" },
-  { src: "/images/pics/partial_blur.png", caption: "8月に行われた東京大学F-Tecとの交流会" },
-  { src: "/images/pics/IMG_2485.jpg", caption: "交流会後" },
+  { src: "/images/pics/soara-assemble-trim.png", caption: "1月の桁試験にて" },
+  { src: "/images/pics/partial_blur.png", caption: "8月に行われた東京大学F-Tecさんとの交流会" },
+  { src: "/images/pics/IMG_4156.png", caption: "TiBでの作業" },
   { src: "/images/pics/IMG_3584.jpg", caption: "購入した桁を積み込み中" },
   { src: "/images/pics/IMG_3593.jpg", caption: "会議室でアイデア出し" },
   { src: "/images/pics/IMG_6802.jpg", caption: "チーム結成初期の一枚" },
-  { src: "/images/pics/IMG_7502.jpg", caption: "ミニ風洞と越智" },
+  { src: "/images/pics/IMG_0352.png", caption: "リブ切り台試運転中" },
+  { src: "/images/pics/IMG_0547.png", caption: "かんざし製作中" },
   { src: "/images/pics/kareoke.jpg", caption: "肩の力を抜いて親睦を深める時間" },
 ];
 
@@ -26,7 +27,7 @@ const stats = (meta) => [
 ];
 
 const faceGallery = [
-  "/images/people/Iriyama.jpg",
+  "/images/people/iriyama-new.png",
   "/images/people/Takahashi.JPG",
   "/images/people/nakajima.jpg",
   "/images/people/Kikuchi.jpg",
@@ -35,7 +36,8 @@ const faceGallery = [
   "/images/people/ochi-aura.jpg",
   "/images/people/Nomura.jpg",
   "/images/people/danny.jpg",
-  "/images/people/suzuki.jpg",
+  "/images/people/suzuki-new.png",
+  "/images/people/hattori.jpg",
 ];
 
 const heroOverlayOpacity = 0.75;
