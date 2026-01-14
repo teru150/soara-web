@@ -62,7 +62,7 @@ export default function NavBar() {
         >
           <div className="relative h-12 w-56 overflow-hidden">
             <Image
-              src={isDarkMode ? "/logos/soara_logo_yoko_black_transparent.png" : "/logos/soara_logo_yoko_transparent.png"}
+              src="/logos/soara_logo_yoko_transparent.png"
               alt="SOARA ロゴ"
               fill
               className="object-cover object-center"
