@@ -11,6 +11,7 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -34,6 +35,16 @@ export default function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setIsDarkMode(mediaQuery.matches);
+
+    const handleChange = (e) => setIsDarkMode(e.matches);
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   return (
     <header
       className={`pointer-events-none fixed left-0 right-0 top-4 z-50 flex justify-center px-4 transition-transform duration-300 ${
@@ -47,25 +58,17 @@ export default function NavBar() {
       >
         <a
           href="/"
-          className="flex items-center gap-3 rounded-xl px-2 py-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
+          className="flex items-center rounded-xl px-2 py-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
         >
-          <div className="relative h-10 w-10 overflow-hidden rounded-xl shadow-soara ring-1 ring-gray-200">
+          <div className="relative h-12 w-56 overflow-hidden">
             <Image
-              src="/logos/soaralogo_sky_square.jpg"
+              src={isDarkMode ? "/logos/soara_logo_yoko_black_transparent.png" : "/logos/soara_logo_yoko_transparent.png"}
               alt="SOARA ロゴ"
               fill
-              sizes="40px"
-              className="object-cover"
+              className="object-cover object-center"
+              style={{ objectPosition: "center center" }}
               priority
             />
-          </div>
-          <div className="leading-tight">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
-              Soaring into 2026
-            </p>
-            <p className="text-base font-semibold text-gray-900 whitespace-nowrap">
-              高校生有志鳥人間チーム　SOARA
-            </p>
           </div>
         </a>
 

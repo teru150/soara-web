@@ -45,6 +45,87 @@ const heroOverlay = `linear-gradient(180deg, rgba(255,255,255,${heroOverlayOpaci
   heroOverlayOpacity * 0.95
 }) 50%, rgba(255,255,255,${Math.min(heroOverlayOpacity + 0.05, 1)}) 100%)`;
 
+function MissionCard({ mission }) {
+  const videoRef = useRef(null);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  // 単一動画か複数動画かを判定
+  const videos = mission.videos || (mission.video ? [mission.video] : []);
+  const hasMultipleVideos = videos.length > 1;
+  const currentVideo = videos[currentVideoIndex];
+
+  // 動画インデックスが変わったら新しい動画を再生
+  useEffect(() => {
+    if (isHovering && videoRef.current) {
+      videoRef.current.play().catch(err => console.log("Video play failed:", err));
+    }
+  }, [currentVideoIndex, isHovering]);
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => console.log("Video play failed:", err));
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    // マウスを離したら最初の動画にリセット
+    setCurrentVideoIndex(0);
+  };
+
+  const handleVideoEnded = () => {
+    if (hasMultipleVideos) {
+      // 複数動画の場合、次の動画に進む（最後の動画なら最初に戻る）
+      setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    }
+  };
+
+  return (
+    <article
+      className="group relative flex flex-col justify-center overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+      style={{ minHeight: "350px" }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* 背景動画 */}
+      {currentVideo && (
+        <video
+          key={currentVideo}
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+          muted
+          loop={!hasMultipleVideos}
+          playsInline
+          onEnded={handleVideoEnded}
+        >
+          <source src={currentVideo} type="video/mp4" />
+        </video>
+      )}
+
+      {/* オーバーレイ */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-white/65 to-gray-50/70 transition group-hover:from-[#e6f4ff]/70 group-hover:via-white/65 group-hover:to-white/60" />
+
+      {/* コンテンツ */}
+      <div className="relative z-10 w-full space-y-6 p-8">
+        <div className="space-y-4">
+          <h3 className="text-2xl font-bold text-gray-900 whitespace-pre-line leading-tight">
+            {mission.title}
+          </h3>
+          <p className="text-base text-gray-700 leading-relaxed">
+            {mission.description}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -264,28 +345,19 @@ export default function Home() {
               SOARAのミッション
             </h2>
             <p className="mt-3 text-lg text-gray-600">
-              飛ばす夢とものづくりの楽しさ、両方を次世代に届けるための2本柱。
+              飛ばす夢とものづくりの楽しさ、両方を次世代に届けるための2本柱です。
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             {contentData.home.missions.map((mission) => (
-              <article
-                key={mission.title}
-                className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#e6f4ff] to-transparent opacity-0 transition group-hover:opacity-70" />
-                <div className="relative z-10 space-y-3">
-                  <img
-                    src={mission.icon}
-                    alt={mission.title}
-                    className="h-16 w-16 rounded-xl object-cover shadow-md ring-1 ring-gray-200"
-                  />
-                  <h3 className="text-xl font-semibold text-gray-900 whitespace-pre-line">
-                    {mission.title}
-                  </h3>
-                  <p className="text-gray-600">{mission.description}</p>
-                </div>
-              </article>
+              <div key={mission.title} className="space-y-2">
+                <MissionCard mission={mission} />
+                {mission.credit && (
+                  <p className="text-right text-xs text-gray-500">
+                    {mission.credit}
+                  </p>
+                )}
+              </div>
             ))}
           </div>
         </div>
