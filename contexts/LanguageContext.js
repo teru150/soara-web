@@ -34,7 +34,7 @@ export const translations = {
 };
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('jp');
 
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'en' ? 'jp' : 'en');

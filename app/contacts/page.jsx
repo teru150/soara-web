@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const ContactPage = () => {
+  const { language } = useLanguage();
+  const L = (jp, en) => (language === "en" ? en : jp);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,10 +27,13 @@ const ContactPage = () => {
     setSubmitStatus("");
 
     try {
-      const subject = `SOARAお問い合わせ: ${formData.name}`;
+      const subject = L(
+        `SOARAお問い合わせ: ${formData.name}`,
+        `SOARA inquiry: ${formData.name}`
+      );
       const body = [
-        `お名前/ご所属: ${formData.name}`,
-        `メールアドレス: ${formData.email}`,
+        L(`お名前/ご所属: ${formData.name}`, `Name / Organization: ${formData.name}`),
+        L(`メールアドレス: ${formData.email}`, `Email: ${formData.email}`),
         "",
         formData.message,
       ].join("\n");
@@ -53,15 +59,19 @@ const ContactPage = () => {
             Contact
           </p>
           <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-            ご相談・お問い合わせ
+            {L("ご相談・お問い合わせ", "Contact & Inquiries")}
           </h1>
           <p className="text-lg text-gray-600">
-            スポンサー/パートナーシップ、取材やイベント登壇などのご連絡を<br/>
-            お待ちしています。2営業日以内の返信を心がけています。
+            {L(
+              "スポンサー/パートナーシップ、取材やイベント登壇などのご連絡をお待ちしています。2営業日以内の返信を心がけています。",
+              "We welcome sponsorships, partnerships, media inquiries, and event requests. We aim to reply within two business days."
+            )}
           </p>
           <div className="flex flex-col gap-2 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between">
             <span>Mail: soara.hpa@gmail.com</span>
-            <span>拠点: 東京都 / オンライン対応可</span>
+            <span>
+              {L("拠点: 東京都 / オンライン対応可", "Base: Tokyo / Remote available")}
+            </span>
           </div>
         </header>
 
@@ -72,7 +82,7 @@ const ContactPage = () => {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-semibold text-gray-800">
-                お名前 / ご所属
+                {L("お名前 / ご所属", "Name / Organization")}
               </label>
               <input
                 type="text"
@@ -82,12 +92,12 @@ const ContactPage = () => {
                 onChange={handleChange}
                 required
                 className="w-full rounded-xl border-2 border-transparent bg-gray-50 px-4 py-3 text-base text-gray-900 transition focus:border-[#369bff] focus:bg-white focus:ring-4 focus:ring-[#369bff]/20"
-                placeholder="例: SOARA株式会社 / 田中太郎"
+                placeholder={L("例: SOARA株式会社 / 田中太郎", "e.g., SOARA Inc. / Taro Tanaka")}
               />
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-semibold text-gray-800">
-                メールアドレス
+                {L("メールアドレス", "Email")}
               </label>
               <input
                 type="email"
@@ -104,7 +114,7 @@ const ContactPage = () => {
 
           <div className="space-y-2">
             <label htmlFor="message" className="text-sm font-semibold text-gray-800">
-              ご用件
+              {L("ご用件", "Message")}
             </label>
             <textarea
               id="message"
@@ -114,7 +124,10 @@ const ContactPage = () => {
               required
               rows={6}
               className="w-full rounded-xl border-2 border-transparent bg-gray-50 px-4 py-3 text-base text-gray-900 transition focus:border-[#369bff] focus:bg-white focus:ring-4 focus:ring-[#369bff]/20"
-              placeholder="サポート・取材・イベント連携など、お気軽にお知らせください。"
+              placeholder={L(
+                "サポート・取材・イベント連携など、お気軽にお知らせください。",
+                "Please tell us about support, media, or event collaboration."
+              )}
             />
           </div>
 
@@ -123,18 +136,24 @@ const ContactPage = () => {
             disabled={isSubmitting}
             className="w-full rounded-xl bg-gradient-to-r from-[#369bff] to-[#0050a7] px-6 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSubmitting ? "送信中..." : "送信する"}
+            {isSubmitting ? L("送信中...", "Sending...") : L("送信する", "Send")}
           </button>
 
           {submitStatus === "success" && (
             <div className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-800 ring-1 ring-green-200">
-              メールアプリを開きました。内容を確認して送信してください。
+              {L(
+                "メールアプリを開きました。内容を確認して送信してください。",
+                "Your mail app opened. Please review and send."
+              )}
             </div>
           )}
 
           {submitStatus === "error" && (
             <div className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-800 ring-1 ring-red-200">
-              送信に失敗しました。時間を置いて再度お試しください。
+              {L(
+                "送信に失敗しました。時間を置いて再度お試しください。",
+                "Sending failed. Please try again later."
+              )}
             </div>
           )}
         </form>

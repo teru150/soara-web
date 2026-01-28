@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../contexts/LanguageContext";
 
 export default function NavLinks({ containerStyles, isScrolled }) {
   const pathName = usePathname();
-  const { t } = useLanguage();
+  const navLabels = translations.en.nav;
 
   const links = [
     {
@@ -60,7 +60,7 @@ export default function NavLinks({ containerStyles, isScrolled }) {
                   ? "text-[#0050a7]"
                   : isScrolled
                     ? "text-gray-700 hover:text-gray-900"
-                    : "text-white hover:text-gray-200"
+                    : "text-transparent group-hover:text-gray-700"
               }`}
               initial={{ y: 0 }}
               whileHover={{
@@ -75,7 +75,7 @@ export default function NavLinks({ containerStyles, isScrolled }) {
               }}
               aria-current={isActive ? "page" : undefined}
             >
-              {t(`nav.${fileLink.fileName}`)}
+              {navLabels[fileLink.fileName]}
               <span
                 className={`absolute inset-x-1 -bottom-1 h-0.5 rounded-full transition-all duration-200 ${
                   isActive

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import contentData from "../../data/content.json";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const members = [
   {
@@ -180,6 +181,8 @@ const members = [
 
 const MembersPage = () => {
   const [hoveredMember, setHoveredMember] = useState(null);
+  const { language } = useLanguage();
+  const L = (jp, en) => (language === "en" ? en : jp);
 
   return (
     <div className="relative flex flex-col px-6 pb-20 pt-24 sm:px-8 lg:px-12">
@@ -190,10 +193,16 @@ const MembersPage = () => {
             Members
           </p>
           <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-            多様な背景が一つの翼になる
+            {L(
+              "多様な背景が一つの翼になる",
+              "Different backgrounds, one wing"
+            )}
           </h1>
           <p className="text-lg text-gray-600">
-            東京・山口・海外まで、{contentData.meta?.schools ?? 13}校から集まった{contentData.meta?.members ?? 21}名。役割も専門も異なる仲間が、同じ目標に向かって動いています。
+            {L(
+              `東京・山口・海外まで、${contentData.meta?.schools ?? 13}校から集まった${contentData.meta?.members ?? 21}名。役割も専門も異なる仲間が、同じ目標に向かって動いています。`,
+              `${contentData.meta?.members ?? 21} members from ${contentData.meta?.schools ?? 13} schools across Tokyo, Yamaguchi, and overseas. Different roles, one shared goal.`
+            )}
           </p>
         </header>
 
@@ -203,6 +212,8 @@ const MembersPage = () => {
               hoveredMember === member.name && member.altImage
                 ? member.altImage
                 : member.image;
+            const displayName = language === "en" ? member.englishName : member.name;
+            const subName = language === "en" ? member.name : member.englishName;
             return (
             <div
               key={member.name}
@@ -227,17 +238,17 @@ const MembersPage = () => {
                 </span>
               </div>
               <h2 className="mt-3 text-center text-2xl font-bold text-gray-900">
-                {member.name}
+                {displayName}
               </h2>
               <p className="text-center text-sm text-gray-500">
-                {member.englishName}
+                {subName}
               </p>
               <div className="mt-3 text-center text-sm text-gray-600">
                 <p>{member.school}</p>
                 <p>{member.grade}</p>
               </div>
               <p className="mt-4 flex-1 text-sm leading-relaxed text-gray-700">
-                {member.introduction || "Coming soon..."}
+                {member.introduction || L("準備中...", "Coming soon...")}
               </p>
             </div>
             );
@@ -251,17 +262,23 @@ const MembersPage = () => {
                 Recruiting
               </p>
               <h3 className="text-2xl font-bold text-gray-900">
-                ものづくりに挑みたい仲間を募集中
+                {L(
+                  "ものづくりに挑みたい仲間を募集中",
+                  "We’re recruiting makers"
+                )}
               </h3>
               <p className="text-base text-gray-700">
-                設計・製作・電装・マーケティング・映像など、専門を問わず参画できます。
+                {L(
+                  "設計・製作・電装・マーケティング・映像など、専門を問わず参画できます。",
+                  "Join across design, fabrication, electronics, marketing, media, and more."
+                )}
               </p>
             </div>
             <a
               href="/contacts"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0050a7] px-5 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
             >
-              加入・見学のご相談はこちらから
+              {L("加入・見学のご相談はこちらから", "Inquiries to join or visit")}
             </a>
           </div>
         </div>

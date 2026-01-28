@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Plus } from "lucide-react";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const modalMotion = {
   initial: { opacity: 0, scale: 0.98, y: 12 },
@@ -13,6 +14,8 @@ const modalMotion = {
 };
 
 export default function BlogPage() {
+  const { language } = useLanguage();
+  const L = (jp, en) => (language === "en" ? en : jp);
   const [activePost, setActivePost] = useState(null);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +39,9 @@ export default function BlogPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="text-xl text-gray-600">読み込み中...</div>
+        <div className="text-xl text-gray-600">
+          {L("読み込み中...", "Loading...")}
+        </div>
       </div>
     );
   }
@@ -52,10 +57,13 @@ export default function BlogPage() {
                 Blog
               </p>
               <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-                SOARA-活動報告
+                {L("SOARA-活動報告", "SOARA Updates")}
               </h1>
               <p className="text-lg text-gray-600">
-                設計・制作・広報の進捗やイベントでの学びを時系列順にお届けします。
+                {L(
+                  "設計・制作・広報の進捗やイベントでの学びを時系列順にお届けします。",
+                  "Design, build, and outreach updates in chronological order."
+                )}
               </p>
             </div>
             <Link
@@ -63,7 +71,7 @@ export default function BlogPage() {
               className="group flex shrink-0 items-center gap-2 rounded-xl bg-[#0050a7] px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-[#003d80] sm:px-6"
             >
               <Plus className="h-5 w-5" />
-              <span className="hidden sm:inline">記事を投稿</span>
+              <span className="hidden sm:inline">{L("記事を投稿", "New post")}</span>
             </Link>
           </div>
         </header>
@@ -92,7 +100,7 @@ export default function BlogPage() {
               <div className="flex flex-1 flex-col gap-3 p-5">
                 <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
                   <span>{post.date}</span>
-                  <span>Report</span>
+                  <span>{L("レポート", "Report")}</span>
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">
                   {post.title}
@@ -101,7 +109,7 @@ export default function BlogPage() {
                   {post.excerpt}
                 </p>
                 <span className="mt-auto inline-flex items-center text-sm font-semibold text-[#0050a7]">
-                  もっと読む
+                  {L("もっと読む", "Read more")}
                   <span className="ml-1" aria-hidden>
                     →
                   </span>
@@ -151,7 +159,7 @@ export default function BlogPage() {
                     {activePost.author && (
                       <>
                         <span>•</span>
-                        <span>投稿者: {activePost.author}</span>
+                        <span>{L("投稿者", "Author")}: {activePost.author}</span>
                       </>
                     )}
                   </div>
@@ -160,7 +168,7 @@ export default function BlogPage() {
                   type="button"
                   onClick={() => setActivePost(null)}
                   className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow-sm transition hover:bg-white"
-                  aria-label="閉じる"
+                  aria-label={L("閉じる", "Close")}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -176,7 +184,7 @@ export default function BlogPage() {
                             <div className="relative h-64 w-full overflow-hidden rounded-2xl ring-1 ring-gray-200 sm:h-96">
                               <img
                                 src={item.src}
-                                alt={item.alt || "Blog image"}
+                                 alt={item.alt || L("ブログ画像", "Blog image")}
                                 className="h-full w-full object-cover"
                                 onError={(e) => {
                                   console.error("Image failed to load:", item.src);
@@ -209,7 +217,10 @@ export default function BlogPage() {
                   })}
                   <div className="mt-8 rounded-2xl bg-gradient-to-br from-[#e6f4ff] to-white p-6 ring-1 ring-[#369bff]/25">
                     <p className="text-sm text-gray-700">
-                      詳細や参加希望は、お問い合わせフォームからご連絡ください。
+                      {L(
+                        "詳細や参加希望は、お問い合わせフォームからご連絡ください。",
+                        "For details or participation, please contact us via the form."
+                      )}
                     </p>
                   </div>
                 </div>

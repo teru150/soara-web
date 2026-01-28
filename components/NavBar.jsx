@@ -12,7 +12,7 @@ export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const { t } = useLanguage();
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     let lastScrollY = 0;
@@ -72,16 +72,26 @@ export default function NavBar() {
           </div>
         </a>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="group hidden items-center gap-8 lg:flex">
           <NavLinks
             containerStyles="flex items-center gap-6 font-semibold"
             isScrolled={isScrolled}
           />
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-pressed={language === "en"}
+            className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm transition hover:border-gray-300 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
+          >
+            <span className={language === "jp" ? "text-[#0050a7]" : ""}>JP</span>
+            <span className="h-3 w-px bg-gray-200" aria-hidden />
+            <span className={language === "en" ? "text-[#0050a7]" : ""}>EN</span>
+          </button>
           <a
             href="/supporters"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#369bff] to-[#0050a7] px-4 py-2 text-sm font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff] whitespace-nowrap"
           >
-            <span>支援する</span>
+            <span>Support</span>
             <span aria-hidden>→</span>
           </a>
         </nav>
@@ -124,7 +134,7 @@ export default function NavBar() {
                 href="/supporters"
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#369bff] to-[#0050a7] px-4 py-3 text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
               >
-                支援する
+                Support
                 <span aria-hidden>→</span>
               </a>
             </motion.nav>

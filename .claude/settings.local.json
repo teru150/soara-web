@@ -12,7 +12,8 @@
       "Bash(test:*)",
       "Bash(cat:*)",
       "Bash(taskkill /F /PID 48660)",
-      "Bash(npx kill-port:*)"
+      "Bash(npx kill-port:*)",
+      "Bash(npx next build)"
     ],
     "deny": [],
     "ask": []

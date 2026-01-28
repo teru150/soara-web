@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function BirdmanPage() {
+  const { language } = useLanguage();
+  const L = (jp, en) => (language === "en" ? en : jp);
   return (
     <div className="relative flex flex-col px-6 pb-20 pt-24 sm:px-8 lg:px-12">
       <div className="absolute inset-0 soara-grid pointer-events-none" aria-hidden />
@@ -12,23 +15,29 @@ export default function BirdmanPage() {
             Birdman Contest
           </p>
           <br/>
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">鳥人間コンテストとは？</h1>
+          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+            {L("鳥人間コンテストとは？", "What is the Birdman Contest?")}
+          </h1>
           <br/>
           <p className="mt-3 text-lg text-gray-700">
-            大会の概要、競技の流れ、機体の仕組み等についてご紹介します。
+            {L(
+              "大会の概要、競技の流れ、機体の仕組み等についてご紹介します。",
+              "An overview of the event, how it runs, and how the aircraft work."
+            )}
           </p>
         </header>
 
         <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-              概要
+              {L("概要", "Overview")}
             </p>
             <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
               <p className="text-base leading-relaxed text-gray-700">
-                鳥人間コンテストは、読売テレビが番組撮影の一環として毎年7月に主催する、人力飛行機が琵琶湖を舞台に飛行距離を競う大会です。<br/>
-                2026年で第48回の開催を迎え、大学生・社会人を中心とする多様なチームが参加しています。<br/>
-                グライダーのように滑空する滑空機部門とパイロットが漕いでプロペラを回す人力プロペラ機部門があり、SOARAは滑空機部門での出場を目指しています。
+                {L(
+                  "鳥人間コンテストは、読売テレビが番組撮影の一環として毎年7月に主催する、人力飛行機が琵琶湖を舞台に飛行距離を競う大会です。2026年で第48回の開催を迎え、大学生・社会人を中心とする多様なチームが参加しています。グライダーのように滑空する滑空機部門とパイロットが漕いでプロペラを回す人力プロペラ機部門があり、SOARAは滑空機部門での出場を目指しています。",
+                  "The Birdman Contest is held every July by Yomiuri TV as part of a broadcast production, where human-powered aircraft compete for distance over Lake Biwa. The 48th edition takes place in 2026, with teams from universities and working adults. There are two divisions: gliders that soar like sailplanes and human-powered propeller aircraft. SOARA aims to compete in the glider division."
+                )}
               </p>
               <div className="mt-4 rounded-xl bg-gray-100 ring-1 ring-dashed ring-gray-300">
                 <img
@@ -38,21 +47,26 @@ export default function BirdmanPage() {
                 />
               
               </div>
-              <p className="mt-2 text-xs text-gray-500">人力プロペラ機部門 | 出典：ytv公式</p>
+              <p className="mt-2 text-xs text-gray-500">
+                {L(
+                  "人力プロペラ機部門 | 出典：ytv公式",
+                  "Human-powered propeller division | Source: YTV official"
+                )}
+              </p>
               
             </div>
           </div>
 
           <div className="space-y-4">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-              大会について
+              {L("大会について", "Event details")}
             </p>
             <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
               <ul className="space-y-3 text-base text-gray-700">
-                <li>・会場: 琵琶湖・松原水泳場</li>
-                <li>・競技: 滑空機部門、人力プロペラ機部門（2026）</li>
-                <li>・評価: 各部門内で飛行距離を競う</li>
-                <li>・備考: 高校生チームは過去23年に渡り記録なし</li>
+                <li>{L("・会場: 琵琶湖・松原水泳場", "• Venue: Lake Biwa, Matsubara Beach")}</li>
+                <li>{L("・競技: 滑空機部門、人力プロペラ機部門（2026）", "• Divisions: Glider, Human-powered propeller (2026)")}</li>
+                <li>{L("・評価: 各部門内で飛行距離を競う", "• Scoring: Distance within each division")}</li>
+                <li>{L("・備考: 高校生チームは過去23年に渡り記録なし", "• Note: No recorded high school team results for 23 years")}</li>
               </ul>
               <br/>
               <div className="mt-4 rounded-xl bg-gray-100 ring-1 ring-dashed ring-gray-300">
@@ -62,42 +76,52 @@ export default function BirdmanPage() {
                   className="h-80 w-full rounded-xl object-cover"
                 />
               </div>
-              <p className="mt-2 text-xs text-gray-500">滑空機部門 | 出典：ytv公式鳥人間コンテストYoutubeチャンネル</p>
+              <p className="mt-2 text-xs text-gray-500">
+                {L(
+                  "滑空機部門 | 出典：ytv公式鳥人間コンテストYoutubeチャンネル",
+                  "Glider division | Source: YTV official Birdman Contest YouTube"
+                )}
+              </p>
             </div>
           </div>
         </section>
 
         <section className="space-y-4">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-            機体について
+            {L("機体について", "About the aircraft")}
           </p>
           <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
             <div className="grid gap-4 md:grid-cols-2">
               <div className="flex h-full flex-col space-y-3">
-                <h3 className="text-xl font-semibold text-gray-900">琵琶湖滑空機</h3>
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {L("琵琶湖滑空機", "Lake Biwa Glider")}
+                </h3>
                 <p className="mt-2 text-xs text-gray-500">SOARA-X2</p>
                 <div className="space-y-3 text-base leading-relaxed text-gray-700">
                   <p>
-                    滑空機部門で使用される機体は、翼幅15~25m、機体重量30~45kgです。<br/>
-                    自作人力飛行機でなければならないことを除き、機体形状などを制限するレギュレーションはありません。
-                    そのため、各チームが独自に機体の開発・設計・製作を行います。
+                    {L(
+                      "滑空機部門で使用される機体は、翼幅15~25m、機体重量30~45kgです。自作人力飛行機でなければならないことを除き、機体形状などを制限するレギュレーションはありません。そのため、各チームが独自に機体の開発・設計・製作を行います。",
+                      "Glider division aircraft typically have a 15–25 m wingspan and weigh 30–45 kg. Aside from the requirement that the aircraft be human-powered and self-built, there are few restrictions on shape, so each team designs and builds its own aircraft."
+                    )}
                   </p>
                   <p>
-                    近年の大会ではカーボンファイバーや高強度発泡スチロールなどの先端材料を用い、
-                    空力性能と軽量化を両立した機体が主流となっています。
+                    {L(
+                      "近年の大会ではカーボンファイバーや高強度発泡スチロールなどの先端材料を用い、空力性能と軽量化を両立した機体が主流となっています。",
+                      "Recent competitions favor advanced materials such as carbon fiber and high-strength foam to achieve both aerodynamic performance and light weight."
+                    )}
                   </p>
                 </div>
                 <ul className="mt-2 space-y-3 text-base text-gray-700">
-                  <li>・主桁: 主翼やコクピットといった重要な構造を支持する骨組み。</li>
-                  <li>・主翼: 機体を飛行させるための揚力を生成する。</li>
-                  <li>・コクピット: パイロットが搭乗する部分。</li>
-                  <li>・コクピットフレーム: パイロットが直接体重をかけるアルミフレーム。</li>
-                  <li>・フェアリング: コクピットを保護し、空気抵抗を低減する。</li>
-                  <li>・尾翼: 機体の安定性を保つ。</li>
+                  <li>{L("・主桁: 主翼やコクピットといった重要な構造を支持する骨組み。", "• Main spar: The primary structure supporting wings and cockpit.")}</li>
+                  <li>{L("・主翼: 機体を飛行させるための揚力を生成する。", "• Wing: Generates lift for flight.")}</li>
+                  <li>{L("・コクピット: パイロットが搭乗する部分。", "• Cockpit: Where the pilot sits.")}</li>
+                  <li>{L("・コクピットフレーム: パイロットが直接体重をかけるアルミフレーム。", "• Cockpit frame: Aluminum frame supporting the pilot's weight.")}</li>
+                  <li>{L("・フェアリング: コクピットを保護し、空気抵抗を低減する。", "• Fairing: Protects the cockpit and reduces drag.")}</li>
+                  <li>{L("・尾翼: 機体の安定性を保つ。", "• Tail: Maintains stability.")}</li>
                   <li>
-                    ・ラダー/エレベーター: 機体の制御を行う。
+                    {L("・ラダー/エレベーター: 機体の制御を行う。", "• Rudder/Elevator: Controls the aircraft.")}
                     <span className="block text-sm text-gray-600">
-                      　 安全規定で事実上搭載が義務付けられている。
+                      {L("　安全規定で事実上搭載が義務付けられている。", "Required by safety regulations.")}
                     </span>
                   </li>
                 </ul>
@@ -119,7 +143,9 @@ export default function BirdmanPage() {
                 </div>
               </div>
             </div>
-            <p className="mt-2 text-right text-xs text-gray-500">※ SOARA-X2/X3 機体図</p>
+            <p className="mt-2 text-right text-xs text-gray-500">
+              {L("※ SOARA-X2/X3 機体図", "SOARA-X2/X3 diagrams")}
+            </p>
           </div>
         </section>
 
@@ -128,7 +154,7 @@ export default function BirdmanPage() {
             href="/aircraft"
             className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0050a7] ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
           >
-            私たちの機体を見る
+            {L("私たちの機体を見る", "See our aircraft")}
           </Link>
         </div>
       </div>
