@@ -3,6 +3,7 @@ import "./globals.css";
 import NavBar from "../components/NavBar";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import PageFooter from "../components/PageFooter";
+import LoadingGate from "../components/LoadingGate";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,6 +57,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} antialiased flex flex-col w-full min-h-screen items-stretch bg-gray-50 text-gray-800`}
       >
+        <LoadingGate />
         <LanguageProvider>
           <div className="soara-surface flex min-h-screen flex-col">
             <NavBar />

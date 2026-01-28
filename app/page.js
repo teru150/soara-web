@@ -156,6 +156,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+
   const goToSlide = (nextIndex) => {
     const safeIndex =
       ((nextIndex % heroImages.length) + heroImages.length) % heroImages.length;
@@ -184,9 +185,19 @@ export default function Home() {
           <div className="space-y-8">
             <br />
             <div className="space-y-4">
-              <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
+              <button
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(
+                    new CustomEvent("soara:show-loading", {
+                      detail: { durationMs: 1500 },
+                    }),
+                  );
+                }}
+                className="text-sm uppercase tracking-[0.2em] text-gray-500 transition hover:text-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#369bff]"
+              >
                 2026 Birdman Contest Glider Project
-              </p>
+              </button>
               <h1 className="text-4xl font-bold leading-tight text-gray-900 sm:text-5xl lg:text-[52px]">
                 常識の向こうへ、<br />
                 碧空の彼方へ。
