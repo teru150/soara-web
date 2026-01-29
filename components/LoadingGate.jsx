@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LoadingOverlay from "./LoadingOverlay";
 
-const MIN_LOADING_MS = 1500;
+const MIN_LOADING_MS = 800;
 const EXIT_ANIMATION_MS = 520;
 const MAX_LOADING_MS = 10000;
 

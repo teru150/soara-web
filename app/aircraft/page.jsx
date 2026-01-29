@@ -766,7 +766,7 @@ export default function AircraftPage() {
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-gray-700">
                     {L(
-                      "翼型GOE647の断面形状を維持するための骨組みで、翼の「肋骨」のような存在です。10mm厚のスタイロフォームを重力式スライサーでスライスし、MDFレーザーカット製のマスターに沿ってホットワイヤーで切り出しています。翼弦1.4mの矩形翼なので全リブが同じ形状になり、製作を大幅に効率化できました。",
+                      "翼型GOE647の断面形状を維持するための骨組みで、翼の「肋骨」のような存在です。10mm厚のスタイロフォームを重力式スライサーでスライスし、MDFレーザーカット製のマスターに沿って電熱線で切り出しています。翼弦1.4mの矩形翼なので全リブが同じ形状になり、製作を大幅に効率化できました。",
                       "These are the framework that maintains the GOE647 airfoil cross-section — essentially the \"ribs\" of the wing. We slice 10 mm Styrofoam with a gravity slicer and cut them with a hot wire along an MDF laser-cut master template. Since the wing is rectangular with a 1.4 m chord, all ribs share the same shape, which greatly streamlined production."
                     )}
                   </p>
@@ -813,7 +813,7 @@ export default function AircraftPage() {
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-gray-700">
                     {L(
-                      "リブとリブの間でフィルム（外皮）が凹んでしまうのを防ぐための縦通材です。3×5mmのヒノキ角材を、断面の長辺（5mm）が翼表面に対して垂直に立つように配置して曲げ剛性を高めています。プランク端から30mm手前で止めることで、フィルムへの移行が滑らかになるよう工夫しました。",
+                      "リブとリブの間でフィルム（外皮）が凹んでしまうのを防ぐための縦通材です。3×5mmのヒノキ角材を、断面の長辺（5mm）が翼表面に対して垂直に立つように配置して曲げ剛性を高めています。圧力のかかるプランク端に配置し、強度を補っています。",
                       "A longitudinal member that prevents the film (skin) from sagging between ribs. We orient 3×5 mm Japanese cypress strips with the long side (5 mm) perpendicular to the wing surface to maximize bending stiffness. They stop 30 mm short of the plank edge to ensure a smooth transition to the film."
                     )}
                   </p>
@@ -946,7 +946,7 @@ export default function AircraftPage() {
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-gray-700">
                     {L(
-                      "翼の最後尾を鋭く仕上げて、空気の流れをきれいに切ることで抗力を減らすパーツです。SOARAではヒノキとスタイロフォームを組み合わせた複合構造を採用しました。リブの後縁20mmを上下から1mm厚のヒノキで挟み、リブ間には斜めにスライスしたスタイロを挿入しています。",
+                      "翼の最後尾を鋭く仕上げて、空気の流れをきれいに切ることで抗力を減らすパーツです。SOARAではヒノキとスタイロフォームを組み合わせた複合構造を採用しました。リブの後縁20mmを上下から1mm厚のヒノキで挟み、リブ間には斜めにスライスしたスタイロを挿入しています。（写真は試作なのでヒノキのみです）",
                       "This part sharpens the trailing edge of the wing so that the airflow separates cleanly, reducing drag. SOARA uses a composite of Japanese cypress and Styrofoam — the last 20 mm of each rib is sandwiched between 1 mm cypress sheets, and diagonally sliced Styrofoam is inserted between the ribs."
                     )}
                   </p>
