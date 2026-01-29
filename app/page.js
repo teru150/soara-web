@@ -7,7 +7,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 const heroImages = [
   {
-    src: "/images/pics/soara-assemble-trim.png",
+    src: "/images/pics/soarafront.jpg",
     caption: { jp: "1月の桁試験にて", en: "Spar test in January" },
   },
   {
@@ -85,7 +85,7 @@ const stats = (meta, language) => [
 ];
 
 const faceGallery = [
-  "/images/people/iriyama-new.png",
+  "/images/people/Iriyama_rib.png",
   "/images/people/Takahashi.JPG",
   "/images/people/nakajima.jpg",
   "/images/people/Kikuchi.jpg",
@@ -96,6 +96,8 @@ const faceGallery = [
   "/images/people/danny.jpg",
   "/images/people/suzuki-new.png",
   "/images/people/hattori.jpg",
+  "/images/people/Asaoka.png",
+  "/images/people/Yano.png",
 ];
 
 const heroOverlayOpacity = 0.75;
@@ -555,7 +557,7 @@ export default function Home() {
         <div className="mx-auto max-w-screen-xl overflow-hidden rounded-3xl border border-[#369bff]/20 bg-gradient-to-br from-[#e6f4ff]/80 via-white to-[#f5f7fa] shadow-soara">
           <div className="grid gap-10 p-10 lg:grid-cols-[1.1fr_0.9fr] lg:p-12">
             <div className="space-y-5">
-              <p className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#0050a7] shadow-sm ring-1 ring-[#369bff]/30">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
                 {goal2026.label}
               </p>
               <h3 className="text-3xl font-bold text-gray-900">

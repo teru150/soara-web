@@ -12,7 +12,7 @@ const members = [
     school: "開成高等学校",
     grade: "2年",
     position: "代表",
-    image: "/images/people/iriyama-new.png",
+    image: "/images/people/Iriyama_rib.png",
     introduction:
       "一度は断たれた鳥人間コンテストに出るという夢を諦めきれず、SOARAを立ち上げました。各地から集った同じ夢を目指す仲間と共に、琵琶湖を目指し邁進しています。",
   },
@@ -129,7 +129,7 @@ const members = [
     school: "開成高等学校",
     grade: "2年",
     position: "製作班",
-    image: "/images/unknown.png",
+    image: "/images/people/Asaoka.png",
     introduction: "小さい時から歴史の授業が好きで、そこから現代史、第二次世界大戦、ミリタリーと流れ、その流れでプラモ作りを趣味としていまして、それが今のポジションに繋がっています。",
   },
   {
@@ -147,7 +147,7 @@ const members = [
     school: "ドルトン東京学園高等部",
     grade: "2年",
     position: "製作班",
-    image: "/images/unknown.png",
+    image: "/images/people/Yano.png",
     introduction: "Coming soon...",
   },
   {
@@ -157,7 +157,7 @@ const members = [
     grade: "2年",
     position: "マーケティング",
     image: "/images/unknown.png",
-    introduction: "Coming soon...",
+    introduction: "主に天文学に興味があります。このようなプロジェクトに参加するのは初めてですが、微力ながら尽力させていただきます。",
   },
   {
     name: "古川貫太",

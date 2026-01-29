@@ -59,7 +59,7 @@ const missionStories = [
   },
 ];
 
-const introImage = "/images/pics/soara-assemble-trim.png";
+const introImage = "/images/pics/soarafront.jpg";
 const introTitle = {
   jp: "SOARAとは",
   en: "What is SOARA?",
@@ -313,13 +313,13 @@ export default function AboutPage() {
           </div>
           <h2 className="text-3xl font-bold text-gray-900">
             {L(
-              "2026年7月、琵琶湖で200m滑空を実現する",
+              "2026年7月、琵琶湖で200mの滑空を実現する",
               "Achieve a 200m glide at Lake Biwa in July 2026"
             )}
           </h2>
           <p className="text-lg leading-relaxed text-gray-700">
             {L(
-              "鳥人間コンテスト滑空機部門で200mを達成することが、SOARAの指標です。高校生チームが未だ突破したことのない第二の壁を超えることで、次世代の可能性を示します。",
+              "鳥人間コンテスト滑空機部門で200mを記録することが、SOARAの指標です。高校生チームが未だ突破したことのない第二の壁を超えることで、次世代の可能性を示します。",
               "Our benchmark is a 200m glide in the Birdman Contest glider division. By crossing this second barrier—never achieved by a high school team—we aim to show the potential of the next generation."
             )}
           </p>
@@ -470,7 +470,7 @@ export default function AboutPage() {
             </p>
             <p className="mt-3 text-gray-700">
               {L(
-                "・高校生記録153mを上回るためには、揚抗比・安定性・操縦技術の両立が不可欠。\n・東京を拠点に、経験豊富な大学・社会人チームと連携し、設計と製作の質を向上可。",
+                "・高校生記録153mを上回るためには、揚抗比・安定性・操縦技術の両立が不可欠です。\n・経験豊富な大学・社会人チームが多く位置する東京を拠点に先輩方から学び、より安全で高性能な機体を目指します。",
                 "• To surpass the 153 m high school record, we must balance L/D, stability, and piloting skills.\n• Based in Tokyo, we can collaborate with experienced university and adult teams to improve design and build quality."
               ).split("\n").map((line, idx) => (
                 <span key={idx} className="block">
@@ -538,7 +538,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-lg leading-relaxed text-gray-700">
             {L(
-              "SOARAは、他の鳥人間チームと比較し、2つの独自性を持っています。",
+              "SOARAは他の鳥人間チームと比較し、2つの独自性を持っていると考えています。",
               "Compared to other Birdman teams, SOARA stands out in two ways."
             )}
           </p>
@@ -551,7 +551,7 @@ export default function AboutPage() {
                   en: "A volunteer team across schools",
                 },
                 summary: {
-                  jp: "複数校から有志が集まる高校生チームとして日本初の形態。部活の制約に縛られず、情熱と多様な知を結集。",
+                  jp: "複数校から有志が集まる高校生チームとして日本初の形態をとっています。既存の組織にありがちな制約に縛られず、情熱と多様な知を結集できます。",
                   en: "Japan’s first high school team formed by volunteers from multiple schools, free from club constraints and united by passion and diverse expertise.",
                 },
                 details: {
@@ -576,7 +576,7 @@ export default function AboutPage() {
                   en: "Commitment to visibility",
                 },
                 summary: {
-                  jp: "フライトだけでなく製作過程を発信。技術力の可視化と次世代の挑戦を促す。",
+                  jp: "フライトだけでなく製作過程を積極的に発信することで、技術力の可視化と次世代の挑戦者が生まれやすい環境を作ります。",
                   en: "We share not just flights but the build process, making our skills visible and inspiring the next generation.",
                 },
                 details: {

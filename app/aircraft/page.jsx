@@ -36,6 +36,145 @@ function PlaceholderImg({ label }) {
   );
 }
 
+function WingStructureComparison({ L }) {
+  const [sliderPosition, setSliderPosition] = useState(90); // デフォルトは90%（左から10%の位置）
+  const [isDragging, setIsDragging] = useState(false);
+  const [showBefore, setShowBefore] = useState(true);
+  const [showAfter, setShowAfter] = useState(true);
+
+  const handleMouseDown = () => setIsDragging(true);
+  const handleMouseUp = () => setIsDragging(false);
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+    const percent = (x / rect.width) * 100;
+    setSliderPosition(percent);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.max(
+      0,
+      Math.min(e.touches[0].clientX - rect.left, rect.width)
+    );
+    const percent = (x / rect.width) * 100;
+    setSliderPosition(percent);
+  };
+
+  return (
+    <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200">
+      <div
+        className="relative h-full w-full min-h-[400px] cursor-col-resize select-none"
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleMouseUp}
+      >
+        {/* 後の画像（つけた後） - ベース */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/structure/wing-structure-after.png"
+            alt={L("翼構造（外皮あり）", "Wing structure (with skin)")}
+            className="h-full w-full object-cover"
+            onError={() => {
+              setShowAfter(false);
+            }}
+          />
+          {!showAfter && (
+            <div className="flex h-full w-full items-center justify-center">
+              <PlaceholderImg
+                label={L(
+                  "翼構造（外皮あり）",
+                  "Wing structure (with skin)"
+                )}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* 前の画像（つける前） - オーバーレイ（クリップされる） */}
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        >
+          <img
+            src="/images/structure/wing-structure-before.png"
+            alt={L("翼構造（骨組みのみ）", "Wing structure (frame only)")}
+            className="h-full w-full object-cover"
+            onError={() => {
+              setShowBefore(false);
+            }}
+          />
+          {!showBefore && (
+            <div className="flex h-full w-full items-center justify-center">
+              <PlaceholderImg
+                label={L(
+                  "翼構造（骨組みのみ）",
+                  "Wing structure (frame only)"
+                )}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* スライダーライン */}
+        <div
+          className="absolute top-0 bottom-0 w-1 bg-white shadow-lg cursor-col-resize z-10"
+          style={{ left: `${sliderPosition}%` }}
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleMouseDown}
+        >
+          {/* スライダーハンドル */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center ring-2 ring-gray-200">
+            <svg
+              className="w-5 h-5 text-gray-600"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M8 9l4-4 4 4M16 15l-4 4-4-4" />
+            </svg>
+          </div>
+        </div>
+
+        {/* ラベル */}
+        <div className="absolute top-4 left-4 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-gray-700 shadow-sm ring-1 ring-gray-200 pointer-events-none">
+          {L("プランク・フィルムなし", "Frame only")}
+        </div>
+        <div className="absolute top-4 right-4 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-gray-700 shadow-sm ring-1 ring-gray-200 pointer-events-none">
+          {L("外皮あり", "With skin")}
+        </div>
+
+        {/* 操作説明 */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-gray-700 shadow-sm ring-1 ring-gray-200 pointer-events-none">
+          {L(
+            "スライダーをドラッグして比較",
+            "Drag slider to compare"
+          )}
+        </div>
+
+        {/* 将来：3Dモデルビューアー（実装時にコメント解除） */}
+        {/* <Suspense
+          fallback={
+            <div className="flex h-full w-full min-h-[400px] items-center justify-center text-gray-500">
+              {L("3Dモデルを読み込み中...", "Loading 3D Model...")}
+            </div>
+          }
+        >
+          <WingStructure3D />
+        </Suspense> */}
+      </div>
+    </div>
+  );
+}
+
 export default function AircraftPage() {
   const [selected, setSelected] = useState("X1");
   const [openSpecs, setOpenSpecs] = useState(false);
@@ -46,7 +185,7 @@ export default function AircraftPage() {
     X1: {
       status: L("Prototype - 2024年設計", "Prototype — Designed 2024"),
       note: L(
-        "強度課題により製作中止。ここから得た学びを次機に反映。",
+        "強度課題により製作中止。ここから得た学びを次機に反映しました。",
         "Production halted due to structural issues. Lessons learned were applied to the next aircraft."
       ),
       specs: [
@@ -454,50 +593,51 @@ export default function AircraftPage() {
                 "Understanding Aircraft Structure"
               )}
             </h2>
-            <p className="max-w-3xl text-base leading-relaxed text-gray-600">
-              {L(
-                "人力飛行機の翼は、大きく「一次構造」と「二次構造」の2つに分けることができます。一次構造は揚力を受け止める骨格にあたり、二次構造は翼の形を作って空気の流れを整える外装の役割を担っています。",
-                "The wings of a human-powered aircraft can be divided into two categories: primary structure and secondary structure. The primary structure serves as the load-bearing skeleton that supports lift, while the secondary structure forms the airfoil shape and smooths the airflow."
-              )}
-            </p>
           </div>
 
-          {/* 一次構造 / 二次構造 概要カード */}
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div className="rounded-2xl bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] p-6 shadow-sm ring-1 ring-gray-200">
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#369bff]/10 px-3 py-1 text-xs font-semibold text-[#0050a7]">
-                Primary Structure
-              </span>
-              <h3 className="mt-3 text-xl font-semibold text-gray-900">
-                {L(
-                  "一次構造 ― 揚力を支える骨格",
-                  "Primary Structure — The Load-bearing Skeleton"
-                )}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                {L(
-                  "主桁（CFRPパイプ）とかんざし（桁どうしを接合する内部パーツ）から成り、パイロットと機体自身の全重量を支えながら、飛行中に翼にかかる荷重を受け止めています。",
-                  "Composed of the main spar (CFRP pipe) and kanzashi (internal joints connecting spars), this structure supports the full weight of the pilot and the aircraft while bearing the aerodynamic loads during flight."
-                )}
-              </p>
+          {/* 左半分：一次構造・二次構造の説明 / 右半分：翼構造イメージ */}
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* 左半分：テキスト説明 */}
+            <div className="space-y-6">
+              <div className="rounded-2xl bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] p-6 shadow-sm ring-1 ring-gray-200">
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#369bff]/10 px-3 py-1 text-xs font-semibold text-[#0050a7]">
+                  Primary Structure
+                </span>
+                <h3 className="mt-3 text-xl font-semibold text-gray-900">
+                  {L(
+                    "一次構造 ― 揚力を支える骨格",
+                    "Primary Structure — The Load-bearing Skeleton"
+                  )}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                  {L(
+                    "主桁（CFRPパイプ）とかんざし（桁どうしを接合する内部パーツ）から成り、パイロットと機体自身の全重量を支えながら、飛行中に翼にかかる荷重を受け止めています。",
+                    "Composed of the main spar (CFRP pipe) and kanzashi (internal joints connecting spars), this structure supports the full weight of the pilot and the aircraft while bearing the aerodynamic loads during flight."
+                  )}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-200">
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700">
+                  Secondary Structure
+                </span>
+                <h3 className="mt-3 text-xl font-semibold text-gray-900">
+                  {L(
+                    "二次構造 ― 翼型を形づくる外装",
+                    "Secondary Structure — Airfoil-shaping Skin"
+                  )}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-700">
+                  {L(
+                    "リブ・ストリンガー・プランク・後縁材・リブキャップ・フィルムといった部材で構成されており、翼の断面形状（翼型 GOE647）を正確に維持しながら、層流を保って抗力を抑える働きをしています。",
+                    "Composed of ribs, stringers, planks, trailing-edge members, rib caps, and film, this structure accurately maintains the airfoil cross-section (GOE647) while preserving laminar flow and reducing drag."
+                  )}
+                </p>
+              </div>
             </div>
-            <div className="rounded-2xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-200">
-              <span className="inline-flex items-center gap-1 rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700">
-                Secondary Structure
-              </span>
-              <h3 className="mt-3 text-xl font-semibold text-gray-900">
-                {L(
-                  "二次構造 ― 翼型を形づくる外装",
-                  "Secondary Structure — Airfoil-shaping Skin"
-                )}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-700">
-                {L(
-                  "リブ・ストリンガー・プランク・後縁材・リブキャップ・フィルムといった部材で構成されており、翼の断面形状（翼型 GOE647）を正確に維持しながら、層流を保って抗力を抑える働きをしています。",
-                  "Composed of ribs, stringers, planks, trailing-edge members, rib caps, and film, this structure accurately maintains the airfoil cross-section (GOE647) while preserving laminar flow and reducing drag."
-                )}
-              </p>
-            </div>
+
+            {/* 右半分：翼構造イメージ（画像比較スライダー） */}
+            <WingStructureComparison L={L} />
           </div>
 
           {/* 構造パーツ詳細 */}
@@ -509,12 +649,16 @@ export default function AircraftPage() {
             {/* ── 主桁 (CFRP) ── */}
             <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200">
               <div className="grid lg:grid-cols-[1fr_1.2fr]">
-                <PlaceholderImg
-                  label={L(
-                    "主桁（CFRP パイプ）写真",
-                    "Main spar (CFRP pipe) photo"
-                  )}
-                />
+                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
+                  <img
+                    src="/images/structure/cfrp.png"
+                    alt={L(
+                      "主桁（CFRP パイプ）写真",
+                      "Main spar (CFRP pipe) photo"
+                    )}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
                 <div className="flex flex-col justify-center p-6 lg:p-8">
                   <span className="inline-flex w-fit items-center gap-1 rounded-full bg-[#369bff]/10 px-3 py-1 text-xs font-semibold text-[#0050a7]">
                     {L("一次構造", "Primary")}
@@ -571,7 +715,7 @@ export default function AircraftPage() {
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-gray-700">
                     {L(
-                      "隣り合う桁の内側に差し込んで接合するための円筒状のパーツです。SOARAでは2番桁を抜いた構成にしているため、1番桁と3番桁を繋ぐかんざしを新たに製作しました。TORICAのかんざしをベースに、その上からガラス繊維を3mm積層してエポキシ樹脂で固めています。",
+                      "隣り合う桁の内側に差し込んで接合するための円筒状のパーツです。SOARAでは2番桁を抜いた構成にしているため、1番桁と3番桁を繋ぐかんざしを新たに製作しました。鳥科さまのかんざしをベースに、その上から3mmヒノキ棒を巻いたうえでガラス繊維を1層積層してエポキシ樹脂で固めています。",
                       "A cylindrical part inserted inside adjacent spars to join them together. Since SOARA omits spar No. 2, we fabricated a new kanzashi to connect spars No. 1 and No. 3. Starting from a TORICA kanzashi, we laminated 3 mm of glass fiber on top and cured it with epoxy resin."
                     )}
                   </p>
@@ -587,21 +731,29 @@ export default function AircraftPage() {
                     </span>
                   </div>
                 </div>
-                <PlaceholderImg
-                  label={L("かんざし写真", "Kanzashi photo")}
-                />
+                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
+                  <img
+                    src="/images/structure/kanzashi.png"
+                    alt={L("かんざし写真", "Kanzashi photo")}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
               </div>
             </div>
 
             {/* ── リブ ── */}
             <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200">
               <div className="grid lg:grid-cols-[1fr_1.2fr]">
-                <PlaceholderImg
-                  label={L(
-                    "リブ（翼型断面）写真",
-                    "Rib (airfoil cross-section) photo"
-                  )}
-                />
+                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
+                  <img
+                    src="/images/structure/ribs.png"
+                    alt={L(
+                      "リブ（翼型断面）写真",
+                      "Rib (airfoil cross-section) photo"
+                    )}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
                 <div className="flex flex-col justify-center p-6 lg:p-8">
                   <span className="inline-flex w-fit items-center gap-1 rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700">
                     {L("二次構造", "Secondary")}
@@ -677,21 +829,29 @@ export default function AircraftPage() {
                     </span>
                   </div>
                 </div>
-                <PlaceholderImg
-                  label={L("ストリンガー写真", "Stringer photo")}
-                />
+                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
+                  <img
+                    src="/images/structure/stringers.JPG"
+                    alt={L("ストリンガー写真", "Stringer photo")}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
               </div>
             </div>
 
             {/* ── プランク ── */}
             <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200">
               <div className="grid lg:grid-cols-[1fr_1.2fr]">
-                <PlaceholderImg
-                  label={L(
-                    "プランク（前縁）写真",
-                    "Plank (leading edge) photo"
-                  )}
-                />
+                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
+                  <img
+                    src="/images/structure/plank.png"
+                    alt={L(
+                      "プランク（前縁）写真",
+                      "Plank (leading edge) photo"
+                    )}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
                 <div className="flex flex-col justify-center p-6 lg:p-8">
                   <span className="inline-flex w-fit items-center gap-1 rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700">
                     {L("二次構造", "Secondary")}
@@ -754,18 +914,26 @@ export default function AircraftPage() {
                     </span>
                   </div>
                 </div>
-                <PlaceholderImg
-                  label={L("リブキャップ写真", "Rib cap photo")}
-                />
+                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
+                  <img
+                    src="/images/structure/ribcaps.JPG"
+                    alt={L("リブキャップ写真", "Rib cap photo")}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
               </div>
             </div>
 
             {/* ── 後縁材 ── */}
             <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200">
               <div className="grid lg:grid-cols-[1fr_1.2fr]">
-                <PlaceholderImg
-                  label={L("後縁材写真", "Trailing-edge member photo")}
-                />
+                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
+                  <img
+                    src="/images/structure/trailingedge.png"
+                    alt={L("後縁材写真", "Trailing-edge member photo")}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
                 <div className="flex flex-col justify-center p-6 lg:p-8">
                   <span className="inline-flex w-fit items-center gap-1 rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700">
                     {L("二次構造", "Secondary")}
@@ -796,40 +964,6 @@ export default function AircraftPage() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* 製作フロー */}
-          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-8">
-            <h3 className="text-2xl font-bold text-gray-900">
-              {L(
-                "翼製作フロー：オン・スパ同時接着",
-                "Wing Construction Flow: On-spar Simultaneous Bonding"
-              )}
-            </h3>
-            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-600">
-              {L(
-                "桁にはフランジ（出っ張り）があり、精度の確保が難しいため、SOARAでは「リブの結合」「迎角合わせ」「桁への固定」をひとつの工程でまとめて行う方法を採用しています。",
-                "Because spar flanges make precision difficult, SOARA performs rib joining, angle-of-attack alignment, and spar attachment in a single combined step."
-              )}
-            </p>
-            <ol className="mt-6 grid gap-4 sm:grid-cols-3">
-              {constructionSteps.map((item) => (
-                <li
-                  key={item.step}
-                  className="rounded-2xl bg-gray-50 p-5 ring-1 ring-gray-100"
-                >
-                  <span className="text-2xl font-bold text-[#369bff]">
-                    {item.step}
-                  </span>
-                  <h4 className="mt-2 text-base font-semibold text-gray-900">
-                    {item.title}
-                  </h4>
-                  <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                    {item.desc}
-                  </p>
-                </li>
-              ))}
-            </ol>
           </div>
         </section>
       </div>
