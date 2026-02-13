@@ -295,7 +295,7 @@ export default function AircraftPage() {
       ),
       specs: [
         { label: L("全幅", "Wingspan"), value: "18.8 m" },
-        { label: L("全長", "Length"), value: "5.5 m" },
+        { label: L("全長", "Length"), value: "5.35 m" },
         { label: L("主翼面積", "Wing Area"), value: "26.32 m²" },
         { label: L("空虚重量", "Empty Weight"), value: "50 kg" },
         { label: L("予想総重量", "Est. Gross Weight"), value: "105 kg" },
@@ -651,7 +651,7 @@ export default function AircraftPage() {
               <div className="grid lg:grid-cols-[1fr_1.2fr]">
                 <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
                   <img
-                    src="/images/structure/cfrp.png"
+                    src="/images/structure/cfrp_2.png"
                     alt={L(
                       "主桁（CFRP パイプ）写真",
                       "Main spar (CFRP pipe) photo"

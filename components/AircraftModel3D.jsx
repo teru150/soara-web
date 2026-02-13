@@ -11,16 +11,15 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 // ========================================
 const AIRCRAFT_MODELS = {
   X1: { type: 'glb', path: '/3d/SOARA-X1.glb' },
-  // X2 は OBJ + MTL の組み合わせ
   X2: { type: 'glb', path: '/3d/SOARA-X2.glb' },
-  X3: { type: 'glb', path: '/3d/placeholder-X3.glb' },
+  X3: { type: 'glb', path: '/3d/SOARA-X3.glb' },
 };
 
 // 実機モデルかプレースホルダーかの判定（本番時は全てtrueに変更）
 const IS_ACTUAL_MODEL = {
   X1: true,   // 実機モデル
   X2: true,   // OBJ+MTL 実機モデル
-  X3: false,  // プレースホルダー（本番時: true に変更）
+  X3: true,  // 実機モデル（本番時: true に変更）
 };
 
 /**
@@ -50,9 +49,13 @@ function Model({ model, aircraft, autoRotate = false }) {
 
   // X2は実機サイズのため1/100に縮小、その他は0.15スケール
   const scale = aircraft === 'X2' ? 0.0015 : 0.15;
+  const scale2 = aircraft === 'X3' ? 0.0015 : 0.15;
 
   return object ? <primitive ref={meshRef} object={object} scale={scale} /> : null;
+  return object ? <primitive ref={meshRef} object={object} scale={scale2} /> : null;
+
 }
+
 
 /**
  * ローディング中のフォールバック
