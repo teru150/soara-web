@@ -67,13 +67,13 @@ const introTitle = {
 const introParagraphs = {
   jp: [
     "SOARAは、2025年6月に結成された日本初の高校生有志鳥人間チームです。学校の枠を越え「自分たちで飛行機を作りたい」という情熱だけで集まった仲間がスタート地点です。",
-    "現在は東京を中心に、全国13校から21名が参加し、海外からのメンバーも加わっています。多様なバックグラウンドを持つ高校生が、専門や得意分野を掛け合わせて挑戦しています。",
+    `現在は東京を中心に、全国${contentData.meta?.schools ?? 20}校から${contentData.meta?.members ?? 29}名が参加し、海外からのメンバーも加わっています。多様なバックグラウンドを持つ高校生が、専門や得意分野を掛け合わせて挑戦しています。`,
     "私たちは、この挑戦を通じて2つのことを実現します。高校生でも本格的な航空機を作り、安全に飛ばせることの証明。そして、同世代・次世代がものづくりに触れるきっかけを作ること。",
     "SOARAは、単なる機体製作チームではありません。困難でありながら最高に楽しい課題に、仲間とともに挑む若き挑戦者たちの集まりです。",
   ],
   en: [
-    "SOARA is Japan’s first volunteer high school Birdman Contest team, formed in June 2025. We came together with a shared passion to build our own aircraft beyond school boundaries.",
-    "Based in Tokyo, we now have 21 members from 13 schools plus overseas participants. Students from diverse backgrounds combine their skills to take on this challenge.",
+    "SOARA is Japan's first volunteer high school Birdman Contest team, formed in June 2025. We came together with a shared passion to build our own aircraft beyond school boundaries.",
+    `Based in Tokyo, we now have ${contentData.meta?.members ?? 29} members from ${contentData.meta?.schools ?? 20} schools plus overseas participants. Students from diverse backgrounds combine their skills to take on this challenge.`,
     "Through this challenge, we aim to prove that high school students can build and safely fly a real aircraft, and to create opportunities for peers and future generations to experience making.",
     "SOARA is not just an aircraft build team. We are young challengers tackling a demanding, rewarding mission together.",
   ],

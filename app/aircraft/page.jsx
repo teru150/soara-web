@@ -589,8 +589,8 @@ export default function AircraftPage() {
             </p>
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
               {L(
-                "機体構造を知る",
-                "Understanding Aircraft Structure"
+                "翼構造を知る",
+                "Understanding Wing Structure"
               )}
             </h2>
           </div>
@@ -651,7 +651,7 @@ export default function AircraftPage() {
               <div className="grid lg:grid-cols-[1fr_1.2fr]">
                 <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[360px] bg-gray-50">
                   <img
-                    src="/images/structure/cfrp_2.png"
+                    src="/images/structure/cfrp_3.png"
                     alt={L(
                       "主桁（CFRP パイプ）写真",
                       "Main spar (CFRP pipe) photo"
@@ -671,8 +671,8 @@ export default function AircraftPage() {
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-gray-700">
                     {L(
-                      "炭素繊維強化プラスチック（CFRP）製のパイプで、いわば翼の背骨にあたる最も重要な部材です。SOARAでは0-1-3-4-5-6番の計6本の桁を使って翼幅18.8mを構成しており、東京理科大学の鳥人間サークル鳥科さまを通じて、有限会社スリーホープ製のものを購入しました。",
-                      "Made of carbon-fiber-reinforced plastic (CFRP), this is the most critical structural member — essentially the backbone of the wing. SOARA uses six spars (Nos. 0-1-3-4-5-6) to span 18.8 m, purchased through TORICA, the Birdman club at Tokyo University of Science, and manufactured by Three Hope Co., Ltd."
+                      "写真中央の3人で抱えている炭素繊維強化プラスチック（CFRP）製のパイプで、いわば翼の背骨にあたる最も重要な部材です。SOARAでは0-1-3-4-5-6番の左右合わせて計11本の桁を使って翼幅18.8mを構成しており、東京理科大学の鳥人間サークル鳥科さまを通じて、有限会社スリーホープ製のものを購入しました。",
+                      "Made of carbon-fiber-reinforced plastic (CFRP), this is the most critical structural member — essentially the backbone of the wing. SOARA uses eleven spars (Nos. 0-1-3-4-5-6) to span 18.8 m, purchased through TORICA, the Birdman club at Tokyo University of Science, and manufactured by Three Hope Co., Ltd."
                     )}
                   </p>
                   <div className="mt-4 grid grid-cols-2 gap-2">
@@ -690,8 +690,8 @@ export default function AircraftPage() {
                       </span>
                       <span className="font-medium text-gray-800">
                         {L(
-                          "6 本（2番桁は不使用）",
-                          "6 pipes (No. 2 not used)"
+                          "11 本（2番桁は不使用）",
+                          "11 pipes (No. 2 not used)"
                         )}
                       </span>
                     </div>
@@ -864,7 +864,7 @@ export default function AircraftPage() {
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-gray-700">
                     {L(
-                      "翼の前縁（Leading Edge）を覆って、正確な曲面形状を保つことで層流を維持するパーツです。前縁は空気が最初に触れる部分なので、ここの精度が揚力と抗力にそのまま影響します。SOARAでは軽量で加工しやすいスチレンペーパーを採用しました。",
+                      "翼の前縁を覆って、正確な曲面形状を保つことで層流を維持するパーツです。前縁は空気が最初に触れる部分なので、ここの精度が揚力と抗力にそのまま影響します。SOARAでは軽量で加工しやすいスチレンペーパーを採用しました。",
                       "This part covers the leading edge of the wing and maintains an accurate curved shape to preserve laminar flow. Since the leading edge is the first point of contact with the air, its precision directly affects lift and drag. SOARA chose lightweight, easy-to-process styrene paper."
                     )}
                   </p>

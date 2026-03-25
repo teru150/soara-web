@@ -10,20 +10,24 @@ const heroImages = [
     src: "/images/pics/soarafront.jpg",
     caption: { jp: "1月の桁試験にて", en: "Spar test in January" },
   },
+   {
+    src: "/images/pics/mainwing_clean.png",
+    caption: { jp: "きれいに作れた主翼模型", en: "Cleanly made main wing model" },
+  },
   {
     src: "/images/pics/partial_blur.png",
     caption: {
-      jp: "8月に行われた東京大学F-Tecさんとの交流会",
+      jp: "昨年8月に行われた東京大学F-Tecさんとの交流会",
       en: "August meetup with the University of Tokyo F-Tec team",
     },
   },
   {
     src: "/images/pics/IMG_4156.png",
     caption: { jp: "TiBでの作業", en: "Work at TiB" },
-  },
+  },  
   {
     src: "/images/pics/IMG_3584.jpg",
-    caption: { jp: "購入した桁を積み込み中", en: "Loading purchased spars" },
+    caption: { jp: "桁を積み込み中", en: "Loading aircraft main spars" },
   },
   {
     src: "/images/pics/IMG_3593.jpg",
@@ -85,7 +89,7 @@ const stats = (meta, language) => [
 ];
 
 const faceGallery = [
-  "/images/people/Iriyama_rib.png",
+  "/images/people/iriyama_new.png",
   "/images/people/Takahashi.JPG",
   "/images/people/nakajima.jpg",
   "/images/people/Kikuchi.jpg",
@@ -98,6 +102,7 @@ const faceGallery = [
   "/images/people/hattori.jpg",
   "/images/people/Asaoka.png",
   "/images/people/Yano.png",
+  "/images/people/YHattori.png"
 ];
 
 const heroOverlayOpacity = 0.75;
