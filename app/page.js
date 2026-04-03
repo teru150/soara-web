@@ -54,40 +54,6 @@ const heroImages = [
   },
 ];
 
-const stats = (meta, language) => [
-  {
-    label: "Mission",
-    value: "2",
-    detail:
-      language === "en" ? (
-        <>
-          Challenge the impossible ×
-          <br />
-          Grow peers across generations
-        </>
-      ) : (
-        <>
-          困難への挑戦 ×
-          <br />
-          同世代の仲間を増やす
-        </>
-      ),
-  },
-  {
-    label: "Members",
-    value: String(meta?.members ?? 21),
-    detail:
-      language === "en"
-        ? "13 schools + overseas"
-        : meta?.schoolsNote ?? "全国13校・アメリカ含む",
-  },
-  {
-    label: "Target",
-    value: "200m",
-    detail: language === "en" ? "Aim for a first high school record" : "高校生初の記録へ挑戦",
-  },
-];
-
 const faceGallery = [
   "/images/people/iriyama_new.png",
   "/images/people/Takahashi.JPG",
@@ -109,6 +75,37 @@ const heroOverlayOpacity = 0.75;
 const heroOverlay = `linear-gradient(180deg, rgba(255,255,255,${heroOverlayOpacity}) 0%, rgba(255,255,255,${
   heroOverlayOpacity * 0.95
 }) 50%, rgba(255,255,255,${Math.min(heroOverlayOpacity + 0.05, 1)}) 100%)`;
+
+const countdownTargetMs = new Date("2026-07-25T00:00:00+09:00").getTime();
+
+function getCountdownParts(nowMs) {
+  const diffMs = Math.max(countdownTargetMs - nowMs, 0);
+  const totalSeconds = Math.floor(diffMs / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return {
+    days: String(days).padStart(3, "0"),
+    hours: String(hours).padStart(2, "0"),
+    minutes: String(minutes).padStart(2, "0"),
+    seconds: String(seconds).padStart(2, "0"),
+  };
+}
+
+function CountdownStrip({ label, value }) {
+  return (
+    <div className="min-w-0">
+      <div className="relative inline-flex min-w-[7.5rem] items-center justify-center rounded-[24px] bg-white px-5 py-4 text-3xl font-bold text-[#0050a7] shadow-sm ring-1 ring-[#369bff]/15 transition duration-500 ease-out motion-safe:animate-[countdownPop_0.5s_ease-out] sm:min-w-[8.5rem] sm:px-6 sm:py-5 sm:text-4xl">
+        {Number(value)}
+        <span className="absolute bottom-2 right-3 text-[10px] font-semibold tracking-[0.16em] text-gray-400 sm:bottom-2.5 sm:right-4 sm:text-xs">
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 function MissionCard({ mission }) {
   const videoRef = useRef(null);
@@ -199,6 +196,8 @@ export default function Home() {
   const [reduceMotion, setReduceMotion] = useState(false);
   const intervalRef = useRef(null);
   const [faceIndex, setFaceIndex] = useState(0);
+  const [showAnnouncementCopy, setShowAnnouncementCopy] = useState(false);
+  const [countdown, setCountdown] = useState(() => getCountdownParts(Date.now()));
   const meta = contentData.meta || { members: 21, schools: 13, schoolsNote: "全国13校・アメリカ含む" };
   const homeMissions =
     language === "en"
@@ -326,6 +325,25 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowAnnouncementCopy(true);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    const tick = () => {
+      setCountdown(getCountdownParts(Date.now()));
+    };
+
+    tick();
+    const interval = setInterval(tick, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   const goToSlide = (nextIndex) => {
     const safeIndex =
@@ -336,7 +354,59 @@ export default function Home() {
   return (
     <div className="relative flex min-h-screen flex-col">
       <div className="pointer-events-none absolute inset-0 soara-grid" aria-hidden />
-      <section className="relative isolate overflow-hidden px-6 pb-16 pt-28 sm:px-8 lg:px-12">
+      <section className="relative isolate left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#07111f]">
+        <div className="relative min-h-screen">
+          <img
+            src="/images/web-hero-01.png"
+            alt=""
+            className="absolute inset-0 hidden h-full w-full object-cover lg:block"
+            aria-hidden
+          />
+          <img
+            src="/images/web-hero-02.png"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover lg:hidden"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,31,0.16)_0%,rgba(7,17,31,0.36)_35%,rgba(7,17,31,0.78)_72%,rgba(7,17,31,0.94)_100%)]"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(54,155,255,0.28),transparent_28%),radial-gradient(circle_at_top_right,rgba(0,212,255,0.18),transparent_24%)]"
+            aria-hidden
+          />
+          <div className="absolute inset-0 soara-grid opacity-15" aria-hidden />
+
+          <div className="relative mx-auto flex min-h-screen max-w-screen-xl items-end px-6 pb-10 pt-32 sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
+            <div
+              className={`max-w-3xl rounded-[32px] border border-white/15 bg-[#07111f]/48 p-6 text-white shadow-2xl backdrop-blur-md transition-all duration-1000 sm:p-8 lg:p-10 ${
+                showAnnouncementCopy
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-6 opacity-0"
+              }`}
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white/70">
+                2026 Birdman Contest
+              </p>
+              <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+                {L(
+                  "鳥人間コンテスト2026に出場します！",
+                  "SOARA will compete in the 2026 Birdman Contest."
+                )}
+              </h1>
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-white/84 sm:text-xl">
+                {L(
+                  "書類審査に通過し、無事大会への出場権を獲得しました。",
+                  "Our volunteer high school team has earned its place on the starting line at Lake Biwa."
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="main-hero" className="relative isolate overflow-hidden px-6 pb-16 pt-28 sm:px-8 lg:px-12">
         <div
           className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/images/website-hero-mk3.png')" }}
@@ -420,16 +490,32 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 rounded-2xl bg-white/80 p-4 shadow-sm ring-1 ring-gray-200 sm:grid-cols-3">
-              {stats(meta, language).map((stat) => (
-                <div key={stat.label} className="rounded-xl bg-gray-50 px-4 py-3">
-                  <p className="text-sm font-semibold text-gray-500">
-                    {stat.label}
+            <div className="rounded-[28px] bg-gradient-to-r from-[#eef7ff] via-white to-[#f5f7fa] p-5 shadow-sm ring-1 ring-[#369bff]/20 sm:p-6">
+              <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+                    Countdown
                   </p>
-                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-sm text-gray-600">{stat.detail}</p>
+                  <p className="text-2xl font-bold text-gray-900 sm:text-3xl">
+                    {L(
+                      "本番まであと",
+                      "Time remaining until The Competition"
+                    )}
+                  </p>
                 </div>
-              ))}
+                <p className="text-sm leading-7 text-gray-600">
+                  {L(
+                    "2026/7/25に向けて、今この瞬間も準備が進んでいます。",
+                    "Preparation continues every second as we approach the start line at Lake Biwa."
+                  )}
+                </p>
+              </div>
+              <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-10">
+                <CountdownStrip label={L("日", "Days")} value={countdown.days} />
+                <CountdownStrip label={L("時間", "Hours")} value={countdown.hours} />
+                <CountdownStrip label={L("分", "Minutes")} value={countdown.minutes} />
+                <CountdownStrip label={L("秒", "Seconds")} value={countdown.seconds} />
+              </div>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../contexts/LanguageContext";
 import contentData from "../../data/content.json";
 
@@ -59,7 +59,7 @@ const missionStories = [
   },
 ];
 
-const introImage = "/images/pics/soarafront.jpg";
+const introImage = "/images/pics/IMG_5610.jpg";
 const introTitle = {
   jp: "SOARAとは",
   en: "What is SOARA?",
@@ -84,6 +84,8 @@ export default function AboutPage() {
   const L = (jp, en) => (language === "en" ? en : jp);
   const [openMission, setOpenMission] = useState({});
   const [openWallAnalysis, setOpenWallAnalysis] = useState(false);
+  const [introReveal, setIntroReveal] = useState(0);
+  const introSectionRef = useRef(null);
   const pick = (entry) => (language === "en" ? entry.en : entry.jp);
   const introList = language === "en" ? introParagraphs.en : introParagraphs.jp;
   const history =
@@ -144,113 +146,172 @@ export default function AboutPage() {
     setOpenMission((prev) => ({ ...prev, [title]: !prev[title] }));
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = introSectionRef.current;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const total = Math.max(section.offsetHeight - viewportHeight, 1);
+      const travelled = Math.min(Math.max(-rect.top, 0), total);
+      setIntroReveal(travelled / total);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  const introPanelTranslate = 68 - introReveal * 68;
+
   return (
     <div className="relative flex flex-col px-6 pb-20 pt-24 sm:px-8 lg:px-12">
       <div className="absolute inset-0 soara-grid pointer-events-none" aria-hidden />
       <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-14">
-        <header className="relative overflow-hidden rounded-3xl border border-[#369bff]/25 bg-gradient-to-br from-[#e6f4ff]/90 via-white to-[#f5f7fa] px-6 py-12 shadow-soara sm:px-10">
-          <div className="absolute inset-0 soara-grid opacity-40" aria-hidden />
-          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-                About SOARA
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-gray-900 sm:text-5xl">
-                {L(contentData.about.hero.title, "About SOARA")}
-              </h1>
-              <p className="text-lg text-gray-600">
-                {L(
-                  contentData.about.hero.subtitle,
-                  "A nationwide high school team building a human-powered glider for the 2026 Birdman Contest."
-                )}
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 rounded-2xl bg-white/80 px-5 py-4 shadow-sm ring-1 ring-gray-200">
-              <p className="text-sm font-semibold text-gray-500">Key Facts</p>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                <div>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {contentData.meta?.members ?? 21} {L("名", "members")}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    {L(
-                      `全国${contentData.meta?.schools ?? 13}校 + 海外`,
-                      `${contentData.meta?.schools ?? 13} schools + overseas`
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-gray-900">2026</p>
-                  <p className="text-sm text-gray-600">
-                    {L("鳥人間コンテスト出場目標", "Targeting Birdman Contest")}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-gray-900">Tokyo</p>
-                  <p className="text-sm text-gray-600">
-                    {L(
-                      "Tokyo Innovation Baseを拠点に活動",
-                      "Based at Tokyo Innovation Base"
-                    )}
-                  </p>
+        <section
+          ref={introSectionRef}
+          className="relative left-1/2 right-1/2 -mt-6 min-h-[185vh] w-screen -translate-x-1/2"
+        >
+          <div className="sticky top-0 overflow-hidden bg-[#0f1f38] shadow-xl">
+            <div className="relative h-screen min-h-[720px]">
+              <img
+                src={introImage}
+                alt={contentData.about.intro.imageAlt || "SOARAチーム集合写真"}
+                className="h-full w-full object-cover object-center"
+              />
+              <div
+                className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,18,34,0.2)_0%,rgba(10,18,34,0.42)_48%,rgba(10,18,34,0.92)_100%)]"
+                aria-hidden
+              />
+              <div
+                className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(54,155,255,0.28),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(0,212,255,0.14),transparent_22%)]"
+                aria-hidden
+              />
+              <div className="absolute inset-0 soara-grid opacity-15" aria-hidden />
+
+              <div
+                className="absolute inset-x-0 bottom-0 z-20 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8"
+                style={{
+                  transform: `translateY(${introPanelTranslate}%)`,
+                }}
+              >
+                <div className="mx-auto max-w-5xl rounded-[32px] border border-white/15 bg-[#0b172b]/78 p-6 text-white shadow-2xl backdrop-blur-md sm:p-8 lg:p-10">
+                  <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-end">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="h-2 w-2 rounded-full bg-[#00d4ff]" />
+                        <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white/68">
+                          Team Story
+                        </p>
+                      </div>
+                      <h1 className="mt-4 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+                        {pick(introTitle)}
+                      </h1>
+                      <p className="mt-4 max-w-2xl text-xl font-semibold leading-tight text-white sm:text-2xl lg:text-3xl">
+                        {L(
+                          "史上初の難題に挑むため集った若き挑戦者たち",
+                          "Young challengers united to take on an unprecedented challenge"
+                        )}
+                      </p>
+                      <div className="mt-6 space-y-4 text-base leading-8 text-white/84 sm:text-lg">
+                      {introList.map((para, idx) => (
+                        <p key={idx}>{para}</p>
+                      ))}
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <a
+                        href="#mission-detail"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0050a7] shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                      >
+                        {L("もっと詳しく", "Learn more")}
+                        <span aria-hidden>→</span>
+                      </a>
+                      <a
+                        href="/members"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-base font-semibold text-white transition hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                      >
+                        {L("メンバーを見る", "Meet the members")}
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mt-6 w-full self-stretch rounded-2xl bg-white/80 p-5 shadow-sm ring-1 ring-gray-200">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
-              About Our Name
-            </p>
-            <h3 className="mt-2 text-xl font-semibold text-gray-900">
-              {L("SOARAという名前", contentData.home.aboutName.title)}
-            </h3>
-            <p className="mt-2 text-base leading-relaxed text-gray-700 whitespace-pre-line">
-              {L(
-                contentData.home.aboutName.text,
-                "“SOARA” is a coined word combining “soar” (to fly) with “A,” the first letter of the alphabet, symbolizing an origin point. We named it with the hope that students who will shape Japan’s future can take flight and gain their first opportunity to grow into leaders in the aviation field."
-              )}
-            </p>
-          </div>
-        </header>
+        </section>
 
-        <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-[#00d4ff]" />
+        <section className="space-y-8">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.85fr)]">
+            <div className="rounded-[32px] border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-                Team Story
+                {L("About Our Name", "About Our Name")}
+              </p>
+              <h3 className="mt-3 text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">
+                {L("SOARAという名前", contentData.home.aboutName.title)}
+              </h3>
+              <p className="mt-4 whitespace-pre-line text-base leading-8 text-gray-700 sm:text-lg">
+                {L(
+                  contentData.home.aboutName.text,
+                  "“SOARA” is a coined word combining “soar” with “A,” the first letter of the alphabet, to express a first takeoff toward the future."
+                )}
               </p>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">
-              {pick(introTitle)}
-            </h2>
-            <div className="space-y-5 rounded-2xl bg-white p-6 text-lg leading-relaxed text-gray-700 shadow-sm ring-1 ring-gray-200">
-              {introList.map((para, idx) => (
-                <p key={idx}>{para}</p>
-              ))}
+
+            <div className="flex h-full flex-col rounded-[32px] border border-[#369bff]/20 bg-gradient-to-br from-[#e6f4ff] via-white to-[#f5f7fa] p-6 shadow-sm sm:p-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+                {L("Our Logo", "Our Logo")}
+              </p>
+              <div className="mt-5 flex flex-1 flex-col gap-4">
+                <article className="flex min-h-[148px] flex-1 items-center gap-4 rounded-[28px] border border-white/70 bg-white/80 p-4 shadow-sm backdrop-blur sm:gap-5 sm:p-5">
+                  <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[22px] bg-[radial-gradient(circle_at_top,rgba(0,212,255,0.18),transparent_52%),linear-gradient(180deg,#f8fbff_0%,#edf5ff_100%)] p-3 sm:h-28 sm:w-28">
+                    <img
+                      src="/logos/soaralogo_sky_square.jpg"
+                      alt="SOARA team logo"
+                      className="max-h-full w-auto max-w-full rounded-[16px] object-contain"
+                    />
+                  </div>
+                  <div className="min-w-0 space-y-2">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {L("Team Logo", "Team Logo")}
+                    </h3>
+                    <p className="text-sm leading-7 text-gray-700">
+                      {L(
+                        "野村恭平デザイン。チームのロゴです。背景には山口の空をそのまま使用しています。",
+                        "Designed by Kyohei Nomura. This is the team logo, featuring a background of Yamaguchi’s sky."
+                      )}
+                    </p>
+                  </div>
+                </article>
+
+                <article className="flex min-h-[148px] flex-1 items-center gap-4 rounded-[28px] border border-white/70 bg-white/80 p-4 shadow-sm backdrop-blur sm:gap-5 sm:p-5">
+                  <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[22px] bg-[radial-gradient(circle_at_top,rgba(54,155,255,0.18),transparent_52%),linear-gradient(180deg,#f8fbff_0%,#edf5ff_100%)] p-3 sm:h-28 sm:w-28">
+                    <img
+                      src="/logos/Regius_logo_tp.png"
+                      alt="Regius logo"
+                      className="max-h-full w-auto max-w-full object-contain"
+                    />
+                  </div>
+                  <div className="min-w-0 space-y-2">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {L("Regius Logo", "Regius Logo")}
+                    </h3>
+                    <p className="text-sm leading-7 text-gray-700">
+                      {L(
+                        "野村恭平デザイン。2026機体「Regius」のロゴです。グッズなどに使用されます。",
+                        "Designed by Kyohei Nomura. This is the logo for our 2026 aircraft, Regius, and will be used on merchandise and more."
+                      )}
+                    </p>
+                  </div>
+                </article>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#mission-detail"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#369bff] to-[#0050a7] px-5 py-3 text-base font-semibold text-white shadow-soara transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#369bff]"
-              >
-                {L("もっと詳しく", "Learn more")}
-                <span aria-hidden>→</span>
-              </a>
-              <a
-                href="/members"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-[#0050a7] ring-1 ring-gray-200 transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0050a7]"
-              >
-                {L("メンバーを見る", "Meet the members")}
-              </a>
-            </div>
-          </div>
-          <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-lg">
-            <img
-              src={introImage}
-              alt={contentData.about.intro.imageAlt || "SOARAチーム集合写真"}
-              className="h-full w-full object-cover"
-            />
           </div>
         </section>
 

@@ -94,7 +94,7 @@ export default function BirdmanPage() {
             <div className="grid gap-4 md:grid-cols-2">
               <div className="flex h-full flex-col space-y-3">
                 <h3 className="text-xl font-semibold text-gray-900">
-                  {L("琵琶湖滑空機", "Lake Biwa Glider")}
+                  {L("琵琶湖型滑空機", "Lake Biwa Glider")}
                 </h3>
                 <p className="mt-2 text-xs text-gray-500">SOARA-X2</p>
                 <div className="space-y-3 text-base leading-relaxed text-gray-700">
