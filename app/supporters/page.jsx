@@ -48,6 +48,51 @@ export default function SupportersPage() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="space-y-3">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+                Gold Sponsor
+              </p>
+              <h2 className="text-3xl font-bold text-gray-900">
+                {L(
+                  "榎本機工株式会社 様",
+                  "Enomoto Technology"
+                )}
+              </h2>
+              <p className="text-base leading-relaxed text-gray-700">
+                {L(
+                  <>
+                  榎本機工は創業115年。自動車部品を鍛造する日本唯一のサーボ駆動スクリュープレスメーカー！
+                  <br/>
+                  世界19カ国に輸出し、日本のものづくり技術の伝承と若手技術者の育成に力を注いでいます。
+                  </>,
+                  <>
+                    Founded 115 years ago, Enomoto Technology is Japan's only servo-driven screw press manufacturer for forging automotive parts.
+                    <br/>
+                    They export to 19 countries worldwide and are dedicated to passing on Japan's manufacturing expertise and nurturing the next generation of engineers.
+                  </>
+                )}
+              </p>
+              <a
+                href="https://www.enomt.co.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#0050a7]"
+              >
+                {L("公式ウェブサイト →", "Official Website →")}
+              </a>
+            </div>
+            <div className="flex w-full max-w-md justify-center overflow-hidden rounded-2xl bg-gray-50 p-6 ring-1 ring-gray-200">
+              <img
+                src="/images/enomoto_logo.jpg"
+                alt="榎本機工ロゴ"
+                className="h-40 w-40 object-contain scale-[2]"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
                 Special Partner
               </p>
               <h2 className="text-3xl font-bold text-gray-900">
