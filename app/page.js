@@ -76,7 +76,7 @@ const heroOverlay = `linear-gradient(180deg, rgba(255,255,255,${heroOverlayOpaci
   heroOverlayOpacity * 0.95
 }) 50%, rgba(255,255,255,${Math.min(heroOverlayOpacity + 0.05, 1)}) 100%)`;
 
-const countdownTargetMs = new Date("2026-07-25T00:00:00+09:00").getTime();
+const countdownTargetMs = new Date("2026-07-26T10:00:00+09:00").getTime();
 
 function getCountdownParts(nowMs) {
   const diffMs = Math.max(countdownTargetMs - nowMs, 0);
@@ -94,10 +94,10 @@ function getCountdownParts(nowMs) {
   };
 }
 
-function CountdownStrip({ label, value }) {
+function CountdownStrip({ label, value, finished }) {
   return (
     <div className="min-w-0">
-      <div className="relative inline-flex min-w-[7.5rem] items-center justify-center rounded-[24px] bg-white px-5 py-4 text-3xl font-bold text-[#0050a7] shadow-sm ring-1 ring-[#369bff]/15 transition duration-500 ease-out motion-safe:animate-[countdownPop_0.5s_ease-out] sm:min-w-[8.5rem] sm:px-6 sm:py-5 sm:text-4xl">
+      <div className={`relative inline-flex min-w-[7.5rem] items-center justify-center rounded-[24px] bg-white px-5 py-4 text-3xl font-bold shadow-sm ring-1 transition duration-500 ease-out motion-safe:animate-[countdownPop_0.5s_ease-out] sm:min-w-[8.5rem] sm:px-6 sm:py-5 sm:text-4xl ${finished ? "text-red-600 ring-red-200" : "text-[#0050a7] ring-[#369bff]/15"}`}>
         {Number(value)}
         <span className="absolute bottom-2 right-3 text-[10px] font-semibold tracking-[0.16em] text-gray-400 sm:bottom-2.5 sm:right-4 sm:text-xs">
           {label}
@@ -490,33 +490,40 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="rounded-[28px] bg-gradient-to-r from-[#eef7ff] via-white to-[#f5f7fa] p-5 shadow-sm ring-1 ring-[#369bff]/20 sm:p-6">
-              <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                <div className="space-y-2">
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-                    Countdown
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900 sm:text-3xl">
-                    {L(
-                      "本番まであと",
-                      "Time remaining until The Competition"
+            {(() => {
+              const finished = countdown.days === "000" && countdown.hours === "00" && countdown.minutes === "00" && countdown.seconds === "00";
+              return (
+                <div className="rounded-[28px] bg-gradient-to-r from-[#eef7ff] via-white to-[#f5f7fa] p-5 shadow-sm ring-1 ring-[#369bff]/20 sm:p-6">
+                  <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                    <div className="space-y-2">
+                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
+                        Countdown
+                      </p>
+                      <p className="text-2xl font-bold text-gray-900 sm:text-3xl">
+                        {finished
+                          ? L("とうとう大会当日となり、フライトに臨んでいます。", "The day has come — we are taking flight.")
+                          : L("本番まであと", "Time remaining until The Competition")
+                        }
+                      </p>
+                    </div>
+                    {!finished && (
+                      <p className="text-sm leading-7 text-gray-600">
+                        {L(
+                          <>滑空機部門の始まる7/26 10:00に向けて、<br />今この瞬間も準備が進んでいます。</>,
+                          <>Preparation continues every second as we approach<br />the glider division start at 10:00 on July 26.</>,
+                        )}
+                      </p>
                     )}
-                  </p>
+                  </div>
+                  <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-10">
+                    <CountdownStrip label={L("日", "Days")} value={countdown.days} finished={finished} />
+                    <CountdownStrip label={L("時間", "Hours")} value={countdown.hours} finished={finished} />
+                    <CountdownStrip label={L("分", "Minutes")} value={countdown.minutes} finished={finished} />
+                    <CountdownStrip label={L("秒", "Seconds")} value={countdown.seconds} finished={finished} />
+                  </div>
                 </div>
-                <p className="text-sm leading-7 text-gray-600">
-                  {L(
-                    "2026/7/25に向けて、今この瞬間も準備が進んでいます。",
-                    "Preparation continues every second as we approach the start line at Lake Biwa."
-                  )}
-                </p>
-              </div>
-              <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-10">
-                <CountdownStrip label={L("日", "Days")} value={countdown.days} />
-                <CountdownStrip label={L("時間", "Hours")} value={countdown.hours} />
-                <CountdownStrip label={L("分", "Minutes")} value={countdown.minutes} />
-                <CountdownStrip label={L("秒", "Seconds")} value={countdown.seconds} />
-              </div>
-            </div>
+              );
+            })()}
           </div>
 
           <div className="relative flex h-full flex-col">
