@@ -509,8 +509,8 @@ export default function Home() {
                     {!finished && (
                       <p className="text-sm leading-7 text-gray-600">
                         {L(
-                          <>滑空機部門の始まる7/26 10:00に向けて、<br />今この瞬間も準備が進んでいます。</>,
-                          <>Preparation continues every second as we approach<br />the glider division start at 10:00 on July 26.</>,
+                          <>滑空機部門の実施される7月26日に向けて、<br />今この瞬間も準備が進んでいます。</>,
+                          <>Preparation continues every second as we approach<br />the glider division start on July 26.</>,
                         )}
                       </p>
                     )}
