@@ -63,7 +63,7 @@ export default function NavBar() {
           <div className="relative h-12 w-56 overflow-hidden">
             <Image
               src="/logos/soara_logo_yoko_transparent.png"
-              alt="SOARA ロゴ"
+              alt="SOARA"
               fill
               className="object-cover object-center"
               style={{ objectPosition: "center center" }}

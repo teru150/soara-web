@@ -46,6 +46,8 @@ export default function AdminPage() {
 
   // 削除確認ダイアログ
   const [deletingPost, setDeletingPost] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
 
   // 記事一覧を取得
   const fetchPosts = async () => {
@@ -456,6 +458,8 @@ export default function AdminPage() {
 
   // 削除処理
   const handleDelete = async (postId) => {
+    setIsDeleting(true);
+    setDeleteError("");
     try {
       const response = await fetch(`/api/posts/${postId}`, {
         method: "DELETE",
@@ -468,23 +472,15 @@ export default function AdminPage() {
       const data = await response.json();
 
       if (response.ok) {
-        setSubmitStatus({
-          type: "success",
-          message: "記事を削除しました",
-        });
         fetchPosts();
         setDeletingPost(null);
       } else {
-        setSubmitStatus({
-          type: "error",
-          message: data.error || "削除に失敗しました",
-        });
+        setDeleteError(data.error || "削除に失敗しました");
       }
     } catch (error) {
-      setSubmitStatus({
-        type: "error",
-        message: "削除に失敗しました",
-      });
+      setDeleteError("削除に失敗しました");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -933,7 +929,7 @@ export default function AdminPage() {
 
         {/* 削除確認ダイアログ */}
         {deletingPost && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 px-4">
             <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-2xl">
               <h2 className="mb-4 text-2xl font-bold text-gray-900">
                 記事を削除しますか？
@@ -944,18 +940,27 @@ export default function AdminPage() {
               <p className="mb-6 text-sm text-red-600">
                 この操作は取り消せません。
               </p>
+              {deleteError && (
+                <div className="mb-4 rounded-xl bg-red-50 p-3 text-sm text-red-700">
+                  {deleteError}
+                </div>
+              )}
               <div className="flex gap-3">
                 <button
-                  onClick={() => setDeletingPost(null)}
-                  className="flex-1 rounded-xl bg-gray-200 px-4 py-3 font-semibold text-gray-700 transition hover:bg-gray-300"
+                  type="button"
+                  onClick={() => { setDeletingPost(null); setDeleteError(""); }}
+                  disabled={isDeleting}
+                  className="flex-1 rounded-xl bg-gray-200 px-4 py-3 font-semibold text-gray-700 transition hover:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   キャンセル
                 </button>
                 <button
+                  type="button"
                   onClick={() => handleDelete(deletingPost.id)}
-                  className="flex-1 rounded-xl bg-red-600 px-4 py-3 font-semibold text-white transition hover:bg-red-700"
+                  disabled={isDeleting}
+                  className="flex-1 rounded-xl bg-red-600 px-4 py-3 font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  削除する
+                  {isDeleting ? "削除中..." : "削除する"}
                 </button>
               </div>
             </div>

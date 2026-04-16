@@ -21,7 +21,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata = {
-  title: "Soara-Official",
+  title: "SOARA | 史上初の高校生有志鳥人間チーム",
   description: "史上初の高校生有志鳥人間チーム, SOARAの公式ウェブサイトです。",
   icons: {
     icon: [

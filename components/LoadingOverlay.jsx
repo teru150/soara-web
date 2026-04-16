@@ -31,7 +31,7 @@ export default function LoadingOverlay({ exiting = false }) {
       <div className="relative mx-6 flex w-full max-w-screen-sm flex-col items-center text-center">
         <Image
           src="/logos/soara_logo_yoko_transparent.png"
-          alt="SOARA ロゴ"
+          alt="SOARA"
           width={320}
           height={72}
           priority
